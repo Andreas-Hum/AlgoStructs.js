@@ -24,7 +24,7 @@
  * console.log(index); // Output: 4
  * 
  * @complexity
- * Time complexity: O(√n) - where n is the number of elements in the array.
+ * Time complexity: O(sqrt(n)) - where n is the number of elements in the array.
  * Space complexity: O(1) - as it uses a constant amount of extra space.
  */
 export default function JumpSearch<T>(array: T[], target: T, compare: (a: T, b: T) => number): number {
