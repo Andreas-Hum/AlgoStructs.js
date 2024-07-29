@@ -13,6 +13,26 @@
  * - Zero if the first argument is equal to the second.
  * - A positive number if the first argument is greater than the second.
  * 
+ * @complexity
+ * Time complexity: O(log n) - Where n is the number of elements in the array.
+ * Space complexity: O(1) - We use a constant amount of space.
+ * 
+ * @description
+ * Meta binary search is a variation of the binary search algorithm that focuses on reducing the search space
+ * by repeatedly dividing the array into two halves and comparing the target element with the middle element it does this by bit manipulation.
+ * 
+ * The algorithm works as follows:
+ * 1. Initialize two pointers, `low` and `high`, to the start and end of the array, respectively.
+ * 2. Calculate the middle index, `mid`, using bit manipulation to avoid potential overflow: `mid = low + ((high - low) >> 1)`.
+ * 3. Compare the target element with the element at the `mid` index.
+ * 4. If the target element is equal to the element at `mid`, return `mid`.
+ * 5. If the target element is less than the element at `mid`, update `high` to `mid - 1` to search the left half of the array.
+ * 6. If the target element is greater than the element at `mid`, update `low` to `mid + 1` to search the right half of the array.
+ * 7. Repeat steps 2-6 until the target element is found or the search space is exhausted (`low` exceeds `high`).
+ * 8. If the target element is not found, return -1.
+ * 
+ * This algorithm uses bit manipulation to calculate the middle index efficiently and avoid potential overflow issues.
+ * 
  * @example
  * // For numbers
  * const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -26,9 +46,7 @@
  * const index = metaBinarySearch(strings, targetString, (a, b) => a.localeCompare(b));
  * console.log(index); // Output: 2
  * 
- * @complexity
- * Time complexity: O(log n), where n is the number of elements in the array.
- * Space complexity: O(1).
+
  */
 export default function metaBinarySearch<T>(array: T[], target: T, compare: (a: T, b: T) => number): number {
     const n: number = array.length;

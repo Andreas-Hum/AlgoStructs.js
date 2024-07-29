@@ -16,8 +16,18 @@ import binarySearch from "./BinarySearch";
  * - Zero if the first argument is equal to the second.
  * - A positive number if the first argument is greater than the second.
  * 
- * Exponential search works by finding a range where the target element could be,
- * and then performing a binary search within that range.
+* @complexity
+ * Time complexity: O(log n) - Exponential search runs in logarithmic time.
+ * Space complexity: O(1) - We use a constant amount of space.
+ * 
+ * @description
+ * Exponential search is an algorithm that combines binary search with an initial exponential search phase to find a range where the target element could be.
+ * It is particularly useful for unbounded or infinite lists.
+ * 
+ * The algorithm works as follows:
+ * 1. Start with a bound of 1.
+ * 2. Double the bound while the element at the current bound is less than the target element and the bound is within the array length.
+ * 3. Once the bound is found, perform a binary search within the range from the previous bound to the current bound or the end of the array, whichever is smaller.
  * 
  * @example
  * // For numbers
@@ -25,16 +35,14 @@ import binarySearch from "./BinarySearch";
  * const targetNumber = 5;
  * const index = exponentialSearch(numbers, targetNumber, (a, b) => a - b);
  * console.log(index); // Output: 4
- * 
+ * @example
  * // For strings
  * const strings = ["apple", "banana", "cherry", "date"];
  * const targetString = "cherry";
  * const index = exponentialSearch(strings, targetString, (a, b) => a.localeCompare(b));
  * console.log(index); // Output: 2
  * 
- * @complexity
- * Time complexity: O(log n), where n is the number of elements in the array.
- * Space complexity: O(1).
+ * 
  */
 export default function exponentialSearch<T>(array: T[], target: T, compare: (a: T, b: T) => number): number {
     let n: number = array.length;

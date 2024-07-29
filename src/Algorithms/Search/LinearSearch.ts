@@ -13,6 +13,16 @@
  * - Zero if the first argument is equal to the second.
  * - A positive number if the first argument is greater than the second.
  * 
+ * @complexity
+ * Time complexity: O(n) - where n is the number of elements in the array.
+ * Space complexity: O(1) - We use a constant amount of space..
+ * 
+ * @description
+ * This function performs a linear search, which means it checks each element of the array one by one.
+ * It starts from the first element and compares it with the target element using the provided comparison function.
+ * If the comparison function returns zero, it means the target element is found, and the function returns the index of that element.
+ * If the target element is not found after checking all elements, the function returns -1.
+ * 
  * @example
  * // For numbers
  * const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -26,9 +36,7 @@
  * const targetString = "cherry";
  * const index = linearSearch(strings, targetString, (a, b) => a.localeCompare(b));
  * console.log(index); // Output: 2
- * @complexity
- * Time complexity: O(n), where n is the number of elements in the array.
- * Space complexity: O(1).
+
  */
 export default function linearSearch<T>(array: T[], target: T, compare: (a: T, b: T) => number): number {
     const n: number = array.length;

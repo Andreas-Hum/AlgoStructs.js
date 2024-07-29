@@ -4,7 +4,45 @@
  * @param {number} n - The number to test for primality.
  * @param {number} k - The number of iterations to perform, higher values increase accuracy.
  * @returns {boolean} `true` if the number is likely prime, `false` otherwise.
- * @complexity O(k * log^3 n) - The complexity is dependent on the number of iterations and the size of the number.
+ * 
+ * @complexity
+ * Time complexity: O(log(min(a, b))) - The function relies on the Euclidean algorithm for GCD, which runs in logarithmic time.
+ * Space complexity: O(1) - We use a constant amount of space.
+ *
+ *
+ * @description
+ * The Miller-Rabin primality test is a probabilistic algorithm used to determine if a number is a probable prime.
+ * It is based on properties of modular arithmetic and is particularly useful for large numbers.
+ * 
+ * The algorithm works as follows:
+ * 1. Handle small cases: If `n` is less than or equal to 1 or equal to 4, return `false`. If `n` is less than or equal to 3, return `true`.
+ * 2. Write `n - 1` as `2^r * d` where `d` is an odd number. This is done by dividing `n - 1` by 2 until it is odd.
+ * 3. Repeat the following `k` times (where `k` is the number of iterations):
+ *    a. Pick a random integer `a` in the range [2, n-2].
+ *    b. Compute `x = a^d % n` using modular exponentiation.
+ *    c. If `x` is 1 or `n-1`, continue to the next iteration.
+ *    d. Repeat the following until `d` equals `n-1`:
+ *       i. Compute `x = x^2 % n`.
+ *       ii. If `x` is 1, return `false` (composite).
+ *       iii. If `x` is `n-1`, break out of the loop and continue to the next iteration.
+ *    e. If none of the above conditions are met, return `false` (composite).
+ * 4. If all iterations pass, return `true` (probably prime).
+ * 
+ * @example
+ * // Check if 17 is a prime number with 5 iterations
+ * const result1 = millerRabin(17, 5);
+ * console.log(result1); // true
+ * 
+ * @example
+ * // Check if 18 is a prime number with 5 iterations
+ * const result2 = millerRabin(18, 5);
+ * console.log(result2); // false
+ * 
+ * @example
+ * // Check if 561 is a prime number with 10 iterations (561 is a Carmichael number)
+ * const result3 = millerRabin(561, 10);
+ * console.log(result3); // false
+
  */
 export default function millerRabin(n: number, k: number): boolean {
     if (n <= 1 || n === 4) return false;

@@ -4,14 +4,14 @@ import Node from "./DoublyLinkedListNode";
  * A class representing a doubly linked list.
  * @template T The type of elements in the linked list.
  */
-export default class DoublyLinkedList<T> {
+export default class LinkedList<T> {
     private _head: Node<T> | null;
     private _tail: Node<T> | null;
     private _size: number;
     private _compare: (a: T, b: T) => number;
 
     /**
-     * Creates an instance of DoublyLinkedList.
+     * Creates an instance of LinkedList.
      * @param {(a: T, b: T) => number} compare - The comparison function.
      * @remarks
      * The comparison function should return:

@@ -13,8 +13,28 @@
  * - Zero if the first argument is equal to the second.
  * - A positive number if the first argument is greater than the second.
  * 
- * Ternary search works by dividing the array into three parts and determining
- * which part the target element lies in, then recursively searching that part.
+ * @complexity
+ * Time complexity: O(log3 n) - Ternary search runs in logarithmic time.
+ * Space complexity: O(1) - We use a constant amount of space.
+ * 
+ * @description
+ * Ternary search is a divide-and-conquer algorithm that works by dividing the array into three parts.
+ * It determines which part the target element lies in and then iteratively searches that part.
+ * 
+ * The algorithm works as follows:
+ * 1. Divide the array into three parts by calculating two midpoints, `mid1` and `mid2`.
+ *    - `mid1` is one-third of the way through the array.
+ *    - `mid2` is two-thirds of the way through the array.
+ * 2. Compare the target element with the elements at `mid1` and `mid2`.
+ * 3. If the target element is equal to the element at `mid1`, return `mid1`.
+ * 4. If the target element is equal to the element at `mid2`, return `mid2`.
+ * 5. If the target element is less than the element at `mid1`, recursively search the left third of the array.
+ * 6. If the target element is greater than the element at `mid2`, recursively search the right third of the array.
+ * 7. If the target element is between the elements at `mid1` and `mid2`, recursively search the middle third of the array.
+ * 8. Repeat the process until the target element is found or the subarray size reduces to zero.
+ * 
+ * Ternary search is more efficient than binary search for large datasets because it reduces the search space more quickly.
+ * However, it requires more comparisons per iteration, which can make it less efficient for smaller datasets.
  * 
  * @example
  * // For numbers
@@ -23,15 +43,14 @@
  * const index = ternarySearch(numbers, targetNumber, (a, b) => a - b);
  * console.log(index); // Output: 4
  * 
+ * @example
  * // For strings
  * const strings = ["apple", "banana", "cherry", "date"];
  * const targetString = "cherry";
  * const index = ternarySearch(strings, targetString, (a, b) => a.localeCompare(b));
  * console.log(index); // Output: 2
  * 
- * @complexity
- * Time complexity: O(log3 n), where n is the number of elements in the array.
- * Space complexity: O(1).
+
  */
 export default function ternarySearch<T>(array: T[], target: T, compare: (a: T, b: T) => number): number {
     let left: number = 0;

@@ -13,21 +13,39 @@
  * - Zero if the first argument is equal to the second.
  * - A positive number if the first argument is greater than the second.
  * 
+ * @complexity
+ * Time complexity: O(log n) - Binary search runs in logarithmic time.
+ * Space complexity: O(1) - We use a constant amount of space.
+ * 
+ * @description
+ * Binary search is an efficient algorithm for finding an item from a sorted list of items. It works by repeatedly dividing
+ * the search interval in half. If the value of the search key is less than the item in the middle of the interval, narrow the interval
+ * to the lower half. Otherwise, narrow it to the upper half. Repeatedly check until the value is found or the interval is empty.
+ * 
+ * The algorithm works as follows:
+ * 1. Initialize two pointers, `left` and `right`, to the start and end of the array, respectively.
+ * 2. Calculate the middle index, `mid`, as the average of `left` and `right`.
+ * 3. Compare the target element with the element at the `mid` index.
+ * 4. If the target element is equal to the element at `mid`, return `mid`.
+ * 5. If the target element is less than the element at `mid`, update `right` to `mid - 1` to search the left half of the array.
+ * 6. If the target element is greater than the element at `mid`, update `left` to `mid + 1` to search the right half of the array.
+ * 7. Repeat steps 2-6 until the target element is found or the search space is exhausted (`left` exceeds `right`).
+ * 8. If the target element is not found, return -1.
+ * 
  * @example
  * // For numbers
  * const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
  * const targetNumber = 5;
  * const index = binarySearch(numbers, targetNumber, (a, b) => a - b);
  * console.log(index); // Output: 4
- * 
  * // For strings
+ * @example
  * const strings = ["apple", "banana", "cherry", "date"];
  * const targetString = "cherry";
  * const index = binarySearch(strings, targetString, (a, b) => a.localeCompare(b));
  * console.log(index); // Output: 2
- * @complexity
- * Time complexity: O(log n), where n is the number of elements in the array.
- * Space complexity: O(1).
+
+ * 
  */
 export default function binarySearch<T>(array: T[], target: T, compare: (a: T, b: T) => number): number {
     let left: number = 0;

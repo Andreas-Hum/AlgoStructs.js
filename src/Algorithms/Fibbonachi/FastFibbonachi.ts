@@ -6,10 +6,30 @@
  *
  * @param {number} n - The position in the Fibonacci sequence to compute. Must be a non-negative integer.
  * @returns {number} The nth Fibonacci number. Returns -1 if the input is a negative number.
- *
+ * 
  * @complexity
  * Time complexity: O(log n) - We use matrix exponentiation to compute the nth Fibonacci number.
  * Space complexity: O(1) - We use a constant amount of space.
+ * 
+ * @description
+ * This function uses matrix exponentiation to compute the nth Fibonacci number efficiently.
+ * The Fibonacci sequence can be represented using the following matrix equation:
+ * 
+ * [ F(n+1) ] = [ 1 1 ]^n * [ F(1) ]
+ * [ F(n)   ]   [ 1 0 ]     [ F(0) ]
+ * 
+ * By raising the matrix to the power of n, we can compute the nth Fibonacci number in O(log n) time.
+ *
+ * @example
+ * // Compute the 10th Fibonacci number
+ * const fib10 = fastFibonacci(10);
+ * console.log(fib10); // 55
+ *
+ * @example
+ * // Compute the 20th Fibonacci number
+ * const fib20 = fastFibonacci(20);
+ * console.log(fib20); // 6765
+
  */
 export default function fastFibonacci(n: number): number {
     if (n < 0) return -1;
