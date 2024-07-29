@@ -36,16 +36,16 @@ export default class DoublyLinkedList<T> {
      */
     public add(...values: T[]): number {
         for (const value of values) {
-            const newNode = new Node(value);
+            const new_node = new Node(value);
 
             if (this._size === 0) {
-                this._head = newNode;
-                this._tail = newNode;
+                this._head = new_node;
+                this._tail = new_node;
             } else {
                 if (this._tail) {
-                    this._tail.setNext(newNode);
-                    newNode.setPrev(this._tail);
-                    this._tail = newNode;
+                    this._tail.setNext(new_node);
+                    new_node.setPrev(this._tail);
+                    this._tail = new_node;
                 }
             }
 
@@ -179,7 +179,7 @@ export default class DoublyLinkedList<T> {
         }
 
         let current: Node<T> | null = this._head as Node<T> | null;
-        for (let i = 0; i < index; i++) {
+        for (let i:number = 0; i < index; i++) {
             if (current === null) {
                 return null;
             }
@@ -204,7 +204,7 @@ export default class DoublyLinkedList<T> {
         }
 
         let current: Node<T> | null = this._head as Node<T> | null;
-        for (let i = 0; i < index; i++) {
+        for (let i:number = 0; i < index; i++) {
             if (current === null) {
                 return false;
             }

@@ -38,16 +38,16 @@ export default class LinkedList<T> {
         }
 
         for (const value of values) {
-            const newNode = new Node(value);
+            const new_node = new Node(value);
 
             if (this._size === 0) {
-                this._head = newNode;
+                this._head = new_node;
             } else {
                 let current: Node<T> = this._head as Node<T>;
                 while (current.getNext() !== null) {
                     current = current.getNext() as Node<T>;
                 }
-                current.setNext(newNode);
+                current.setNext(new_node);
             }
 
             this._size++;
@@ -68,10 +68,10 @@ export default class LinkedList<T> {
         if (this._head === null) {
             return null;
         } else if (this._compare(this._head.get(), value) === 0) {
-            const removedValue: T = this._head.get();
+            const removed_value: T = this._head.get();
             this._head = this._head.getNext();
             this._size--;
-            return removedValue;
+            return removed_value;
         }
 
         let current: Node<T> | null = this._head.getNext();
@@ -79,14 +79,14 @@ export default class LinkedList<T> {
 
         while (current !== null) {
             if (this._compare(current.get(), value) === 0) {
-                const removedValue: T = current.get();
+                const removed_value: T = current.get();
                 if (current.getNext() !== null) {
                     prev.setNext(current.getNext());
                 } else {
                     prev.setNext(null);
                 }
                 this._size--;
-                return removedValue;
+                return removed_value;
             }
             prev = current;
             current = current.getNext();
@@ -174,7 +174,7 @@ export default class LinkedList<T> {
         }
 
         let current: Node<T> | null = this._head as Node<T> | null;
-        for (let i = 0; i < index; i++) {
+        for (let i: number = 0; i < index; i++) {
             if (current === null) {
                 return null;
             }
@@ -199,7 +199,7 @@ export default class LinkedList<T> {
         }
 
         let current: Node<T> | null = this._head as Node<T> | null;
-        for (let i = 0; i < index; i++) {
+        for (let i: number = 0; i < index; i++) {
             if (current === null) {
                 return false;
             }
