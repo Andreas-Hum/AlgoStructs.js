@@ -25,7 +25,7 @@
  * const targetString = "cherry";
  * const index = binarySearch(strings, targetString, (a, b) => a.localeCompare(b));
  * console.log(index); // Output: 2
- * @remarks
+ * @complexity
  * Time complexity: O(log n), where n is the number of elements in the array.
  * Space complexity: O(1).
  */

@@ -11,7 +11,7 @@ export default class Stack<T> {
      * 
      * @param {...T[]} element - The elements to add to the stack.
      * 
-     * @remarks
+     * @complexity
      * Time complexity: O(1) for each element added.
      * Space complexity: O(n), where n is the number of elements in the stack.
      */
@@ -24,7 +24,7 @@ export default class Stack<T> {
      * 
      * @returns {T | undefined} - The element at the top of the stack, or undefined if the stack is empty.
      * 
-     * @remarks
+     * @complexity
      * Time complexity: O(1).
      * Space complexity: O(1).
      */
@@ -37,7 +37,7 @@ export default class Stack<T> {
      * 
      * @returns {T | undefined} - The element at the top of the stack, or undefined if the stack is empty.
      * 
-     * @remarks
+     * @complexity
      * Time complexity: O(1).
      * Space complexity: O(1).
      */
@@ -50,7 +50,7 @@ export default class Stack<T> {
      * 
      * @returns {boolean} - True if the stack is empty, false otherwise.
      * 
-     * @remarks
+     * @complexity
      * Time complexity: O(1).
      * Space complexity: O(1).
      */
@@ -63,7 +63,7 @@ export default class Stack<T> {
      * 
      * @returns {number} - The number of elements in the stack.
      * 
-     * @remarks
+     * @complexity
      * Time complexity: O(1).
      * Space complexity: O(1).
      */
@@ -74,7 +74,7 @@ export default class Stack<T> {
     /**
      * Removes all elements from the stack.
      * 
-     * @remarks
+     * @complexity
      * Time complexity: O(1).
      * Space complexity: O(1).
      */

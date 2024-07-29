@@ -11,7 +11,7 @@ export class Queue<T> {
      * 
      * @param {...T[]} element - The elements to add to the queue.
      * 
-     * @remarks
+      * @complexity
      * Time complexity: O(1) for each element added.
      * Space complexity: O(n), where n is the number of elements in the queue.
      */
@@ -24,20 +24,19 @@ export class Queue<T> {
      * 
      * @returns {T | undefined} - The element at the front of the queue, or undefined if the queue is empty.
      * 
-     * @remarks
+      * @complexity
      * Time complexity: O(n), where n is the number of elements in the queue (due to array shift operation).
      * Space complexity: O(1).
      */
     public dequeue(): T | undefined {
         return this.items.shift();
     }
-
     /**
      * Returns the element at the front of the queue without removing it.
      * 
      * @returns {T | undefined} - The element at the front of the queue, or undefined if the queue is empty.
      * 
-     * @remarks
+     * @complexity
      * Time complexity: O(1).
      * Space complexity: O(1).
      */
@@ -74,7 +73,7 @@ export class Queue<T> {
     /**
      * Removes all elements from the queue.
      * 
-     * @remarks
+      * @complexity
      * Time complexity: O(1).
      * Space complexity: O(1).
      */

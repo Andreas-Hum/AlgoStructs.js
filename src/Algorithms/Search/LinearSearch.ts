@@ -26,7 +26,7 @@
  * const targetString = "cherry";
  * const index = linearSearch(strings, targetString, (a, b) => a.localeCompare(b));
  * console.log(index); // Output: 2
- * @remarks
+ * @complexity
  * Time complexity: O(n), where n is the number of elements in the array.
  * Space complexity: O(1).
  */
