@@ -40,7 +40,7 @@ export default class Node<T> {
      * 
      * @param {Node<T>} node - The node to set as the next node.
      */
-    public setNext(node: Node<T>): void {
+    public setNext(node: Node<T> | null): void {
         this._next = node;
     }
 
