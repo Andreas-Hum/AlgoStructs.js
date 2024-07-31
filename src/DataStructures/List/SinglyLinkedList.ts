@@ -29,8 +29,8 @@ export default class LinkedList<T> {
      * @param {...T[]} values The values to add.
      * @returns {number} The new size of the linked list.
      * @complexity
-     * Time complexity: O(n) for each value added, where n is the number of elements in the list.
-     * Space complexity: O(1) for each value added.
+     * Time complexity: O(n) - For each value added, where n is the number of elements in the list.
+     * Space complexity: O(1) - For each value added.
      */
     public add(...values: T[]): number {
         if (values.length === 0) {
@@ -61,7 +61,7 @@ export default class LinkedList<T> {
      * @param {T} value The value to remove.
      * @returns {T | null} The removed value, or null if the value was not found.
      * @complexity
-     * Time complexity: O(n), where n is the number of elements in the list.
+     * Time complexity: O(n) - Where n is the number of elements in the list.
      * Space complexity: O(1).
      */
     public remove(value: T): T | null {
@@ -100,7 +100,7 @@ export default class LinkedList<T> {
      * @param {T} value The value to check for.
      * @returns {boolean} True if the value is found, otherwise false.
      * @complexity
-     * Time complexity: O(n), where n is the number of elements in the list.
+     * Time complexity: O(n) - Where n is the number of elements in the list.
      * Space complexity: O(1).
      */
     public contains(value: T): boolean {
@@ -146,7 +146,7 @@ export default class LinkedList<T> {
     /**
      * Clears the linked list.
      * @complexity
-     * Time complexity: O(n), where n is the number of elements in the list.
+     * Time complexity: O(n) - Where n is the number of elements in the list.
      * Space complexity: O(1).
      */
     public clear(): void {
@@ -165,7 +165,7 @@ export default class LinkedList<T> {
      * @param {number} index The index of the value to get.
      * @returns {T | null} The value at the specified index, or null if the index is out of bounds.
      * @complexity
-     * Time complexity: O(n), where n is the number of elements in the list.
+     * Time complexity: O(n) - Where n is the number of elements in the list.
      * Space complexity: O(1).
      */
     public get(index: number): T | null {
@@ -190,7 +190,7 @@ export default class LinkedList<T> {
      * @param {T} value The value to set.
      * @returns {boolean} True if the value was set, otherwise false.
      * @complexity
-     * Time complexity: O(n), where n is the number of elements in the list.
+     * Time complexity: O(n) - Where n is the number of elements in the list.
      * Space complexity: O(1).
      */
     public set(index: number, value: T): boolean {
@@ -218,8 +218,8 @@ export default class LinkedList<T> {
      * Converts the linked list to an array.
      * @returns {T[]} An array containing all elements of the linked list.
      * @complexity
-     * Time complexity: O(n), where n is the number of elements in the list.
-     * Space complexity: O(n), where n is the number of elements in the list.
+     * Time complexity: O(n) - Where n is the number of elements in the list.
+     * Space complexity: O(n) - Where n is the number of elements in the list.
      */
     public toArray(): T[] {
         if (this._head === null) {

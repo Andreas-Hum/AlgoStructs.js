@@ -1,5 +1,5 @@
 /**
- * Performs an interpolation search on a sorted array.
+ * Performs an interpolation search on a sorted array. Very usefull for data uniformly spread
  * 
  * @template T - The type of elements in the array.
  * @param {T[]} array - The sorted array to search.
@@ -11,6 +11,10 @@
  * - A negative number if the first argument is less than the second.
  * - Zero if the first argument is equal to the second.
  * - A positive number if the first argument is greater than the second.
+ * @complexity
+ * Time complexity: O(log(log n)) - For uniformly distributed data, the time complexity is very efficient.
+ * Space complexity: O(1) - We use a constant amount of space.
+ * 
  * @description
  * This function uses interpolation search, which is an improvement over binary search for uniformly distributed data.
  * It estimates the position of the target element based on the values at the low and high indices.
@@ -42,8 +46,8 @@
  * console.log(index); // Output: 1
  */
 export default function interpolationSearch<T>(array: T[], target: T, compare: (a: T, b: T) => number): number {
-    let low = 0;
-    let high = array.length - 1;
+    let low: number = 0;
+    let high: number = array.length - 1;
 
     while (low <= high && compare(target, array[low]) >= 0 && compare(target, array[high]) <= 0) {
         if (low === high) {
@@ -51,19 +55,15 @@ export default function interpolationSearch<T>(array: T[], target: T, compare: (
             return -1;
         }
 
-        // Probing the position with keeping uniform distribution in mind.
         let pos = low + Math.floor(((high - low) / (compare(array[high], array[low]))) * compare(target, array[low]));
 
-        // Condition of target found
         if (compare(array[pos], target) === 0) {
             return pos;
         }
 
-        // If target is larger, target is in upper part
         if (compare(array[pos], target) < 0) {
             low = pos + 1;
         }
-        // If target is smaller, target is in lower part
         else {
             high = pos - 1;
         }
