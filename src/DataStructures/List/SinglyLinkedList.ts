@@ -17,6 +17,10 @@ export default class LinkedList<T> {
      * - A negative number if the first argument is less than the second.
      * - Zero if the first argument is equal to the second.
      * - A positive number if the first argument is greater than the second.
+     * 
+     * @example
+     * const compareNumbers: (a: number, b: number) => number = (a: number, b: number) => a - b;
+     * const LinkedList: LinkedList<number> = new LinkedList<number>(compareNumbers);
      */
     constructor(compare: (a: T, b: T) => number) {
         this._head = null;

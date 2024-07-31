@@ -1,10 +1,30 @@
 import Node from "./BinaryTreeNode";
 
+
+/**
+ * Represents a binary tree.
+ * 
+ * @template T - The type of elements in the tree.
+ */
 export default class BinaryTree<T> {
     private _root: Node<T> | null;
     private _size: number;
     private _compare: (a: T, b: T) => number;
 
+    /**
+     * Creates an instance of a binary tree.
+     * 
+     * @param {(a: T, b: T) => number} compare - The comparison function used to order the elements in the tree.
+     * @remark
+     * The comparison function should return:
+     * - A negative number if the first argument is less than the second.
+     * - Zero if the first argument is equal to the second.
+     * - A positive number if the first argument is greater than the second.
+     * 
+     * @example
+     * const compareNumbers: (a: number, b: number) => number = (a: number, b: number) => a - b;
+     * const tree: BinaryTree<number> = new BinaryTree<number>(compareNumbers);
+     */
     constructor(compare: (a: T, b: T) => number) {
         this._compare = compare;
         this._root = null;

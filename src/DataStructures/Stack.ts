@@ -14,6 +14,13 @@ export default class Stack<T> {
      * @complexity
      * Time complexity: O(1) for each element added.
      * Space complexity: O(n), where n is the number of elements in the stack.
+     *
+     *
+     * @example
+     * const stack: Stack<number> = new Stack<number>();
+     * stack.push(1);
+     * stack.push(2, 3, 4);
+     * console.log(stack); // Output: Stack { items: [1, 2, 3, 4] }
      */
     public push(...element: T[]): void {
         this.items.push(...element);

@@ -32,12 +32,17 @@
  * 4. If the target element is found, return its index. Otherwise, return -1.
  *  
  * @example
- * const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
- * const targetNumber = 5;
- * const index = JumpSearch(numbers, targetNumber, (a, b) => a - b);
+ * const numbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+ * const targetNumber: number = 5;
+ * const index: number = JumpSearch(numbers, targetNumber, (a, b) => a - b);
  * console.log(index); // Output: 4
  * 
-
+ * @example
+ * // For strings
+ * const strings: string[] = ["apple", "banana", "cherry", "date"];
+ * const targetString: string = "cherry";
+ * const index: number = JumpSearch(strings, targetString, (a, b) => a.localeCompare(b));
+ * console.log(index); // Output: 2
  * 
  */
 export default function JumpSearch<T>(array: T[], target: T, compare: (a: T, b: T) => number): number {

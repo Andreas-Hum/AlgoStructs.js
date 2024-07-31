@@ -20,12 +20,12 @@
  *
  * @example
  * // Find all prime numbers up to 10
- * const primesUpTo10 = sieveOfEratosthenes(10);
+ * const primesUpTo10: number[] = sieveOfEratosthenes(10);
  * console.log(primesUpTo10); // [2, 3, 5, 7]
  *
  * @example
  * // Find all prime numbers up to 20
- * const primesUpTo20 = sieveOfEratosthenes(20);
+ * const primesUpTo20: number[] = sieveOfEratosthenes(20);
  * console.log(primesUpTo20); // [2, 3, 5, 7, 11, 13, 17, 19]
 
  */

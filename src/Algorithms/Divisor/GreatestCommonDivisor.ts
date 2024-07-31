@@ -19,12 +19,12 @@
  *
  * @example
  * // Compute the GCD of 48 and 18
- * const gcd = greatestCommonDivisor(48, 18);
+ * const gcd: number = greatestCommonDivisor(48, 18);
  * console.log(gcd); // 6
  *
  * @example
  * // Compute the GCD of 101 and 103
- * const gcd = greatestCommonDivisor(101, 103);
+ * const gcd: number = greatestCommonDivisor(101, 103);
  * console.log(gcd); // 1
 
  */

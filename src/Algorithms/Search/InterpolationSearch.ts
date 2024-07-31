@@ -28,22 +28,16 @@
  * 
  * @example
  * // For numbers
- * const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
- * const targetNumber = 5;
- * const index = interpolationSearch(numbers, targetNumber, compareNumbers);
+ * const numbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+ * const targetNumber: number  = 5;
+ * const index: number  = interpolationSearch(numbers, targetNumber,  (a, b) => a - b);
  * console.log(index); // Output: 4
  * 
  * // For strings
- * const strings = ["apple", "banana", "cherry", "date"];
- * const targetString = "cherry";
- * const index = interpolationSearch(strings, targetString, compareStrings);
+ * const strings: string[] = ["apple", "banana", "cherry", "date"];
+ * const targetString: string = "cherry";
+ * const index: number = interpolationSearch(strings, targetString,  (a, b) => a.localeCompare(b));
  * console.log(index); // Output: 2
- * 
- * // For objects
- * const objects = [{ value: 1 }, { value: 2 }, { value: 3 }];
- * const targetObject = { value: 2 };
- * const index = interpolationSearch(objects, targetObject, compareObjects);
- * console.log(index); // Output: 1
  */
 export default function interpolationSearch<T>(array: T[], target: T, compare: (a: T, b: T) => number): number {
     let low: number = 0;

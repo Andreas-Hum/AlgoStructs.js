@@ -14,6 +14,12 @@ export class Queue<T> {
       * @complexity
      * Time complexity: O(1) for each element added.
      * Space complexity: O(n), where n is the number of elements in the queue.
+     *
+     * @example
+     * const queue: Queue<number> = new Queue<number>();
+     * queue.enqueue(1);
+     * queue.enqueue(2, 3, 4);
+     * console.log(queue); // Output: Queue { items: [1, 2, 3, 4] }
      */
     public enqueue(...element: T[]): void {
         this.items.push(...element);

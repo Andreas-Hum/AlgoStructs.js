@@ -30,19 +30,14 @@
  * 
  * @example
  * // Check if 17 is a prime number with 5 iterations
- * const result1 = millerRabin(17, 5);
+ * const result1: boolean = millerRabin(17, 5);
  * console.log(result1); // true
  * 
  * @example
  * // Check if 18 is a prime number with 5 iterations
- * const result2 = millerRabin(18, 5);
+ * const result2: boolean = millerRabin(18, 5);
  * console.log(result2); // false
- * 
- * @example
- * // Check if 561 is a prime number with 10 iterations (561 is a Carmichael number)
- * const result3 = millerRabin(561, 10);
- * console.log(result3); // false
-
+ *
  */
 export default function millerRabin(n: number, k: number): boolean {
     if (n <= 1 || n === 4) return false;

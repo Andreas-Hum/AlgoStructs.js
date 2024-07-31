@@ -31,15 +31,15 @@ import binarySearch from "./BinarySearch";
  * 
  * @example
  * // For numbers
- * const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
- * const targetNumber = 5;
- * const index = exponentialSearch(numbers, targetNumber, (a, b) => a - b);
+ * const numbers: number[]  = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+ * const targetNumber :number  = 5;
+ * const index: number  = exponentialSearch(numbers, targetNumber, (a, b) => a - b);
  * console.log(index); // Output: 4
  * @example
  * // For strings
- * const strings = ["apple", "banana", "cherry", "date"];
- * const targetString = "cherry";
- * const index = exponentialSearch(strings, targetString, (a, b) => a.localeCompare(b));
+ * const strings: string[] = ["apple", "banana", "cherry", "date"];
+ * const targetString: string = "cherry";
+ * const index: number = exponentialSearch(strings, targetString, (a, b) => a.localeCompare(b));
  * console.log(index); // Output: 2
  * 
  * 

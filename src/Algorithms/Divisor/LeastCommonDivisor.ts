@@ -26,12 +26,12 @@ import greatestCommonDivisor from "./GreatestCommonDivisor";
  *
  * @example
  * // Compute the LCD of 12 and 18
- * const lcd = leastCommonDivisor(12, 18);
+ * const lcd: number = leastCommonDivisor(12, 18);
  * console.log(lcd); // 36
  *
  * @example
  * // Compute the LCD of 7 and 5
- * const lcd = leastCommonDivisor(7, 5);
+ * const lcd: number = leastCommonDivisor(7, 5);
  * console.log(lcd); // 35
  */
 export default function leastCommonDivisor(a: number, b: number): number {

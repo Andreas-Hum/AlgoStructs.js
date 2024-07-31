@@ -25,12 +25,12 @@
  * 
  * @example
  * // Find all prime numbers up to 30
- * const primesUpTo30 = sieveOfAtkin(30);
+ * const primesUpTo30: number[] = sieveOfAtkin(30);
  * console.log(primesUpTo30); // [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
  * 
  * @example
  * // Find all prime numbers up to 50
- * const primesUpTo50 = sieveOfAtkin(50);
+ * const primesUpTo50: number[] = sieveOfAtkin(50);
  * console.log(primesUpTo50); // [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
 
  */

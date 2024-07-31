@@ -22,12 +22,12 @@
  *
  * @example
  * // Compute the 10th Fibonacci number
- * const fib10 = fastFibonacci(10);
+ * const fib10: number = fastFibonacci(10);
  * console.log(fib10); // 55
  *
  * @example
  * // Compute the 20th Fibonacci number
- * const fib20 = fastFibonacci(20);
+ * const fib20: number = fastFibonacci(20);
  * console.log(fib20); // 6765
 
  */
