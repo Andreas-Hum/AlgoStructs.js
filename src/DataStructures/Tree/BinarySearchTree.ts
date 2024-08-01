@@ -31,8 +31,6 @@ export default class BinarySearchTree<T> {
         this._size = 0;
     }
 
-
-
     /**
      * Checks if the binary search tree contains a node with the given value.
      * 
@@ -44,14 +42,8 @@ export default class BinarySearchTree<T> {
      * Space complexity: O(1) - Constant space operation
      */
     public contains(val: T): boolean {
-        if (this.getNode(val) !== null) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.getNode(val) !== null;
     }
-
-
 
     /**
      * Deletes a node with the given value.
@@ -174,6 +166,57 @@ export default class BinarySearchTree<T> {
         return current;
     }
 
+    /**
+     * Finds the in-order predecessor of a given node.
+     * @param {Node<T>} node - The node to find the predecessor of.
+     * @returns {Node<T> | null} - The predecessor node, or null if none exists.
+     * @complexity
+     * Time complexity: O(h) - where h is the height of the tree.
+     * Space complexity: O(1) - Constant space operation.
+     */
+    public getPredecessor(node: Node<T>): Node<T> | null {
+        if (node.getLeftChild() !== null) {
+            let current: Node<T> | null = node.getLeftChild();
+            while (current?.getRightChild() !== null) {
+                current = current!.getRightChild();
+            }
+            return current;
+        } else {
+            let current: Node<T> = node;
+            let parent: Node<T> | null = current.getParent();
+            while (parent !== null && current === parent.getLeftChild()) {
+                current = parent;
+                parent = parent.getParent();
+            }
+            return parent;
+        }
+    }
+
+    /**
+     * Finds the in-order successor of a given node.
+     * @param {Node<T>} node - The node to find the successor of.
+     * @returns {Node<T> | null} - The successor node, or null if none exists.
+     * @complexity
+     * Time complexity: O(h) - where h is the height of the tree.
+     * Space complexity: O(1) - Constant space operation.
+     */
+    public getSuccessor(node: Node<T>): Node<T> | null {
+        if (node.getRightChild() !== null) {
+            let current: Node<T> | null = node.getRightChild();
+            while (current !== null && current.getLeftChild() !== null) {
+                current = current.getLeftChild();
+            }
+            return current;
+        } else {
+            let current: Node<T> = node;
+            let parent: Node<T> | null = current.getParent();
+            while (parent !== null && current === parent.getRightChild()) {
+                current = parent;
+                parent = parent.getParent();
+            }
+            return parent;
+        }
+    }
 
     /**
      * Returns the root node of the binary tree.
@@ -388,6 +431,40 @@ export default class BinarySearchTree<T> {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Performs a level-order traversal (breadth-first traversal) of the binary search tree.
+     * @returns {T[]} An array of node values in level-order.
+     * @complexity
+     * Time complexity: O(n) - where n is the number of nodes in the tree.
+     * Space complexity: O(n) - where n is the number of nodes in the tree.
+     */
+    public levelOrderTraversal(): T[] {
+        const result: T[] = [];
+        const queue: (Node<T> | null)[] = [this._root];
+
+        while (queue.length > 0) {
+            const node: Node<T> | null = queue.shift() as Node<T> | null;
+            if (node !== null) {
+                result.push(node.get());
+                queue.push(node.getLeftChild());
+                queue.push(node.getRightChild());
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Clears all nodes from the tree.
+     * @complexity
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
+     */
+    public clear(): void {
+        this._root = null;
+        this._size = 0;
     }
 
     private _shiftNodes(a: Node<T>, b: Node<T> | null): void {
