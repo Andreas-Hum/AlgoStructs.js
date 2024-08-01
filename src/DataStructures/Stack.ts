@@ -12,8 +12,8 @@ export default class Stack<T> {
      * @param {...T[]} element - The elements to add to the stack.
      * 
      * @complexity
-     * Time complexity: O(1) for each element added.
-     * Space complexity: O(n), where n is the number of elements in the stack.
+     * Time complexity: O(1) - For each element added.
+     * Space complexity: O(n) - where n is the number of elements in the stack.
      *
      *
      * @example
@@ -32,8 +32,8 @@ export default class Stack<T> {
      * @returns {T | undefined} - The element at the top of the stack, or undefined if the stack is empty.
      * 
      * @complexity
-     * Time complexity: O(1).
-     * Space complexity: O(1).
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
      */
     public pop(): T | undefined {
         return this.items.pop();
@@ -45,8 +45,8 @@ export default class Stack<T> {
      * @returns {T | undefined} - The element at the top of the stack, or undefined if the stack is empty.
      * 
      * @complexity
-     * Time complexity: O(1).
-     * Space complexity: O(1).
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
      */
     public peek(): T | undefined {
         return this.items[this.items.length - 1];
@@ -58,8 +58,8 @@ export default class Stack<T> {
      * @returns {boolean} - True if the stack is empty, false otherwise.
      * 
      * @complexity
-     * Time complexity: O(1).
-     * Space complexity: O(1).
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
      */
     public isEmpty(): boolean {
         return this.items.length === 0;
@@ -71,8 +71,8 @@ export default class Stack<T> {
      * @returns {number} - The number of elements in the stack.
      * 
      * @complexity
-     * Time complexity: O(1).
-     * Space complexity: O(1).
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
      */
     public size(): number {
         return this.items.length;
@@ -82,8 +82,8 @@ export default class Stack<T> {
      * Removes all elements from the stack.
      * 
      * @complexity
-     * Time complexity: O(1).
-     * Space complexity: O(1).
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
      */
     public clear(): void {
         this.items = [];

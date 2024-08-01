@@ -12,14 +12,9 @@ export class Queue<T> {
      * @param {...T[]} element - The elements to add to the queue.
      * 
       * @complexity
-     * Time complexity: O(1) for each element added.
-     * Space complexity: O(n), where n is the number of elements in the queue.
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(n) - Where n is the number of elements in the queue.
      *
-     * @example
-     * const queue: Queue<number> = new Queue<number>();
-     * queue.enqueue(1);
-     * queue.enqueue(2, 3, 4);
-     * console.log(queue); // Output: Queue { items: [1, 2, 3, 4] }
      */
     public enqueue(...element: T[]): void {
         this.items.push(...element);
@@ -31,8 +26,8 @@ export class Queue<T> {
      * @returns {T | undefined} - The element at the front of the queue, or undefined if the queue is empty.
      * 
       * @complexity
-     * Time complexity: O(n), where n is the number of elements in the queue (due to array shift operation).
-     * Space complexity: O(1).
+     * Time complexity: O(n) - Where n is the number of elements in the queue (due to array shift operation).
+     * Space complexity: O(1) - Constant space operation.
      */
     public dequeue(): T | undefined {
         return this.items.shift();
@@ -43,8 +38,8 @@ export class Queue<T> {
      * @returns {T | undefined} - The element at the front of the queue, or undefined if the queue is empty.
      * 
      * @complexity
-     * Time complexity: O(1).
-     * Space complexity: O(1).
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
      */
     public front(): T | undefined {
         return this.items[0];
@@ -55,9 +50,9 @@ export class Queue<T> {
      * 
      * @returns {boolean} - True if the queue is empty, false otherwise.
      * 
-     * @remarks
-     * Time complexity: O(1).
-     * Space complexity: O(1).
+     * @complexity
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
      */
     public isEmpty(): boolean {
         return this.items.length === 0;
@@ -68,9 +63,9 @@ export class Queue<T> {
      * 
      * @returns {number} - The number of elements in the queue.
      * 
-     * @remarks
-     * Time complexity: O(1).
-     * Space complexity: O(1).
+     * @complexity
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
      */
     public size(): number {
         return this.items.length;
@@ -79,9 +74,9 @@ export class Queue<T> {
     /**
      * Removes all elements from the queue.
      * 
-      * @complexity
-     * Time complexity: O(1).
-     * Space complexity: O(1).
+     * @complexity
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
      */
     public clear(): void {
         this.items = [];

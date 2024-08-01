@@ -65,7 +65,7 @@ export default class LinkedList<T> {
      * @returns {T | null} The removed value, or null if the value was not found.
      * @complexity
      * Time complexity: O(n) - Where n is the number of elements in the list.
-     * Space complexity: O(1).
+     * Space complexity: O(1) - Constant space operation
      */
     public remove(value: T): T | null {
         if (this._head === null) {
@@ -109,7 +109,7 @@ export default class LinkedList<T> {
      * @returns {boolean} True if the value is found, otherwise false.
      * @complexity
      * Time complexity: O(n) - Where n is the number of elements in the list.
-     * Space complexity: O(1).
+     * Space complexity: O(1) - Constant space operation
      */
     public contains(value: T): boolean {
         if (this._head === null) {
@@ -132,8 +132,8 @@ export default class LinkedList<T> {
      * Checks if the linked list is empty.
      * @returns {boolean} True if the linked list is empty, otherwise false.
      * @complexity
-     * Time complexity: O(1).
-     * Space complexity: O(1).
+     *Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation
      */
     public isEmpty(): boolean {
         return this._head === null;
@@ -143,8 +143,8 @@ export default class LinkedList<T> {
      * Gets the size of the linked list.
      * @returns {number} The number of elements in the linked list.
      * @complexity
-     * Time complexity: O(1).
-     * Space complexity: O(1).
+     *Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation
      */
     public size(): number {
         return this._size;
@@ -154,7 +154,7 @@ export default class LinkedList<T> {
      * Clears the linked list.
      * @complexity
      * Time complexity: O(n) - Where n is the number of elements in the list.
-     * Space complexity: O(1).
+     * Space complexity: O(1) - Constant space operation
      */
     public clear(): void {
         let current: Node<T> | null = this._head;
@@ -175,7 +175,7 @@ export default class LinkedList<T> {
      * @returns {T | null} The value at the specified index, or null if the index is out of bounds.
      * @complexity
      * Time complexity: O(n) - Where n is the number of elements in the list.
-     * Space complexity: O(1).
+     * Space complexity: O(1) - Constant space operation
      */
     public get(index: number): T | null {
         if (index < 0 || index >= this._size || this._head === null) {
@@ -200,7 +200,7 @@ export default class LinkedList<T> {
      * @returns {boolean} True if the value was set, otherwise false.
      * @complexity
      * Time complexity: O(n) - Where n is the number of elements in the list.
-     * Space complexity: O(1).
+     * Space complexity: O(1) - Constant space operation
      */
     public set(index: number, value: T): boolean {
         if (index < 0 || index >= this._size || this._head === null) {
