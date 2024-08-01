@@ -1,6 +1,5 @@
 import Node from "./BinaryTreeNode";
 
-
 /**
  * Represents a binary tree.
  * 
@@ -31,44 +30,25 @@ export default class BinaryTree<T> {
         this._size = 0;
     }
 
+
     /**
-     * Inserts a value into the binary tree.
-     * @param {T} val - The value to insert.
-     * @returns {number} The new size of the tree.
+     * Checks if the binary search tree contains a node with the given value.
+     * 
+     * @param {T} val - The value to check for.
+     * @returns {boolean} True if the tree contains a node with the given value, false otherwise.
+     * 
      * @complexity
-     * Time complexity: O(n) - where n is the number of nodes in the tree.
-     * Space complexity: O(1).
+     * Time complexity: O(log n) - where n is the number of nodes in the tree.
+     * Space complexity: O(1) - Constant space operation.
      */
-    public insert(val: T): number {
-        const node: Node<T> = new Node<T>(val);
-        if (this._root == null) {
-            this._root = node;
+    public contains(val: T): boolean {
+        if (this.getNode(val) !== null) {
+            return true;
         } else {
-            const queue: Node<T>[] = [this._root as Node<T>];
-
-            while (queue.length > 0) {
-                const current: Node<T> = queue.shift() as Node<T>;
-
-                if (current.getLeftChild() === null) {
-                    node.setParent(current);
-                    current.setLeftChild(node);
-                    break;
-                } else {
-                    queue.push(current.getLeftChild() as Node<T>);
-                }
-
-                if (current.getRightChild() === null) {
-                    node.setParent(current);
-                    current.setRightChild(node);
-                    break;
-                } else {
-                    queue.push(current.getRightChild() as Node<T>);
-                }
-            }
+            return false;
         }
-        this._size++;
-        return this._size;
     }
+    s
 
     /**
      * Deletes a value from the binary tree.
@@ -220,37 +200,6 @@ export default class BinaryTree<T> {
         }
     }
 
-    /**
-     * Gets the height of the binary tree.
-     * @param {Node<T> | null} node - The node to start from.
-     * @returns {number} The height of the tree.
-     * @complexity
-     * Time complexity: O(n) - where n is the number of nodes in the tree.
-     * Space complexity: O(h) - where h is the height of the tree.
-     */
-    public getHeight(node: Node<T> | null): number {
-        if (node === null) {
-            return -1;
-        }
-
-        const left_height = this.getHeight(node.getLeftChild());
-        const right_height = this.getHeight(node.getRightChild());
-
-        return Math.max(left_height, right_height) + 1;
-    }
-
-    /**
-     * Finds a node with the given value.
-     * @param {T} target - The value to find.
-     * @returns {Node<T> | null} The node with the given value, or null if not found.
-     * @complexity
-     * Time complexity: O(n) - where n is the number of nodes in the tree.
-     * Space complexity: O(h) - where h is the height of the tree.
-     */
-    public find(target: T): Node<T> | null {
-        return this._findNode(this._root, target);
-    }
-
     private _findNode(node: Node<T> | null, target: T): Node<T> | null {
         if (node === null) {
             return null;
@@ -267,33 +216,122 @@ export default class BinaryTree<T> {
     }
 
     /**
-     * Checks if the binary tree is full.
-     * @returns {boolean} True if the tree is full, false otherwise.
+     * Finds a node with the given value.
+     * @param {T} target - The value to find.
+     * @returns {Node<T> | null} The node with the given value, or null if not found.
      * @complexity
      * Time complexity: O(n) - where n is the number of nodes in the tree.
-     * Space complexity: O(n) - where n is the number of nodes in the tree.
+     * Space complexity: O(h) - where h is the height of the tree.
      */
-    public isFull(): boolean {
-        const queue: Node<T>[] = [this._root as Node<T>];
+    public getNode(target: T): Node<T> | null {
+        return this._findNode(this._root, target);
+    }
 
-        while (queue.length > 0) {
-            const current: Node<T> = queue.shift() as Node<T>;
-            const left: Node<T> | null = current.getLeftChild();
-            const right: Node<T> | null = current.getRightChild();
-
-            if ((left !== null && right === null) || (left === null && right !== null)) {
-                return false;
-            }
-
-            if (left !== null) {
-                queue.push(left);
-            }
-            if (right !== null) {
-                queue.push(right);
-            }
+    /**
+     * Gets the height of the binary tree.
+     * @param {Node<T> | null} node - The node to start from.
+     * @returns {number} The height of the tree.
+     * @complexity
+     * Time complexity: O(n) - where n is the number of nodes in the tree.
+     * Space complexity: O(h) - where h is the height of the tree.
+     */
+    public getHeight(node: Node<T> | null): number {
+        if (node === null) {
+            return -1;
         }
 
-        return true;
+        const left_height: number = this.getHeight(node.getLeftChild());
+        const right_height: number = this.getHeight(node.getRightChild());
+
+        return Math.max(left_height, right_height) + 1;
+    }
+
+    /**
+     * Returns the root node of the binary tree.
+     * 
+     * @returns {Node<T> | null} The root node of the tree, or null if the tree is empty.
+     * 
+     * @complexity
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
+     */
+    public getRoot(): Node<T> | null {
+        return this._root;
+    }
+
+    /**
+     * Returns the number of elements in the binary tree.
+     * 
+     * @returns {number} The size of the tree.
+     * @complexity
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
+     */
+    public getSize(): number {
+        return this._size;
+    }
+
+    /**
+     * Inserts a value into the binary tree.
+     * @param {T} val - The value to insert.
+     * @returns {number} The new size of the tree.
+     * @complexity
+     * Time complexity: O(n) - where n is the number of nodes in the tree.
+     * Space complexity: O(1) - Constant space operation.
+     */
+    public insert(val: T): number {
+        const node: Node<T> = new Node<T>(val);
+        if (this._root == null) {
+            this._root = node;
+        } else {
+            const queue: Node<T>[] = [this._root as Node<T>];
+
+            while (queue.length > 0) {
+                const current: Node<T> = queue.shift() as Node<T>;
+
+                if (current.getLeftChild() === null) {
+                    node.setParent(current);
+                    current.setLeftChild(node);
+                    break;
+                } else {
+                    queue.push(current.getLeftChild() as Node<T>);
+                }
+
+                if (current.getRightChild() === null) {
+                    node.setParent(current);
+                    current.setRightChild(node);
+                    break;
+                } else {
+                    queue.push(current.getRightChild() as Node<T>);
+                }
+            }
+        }
+        this._size++;
+        return this._size;
+    }
+
+    /**
+     * Checks if the binary tree is balanced.
+     * @returns {boolean} True if the tree is balanced, false otherwise.
+     * @complexity
+     * Time complexity: O(n) - where n is the number of nodes in the tree.
+     * Space complexity: O(h) - where h is the height of the tree.
+     */
+    public isBalanced(): boolean {
+        const checkHeight = (node: Node<T> | null): number => {
+            if (node === null) return -1;
+
+            const leftHeight: number = checkHeight(node.getLeftChild());
+            const rightHeight: number = checkHeight(node.getRightChild());
+
+            if (leftHeight === -2 || rightHeight === -2 || Math.abs(leftHeight - rightHeight) > 1) {
+                return -2;
+            }
+
+            return Math.max(leftHeight, rightHeight) + 1;
+        };
+
+        return checkHeight(this._root) !== -2;
     }
 
     /**
@@ -330,27 +368,33 @@ export default class BinaryTree<T> {
     }
 
     /**
-     * Checks if the binary tree is balanced.
-     * @returns {boolean} True if the tree is balanced, false otherwise.
+     * Checks if the binary tree is full.
+     * @returns {boolean} True if the tree is full, false otherwise.
      * @complexity
      * Time complexity: O(n) - where n is the number of nodes in the tree.
-     * Space complexity: O(h) - where h is the height of the tree.
+     * Space complexity: O(n) - where n is the number of nodes in the tree.
      */
-    public isBalanced(): boolean {
-        const checkHeight = (node: Node<T> | null): number => {
-            if (node === null) return -1;
+    public isFull(): boolean {
+        const queue: Node<T>[] = [this._root as Node<T>];
 
-            const leftHeight = checkHeight(node.getLeftChild());
-            const rightHeight = checkHeight(node.getRightChild());
+        while (queue.length > 0) {
+            const current: Node<T> = queue.shift() as Node<T>;
+            const left: Node<T> | null = current.getLeftChild();
+            const right: Node<T> | null = current.getRightChild();
 
-            if (leftHeight === -2 || rightHeight === -2 || Math.abs(leftHeight - rightHeight) > 1) {
-                return -2;
+            if ((left !== null && right === null) || (left === null && right !== null)) {
+                return false;
             }
 
-            return Math.max(leftHeight, rightHeight) + 1;
-        };
+            if (left !== null) {
+                queue.push(left);
+            }
+            if (right !== null) {
+                queue.push(right);
+            }
+        }
 
-        return checkHeight(this._root) !== -2;
+        return true;
     }
 
     /**
@@ -362,29 +406,10 @@ export default class BinaryTree<T> {
      */
     public inOrderTraversal(): T[] {
         const result: T[] = [];
-        const traverse = (node: Node<T> | null): void => {
+        const traverse: (node: Node<T> | null) => void = (node: Node<T> | null): void => {
             if (node === null) return;
             traverse(node.getLeftChild());
             result.push(node.get());
-            traverse(node.getRightChild());
-        };
-        traverse(this._root);
-        return result;
-    }
-
-    /**
-     * Performs a pre-order traversal of the binary tree.
-     * @returns {T[]} An array of node values in pre-order.
-     * @complexity
-     * Time complexity: O(n) - where n is the number of nodes in the tree.
-     * Space complexity: O(n) - where n is the number of nodes in the tree.
-     */
-    public preOrderTraversal(): T[] {
-        const result: T[] = [];
-        const traverse = (node: Node<T> | null): void => {
-            if (node === null) return;
-            result.push(node.get());
-            traverse(node.getLeftChild());
             traverse(node.getRightChild());
         };
         traverse(this._root);
@@ -400,7 +425,7 @@ export default class BinaryTree<T> {
      */
     public postOrderTraversal(): T[] {
         const result: T[] = [];
-        const traverse = (node: Node<T> | null): void => {
+        const traverse: (node: Node<T> | null) => void = (node: Node<T> | null): void => {
             if (node === null) return;
             traverse(node.getLeftChild());
             traverse(node.getRightChild());
@@ -409,4 +434,44 @@ export default class BinaryTree<T> {
         traverse(this._root);
         return result;
     }
+
+    /**
+     * Performs a pre-order traversal of the binary tree.
+     * @returns {T[]} An array of node values in pre-order.
+     * @complexity
+     * Time complexity: O(n) - where n is the number of nodes in the tree.
+     * Space complexity: O(n) - where n is the number of nodes in the tree.
+     */
+    public preOrderTraversal(): T[] {
+        const result: T[] = [];
+        const traverse: (node: Node<T> | null) => void = (node: Node<T> | null): void => {
+            if (node === null) return;
+            result.push(node.get());
+            traverse(node.getLeftChild());
+            traverse(node.getRightChild());
+        };
+        traverse(this._root);
+        return result;
+    }
+
+    /**
+     * Sets the value of a node with the given value.
+     * @param {T} target - The value to find.
+     * @param {T} newVal - The new value to set.
+     * @returns {boolean} True if the node was found and updated, false otherwise.
+     * @complexity
+     * Time complexity: O(n) - where n is the number of nodes in the tree.
+     * Space complexity: O(h) - where h is the height of the tree.
+     */
+    public setNode(target: T, newVal: T): boolean {
+        const node: Node<T> | null = this.getNode(target);
+        if (node !== null) {
+            node.set(newVal);
+            return true;
+        }
+        return false;
+    }
+
+
+
 }
