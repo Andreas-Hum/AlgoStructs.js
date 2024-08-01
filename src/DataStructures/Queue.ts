@@ -81,4 +81,18 @@ export class Queue<T> {
     public clear(): void {
         this.items = [];
     }
+
+
+    /**
+    * Implements the iterable interface for the queue.
+    * @returns {IterableIterator<T>} - An iterator for the queue.
+    * @complexity
+    * Time complexity: O(n) - Where n is the number of elements in the queue.
+    * Space complexity: O(1) - Constant space operation.
+    */
+    *[Symbol.iterator](): IterableIterator<T> {
+        for (const item of this.items) {
+            yield item;
+        }
+    }
 }

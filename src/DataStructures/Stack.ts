@@ -88,4 +88,18 @@ export default class Stack<T> {
     public clear(): void {
         this.items = [];
     }
+
+
+    /**
+     * Implements the iterable interface for the stack.
+     * @returns {IterableIterator<T>} - An iterator for the stack.
+     * @complexity
+     * Time complexity: O(n) - Where n is the number of elements in the stack.
+     * Space complexity: O(1) - Constant space operation.
+     */
+    *[Symbol.iterator](): IterableIterator<T> {
+        for (let i = this.items.length - 1; i >= 0; i--) {
+            yield this.items[i];
+        }
+    }
 }

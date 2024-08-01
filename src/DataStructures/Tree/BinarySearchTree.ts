@@ -497,4 +497,28 @@ export default class BinarySearchTree<T> {
             return parent;
         }
     }
+
+    /**
+     * Implements the iterable interface for the binary search tree.
+     * @returns {IterableIterator<T>} - An iterator for the binary search tree.
+     * @complexity
+     * Time complexity: O(n) - Where n is the number of nodes in the tree.
+     * Space complexity: O(h) - Where h is the height of the tree.
+     */
+    *[Symbol.iterator](): IterableIterator<T> {
+        yield* this.inOrderTraversalGenerator(this._root);
+    }
+
+    /**
+     * Generator for in-order traversal.
+     * @param {Node<T> | null} node - The node to start from.
+     * @yields {IterableIterator<T>} - An iterator for in-order traversal.
+     */
+    private *inOrderTraversalGenerator(node: Node<T> | null): IterableIterator<T> {
+        if (node !== null) {
+            yield* this.inOrderTraversalGenerator(node.getLeftChild());
+            yield node.get();
+            yield* this.inOrderTraversalGenerator(node.getRightChild());
+        }
+    }
 }

@@ -245,4 +245,19 @@ export default class LinkedList<T> {
 
         return list_to_array;
     }
+
+    /**
+     * Implements the iterable interface for the linked list.
+     * @returns {IterableIterator<T>} - An iterator for the linked list.
+     * @complexity
+     * Time complexity: O(n) - Where n is the number of elements in the list.
+     * Space complexity: O(1) - Constant space operation.
+     */
+    *[Symbol.iterator](): IterableIterator<T> {
+        let current = this._head;
+        while (current !== null) {
+            yield current.get();
+            current = current.getNext();
+        }
+    }
 }
