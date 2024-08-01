@@ -30,25 +30,30 @@ export default class BinaryTree<T> {
         this._size = 0;
     }
 
+    /**
+     * Clears all nodes from the tree.
+     * @complexity
+     * Time complexity: O(1) - Constant time operation.
+     * Space complexity: O(1) - Constant space operation.
+     */
+    public clear(): void {
+        this._root = null;
+        this._size = 0;
+    }
 
     /**
-     * Checks if the binary search tree contains a node with the given value.
+     * Checks if the binary tree contains a node with the given value.
      * 
      * @param {T} val - The value to check for.
      * @returns {boolean} True if the tree contains a node with the given value, false otherwise.
      * 
      * @complexity
-     * Time complexity: O(log n) - where n is the number of nodes in the tree.
+     * Time complexity: O(n) - where n is the number of nodes in the tree.
      * Space complexity: O(1) - Constant space operation.
      */
     public contains(val: T): boolean {
-        if (this.getNode(val) !== null) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.getNode(val) !== null;
     }
-    s
 
     /**
      * Deletes a value from the binary tree.
@@ -318,7 +323,7 @@ export default class BinaryTree<T> {
      * Space complexity: O(h) - where h is the height of the tree.
      */
     public isBalanced(): boolean {
-        const checkHeight = (node: Node<T> | null): number => {
+        const checkHeight: (node: Node<T> | null) => number = (node: Node<T> | null): number => {
             if (node === null) return -1;
 
             const leftHeight: number = checkHeight(node.getLeftChild());
@@ -455,6 +460,29 @@ export default class BinaryTree<T> {
     }
 
     /**
+     * Performs a level-order traversal (breadth-first traversal) of the binary tree.
+     * @returns {T[]} An array of node values in level-order.
+     * @complexity
+     * Time complexity: O(n) - where n is the number of nodes in the tree.
+     * Space complexity: O(n) - where n is the number of nodes in the tree.
+     */
+    public levelOrderTraversal(): T[] {
+        const result: T[] = [];
+        const queue: (Node<T> | null)[] = [this._root];
+
+        while (queue.length > 0) {
+            const node: Node<T> | null = queue.shift() as Node<T> | null;
+            if (node !== null) {
+                result.push(node.get());
+                queue.push(node.getLeftChild());
+                queue.push(node.getRightChild());
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Sets the value of a node with the given value.
      * @param {T} target - The value to find.
      * @param {T} newVal - The new value to set.
@@ -471,7 +499,6 @@ export default class BinaryTree<T> {
         }
         return false;
     }
-
 
 
 }
