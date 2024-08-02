@@ -18,7 +18,7 @@ export default class GraphNode<T> {
     }
 
     /**
-     * Adds a directed or undirected edge from this node to another node with a weight.
+     * Adds a directed or undirected edge from this node to another node with a specified weight.
      * 
      * @param {GraphNode<T>} node - The node to connect to.
      * @param {number} weight - The weight of the edge.
@@ -29,60 +29,16 @@ export default class GraphNode<T> {
         if (!this._edges.has(node)) {
             this._edges.set(node, []);
         }
-        this._edges.get(node)!.push(weight);
+        const weights = this._edges.get(node)!;
+        if (weights.includes(weight)) {
+            return false;
+        }
+        weights.push(weight);
 
         if (undirected) {
             node.addEdge(this, weight, false);
         }
-
         return true;
-    }
-
-    /**
-     * Removes a directed or undirected edge from this node to another node with a specific weight.
-     * 
-     * @param {GraphNode<T>} node - The node to disconnect from.
-     * @param {number} weight - The weight of the edge to remove.
-     * @param {boolean} [undirected=false] - Whether the edge is undirected.
-     * @returns {boolean} - True if the edge was removed, false if it did not exist.
-     */
-    public removeEdge(node: GraphNode<T>, weight: number, undirected: boolean = false): boolean {
-        if (!this._edges.has(node)) {
-            return false;
-        }
-        const weights: number[] = this._edges.get(node)!;
-        const index: number = weights.indexOf(weight);
-        if (index === -1) {
-            return false;
-        }
-        weights.splice(index, 1);
-        if (weights.length === 0) {
-            this._edges.delete(node);
-        }
-
-        if (undirected) {
-            node.removeEdge(this, weight, false);
-        }
-
-        return true;
-    }
-
-    /**
-     * Gets all edges connected to this node.
-     * 
-     * @returns {Array<{node: GraphNode<T>, weights: number[]}>} - An array of nodes connected to this node with their weights.
-     */
-    public getEdges(): Array<{ node: GraphNode<T>, weights: number[] }> {
-        return Array.from(this._edges.entries()).map(([node, weights]) => ({ node, weights }));
-    }
-
-    /**
-     * Sets the value of the node.
-     * 
-     * @param {T} val - The new value to store in the node.
-     */
-    public set(val: T): void {
-        this._val = val;
     }
 
     /**
@@ -95,60 +51,107 @@ export default class GraphNode<T> {
     }
 
     /**
-     * Gets the degree of the node (number of edges).
+     * Gets all edges connected to this node.
      * 
-     * @returns {number} - The number of edges connected to this node.
+     * @returns {Array<{node: GraphNode<T>, weights: number[]}>} - An array of nodes and their weights connected to this node.
      */
-    public degree(): number {
-        return Array.from(this._edges.values()).reduce((sum, weights) => sum + weights.length, 0);
+    public getEdges(): Array<{ node: GraphNode<T>, weights: number[] }> {
+        return Array.from(this._edges.entries()).map(([node, weights]) => ({ node, weights }));
     }
 
     /**
-     * Checks if there is an edge between this node and another node with a specific weight.
+     * Checks if there is an edge between this node and another node.
      * 
      * @param {GraphNode<T>} node - The node to check for an edge.
-     * @param {number} weight - The weight of the edge to check for.
      * @returns {boolean} - True if an edge exists, false otherwise.
      */
-    public hasEdge(node: GraphNode<T>, weight: number): boolean {
-        return this._edges.has(node) && this._edges.get(node)!.includes(weight);
+    public hasEdge(node: GraphNode<T>): boolean {
+        return this._edges.has(node);
     }
 
     /**
-     * Clears all edges from this node.
-     */
-    public clearEdges(): void {
-        this._edges.clear();
-    }
-
-    /**
-     * Sets the weight of the edge between this node and another node.
+     * Removes the directed or undirected edge from this node to another node.
      * 
-     * @param {GraphNode<T>} node - The node to set the edge weight for.
-     * @param {number} oldWeight - The old weight of the edge.
-     * @param {number} newWeight - The new weight of the edge.
-     * @returns {boolean} - True if the weight was set, false if the edge does not exist.
+     * @param {GraphNode<T>} node - The node to disconnect from.
+     * @param {number} weight - The weight of the edge to remove.
+     * @param {boolean} [undirected=false] - Whether the edge is undirected.
+     * @returns {boolean} - True if the edge was removed, false if it did not exist.
      */
-    public setWeight(node: GraphNode<T>, oldWeight: number, newWeight: number): boolean {
+    public removeEdge(node: GraphNode<T>, weight: number, undirected: boolean = false): boolean {
         if (!this._edges.has(node)) {
             return false;
         }
         const weights: number[] = this._edges.get(node)!;
-        const index: number = weights.indexOf(oldWeight);
-        if (index === -1) {
+        const weightIndex: number = weights.indexOf(weight);
+        if (weightIndex === -1) {
             return false;
         }
-        weights[index] = newWeight;
+        weights.splice(weightIndex, 1);
+        if (weights.length === 0) {
+            this._edges.delete(node);
+        }
+
+        if (undirected) {
+            node.removeEdge(this, weight, false);
+        }
+
         return true;
     }
 
     /**
-     * Gets the weights of the edges between this node and another node.
+     * Sets the edges of this node.
      * 
-     * @param {GraphNode<T>} node - The node to get the edge weights for.
-     * @returns {number[] | null} - The weights of the edges, or null if no edges exist.
+     * @param {Array<{node: GraphNode<T>, weights: number[]}>} edges - An array of nodes and their weights to set as edges.
+     * @param {boolean} [undirected=false] - Whether the edges are undirected.
      */
-    public getWeights(node: GraphNode<T>): number[] | null {
-        return this._edges.get(node) ?? null;
+    public setEdges(edges: Array<{ node: GraphNode<T>, weights: number[] }>, undirected: boolean = false): void {
+        this._edges.clear();
+        for (const { node, weights } of edges) {
+            for (const weight of weights) {
+                this.addEdge(node, weight, undirected);
+            }
+        }
+    }
+
+    /**
+     * Sets a directed or undirected edge from this node to another node.
+     * If the edge already exists, it replaces the existing edge with the new node.
+     * 
+     * @param {GraphNode<T>} oldNode - The existing node to be replaced.
+     * @param {GraphNode<T>} newNode - The new node to connect to.
+     * @param {number} weight - The weight of the new edge.
+     * @param {boolean} [undirected=false] - Whether the edge is undirected.
+     */
+    public setEdge(oldNode: GraphNode<T>, newNode: GraphNode<T>, weight: number, undirected: boolean = false): boolean {
+        if (!this._edges.has(oldNode)) {
+            return false;
+        }
+        this._edges.delete(oldNode);
+        this.addEdge(newNode, weight, undirected);
+
+        if (undirected) {
+            oldNode.removeEdge(this, weight, false);
+            newNode.addEdge(this, weight, false);
+        }
+
+        return true;
+    }
+
+    /**
+     * Sets the value of the node.
+     * 
+     * @param {T} val - The new value to store in the node.
+     */
+    public set(val: T): void {
+        this._val = val;
+    }
+
+    /**
+     * Returns an iterator over the edges of this node.
+     * 
+     * @returns {Iterator<[GraphNode<T>, number[]]>} - An iterator over the edges and their weights.
+     */
+    public [Symbol.iterator](): Iterator<[GraphNode<T>, number[]]> {
+        return this._edges.entries();
     }
 }
