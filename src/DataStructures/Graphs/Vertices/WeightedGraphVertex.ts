@@ -10,12 +10,12 @@ import type {
  * 
  * @template T - The type of the value stored in the vertex.
  */
-export default class GraphVertex<T> {
+export default class WeightedGraphVertex<T> {
     private _val: T;
-    private _edges: Map<GraphVertex<T>, number[]>;
+    private _edges: Map<WeightedGraphVertex<T>, number[]>;
 
     /**
-     * Creates an instance of a GraphVertex.
+     * Creates an instance of a WeightedGraphVertex.
      * 
      * @param {T} val - The value to store in the vertex.
      */
@@ -59,19 +59,19 @@ export default class GraphVertex<T> {
     /**
      * Gets all edges connected to this vertex.
      * 
-     * @returns {Array<{vertex: GraphVertex<T>, weights: number[]}>} - An array of vertices and their weights connected to this vertex.
+     * @returns {Array<{vertex: WeightedGraphVertex<T>, weights: number[]}>} - An array of vertices and their weights connected to this vertex.
      */
-    public getEdges(): Array<{ vertex: GraphVertex<T>, weights: number[] }> {
+    public getEdges(): Array<{ vertex: WeightedGraphVertex<T>, weights: number[] }> {
         return Array.from(this._edges.entries()).map(([vertex, weights]) => ({ vertex, weights }));
     }
 
     /**
      * Checks if there is an edge between this vertex and another vertex.
      * 
-     * @param {GraphVertex<T>} vertex - The vertex to check for an edge.
+     * @param {WeightedGraphVertex<T>} vertex - The vertex to check for an edge.
      * @returns {boolean} - True if an edge exists, false otherwise.
      */
-    public hasEdge(vertex: GraphVertex<T>): boolean {
+    public hasEdge(vertex: WeightedGraphVertex<T>): boolean {
         return this._edges.has(vertex);
     }
 
@@ -153,9 +153,9 @@ export default class GraphVertex<T> {
     /**
      * Returns an iterator over the edges of this vertex.
      * 
-     * @returns {Iterator<[GraphVertex<T>, number[]]>} - An iterator over the edges and their weights.
+     * @returns {Iterator<[WeightedGraphVertex<T>, number[]]>} - An iterator over the edges and their weights.
      */
-    public [Symbol.iterator](): Iterator<[GraphVertex<T>, number[]]> {
+    public [Symbol.iterator](): Iterator<[WeightedGraphVertex<T>, number[]]> {
         return this._edges.entries();
     }
 }

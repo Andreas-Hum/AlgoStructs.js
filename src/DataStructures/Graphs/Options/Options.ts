@@ -1,5 +1,5 @@
-import WeightedGraphVertex from "../Vertices/Weighted/GraphVertex";
-import UnweightedGraphVertex from "../Vertices/Unweighted/GraphVertex";
+import WeightedGraphVertex from "../Vertices/WeightedGraphVertex";
+import UnweightedGraphVertex from "../Vertices/UnweightedGraphVertex";
 
 
 // General graph options
@@ -17,11 +17,12 @@ export type EdgeOptions<T> = {
 };
 
 // Search options for graph traversal
-export type SearchOptions<T> = {
-    startVertex: WeightedGraphVertex<T> | UnweightedGraphVertex<T>;
+export type SearchOptions<T, VertexType> = {
+    startVertex: VertexType;
     targetValue?: T | null;
     returnPath?: boolean;
-};
+}
+
 
 // Options for graph traversal
 export type TraverseOptions<T> = {

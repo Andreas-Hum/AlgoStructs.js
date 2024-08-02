@@ -3,18 +3,18 @@ import type {
     UnweightedRemoveEdgeOptions as RemoveEdgeOptions,
     UnweightedSetEdgesOptions as SetEdgesOptions,
     UnweightedSetEdgeOptions as SetEdgeOptions
-} from "../../Options/Options";
+} from "../Options/Options";
 
 /**
  * Represents a vertex in an unweighted graph.
  * 
  * @template T - The type of the value stored in the vertex.
  */
-export default class GraphVertex<T> {
+export default class UnweightedGraphVertex<T> {
     private _val: T;
-    private _edges: Set<GraphVertex<T>>;
+    private _edges: Set<UnweightedGraphVertex<T>>;
     /**
-     * Creates an instance of a GraphVertex.
+     * Creates an instance of a UnweightedGraphVertex.
      * 
      * @param {T} val - The value to store in the vertex.
      */
@@ -55,19 +55,19 @@ export default class GraphVertex<T> {
     /**
      * Gets all edges connected to this vertex.
      * 
-     * @returns {GraphVertex<T>[]} - An array of vertices connected to this vertex.
+     * @returns {UnweightedGraphVertex<T>[]} - An array of vertices connected to this vertex.
      */
-    public getEdges(): GraphVertex<T>[] {
+    public getEdges(): UnweightedGraphVertex<T>[] {
         return Array.from(this._edges);
     }
 
     /**
      * Checks if there is an edge between this vertex and another vertex.
      * 
-     * @param {GraphVertex<T>} vertex - The vertex to check for an edge.
+     * @param {UnweightedGraphVertex<T>} vertex - The vertex to check for an edge.
      * @returns {boolean} - True if an edge exists, false otherwise.
      */
-    public hasEdge(vertex: GraphVertex<T>): boolean {
+    public hasEdge(vertex: UnweightedGraphVertex<T>): boolean {
         return this._edges.has(vertex);
     }
 
@@ -139,9 +139,9 @@ export default class GraphVertex<T> {
     /**
      * Returns an iterator over the edges of this vertex.
      * 
-     * @returns {Iterator<GraphVertex<T>>} - An iterator over the edges.
+     * @returns {Iterator<UnweightedGraphVertex<T>>} - An iterator over the edges.
      */
-    public [Symbol.iterator](): Iterator<GraphVertex<T>> {
+    public [Symbol.iterator](): Iterator<UnweightedGraphVertex<T>> {
         return this._edges.values();
     }
 }
