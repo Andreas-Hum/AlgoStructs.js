@@ -3,6 +3,9 @@ import { isPrime } from '../../../src/Algorithms/Primes'
 import * as fc from 'fast-check';
 
 describe('isPrime', () => {
+    afterEach(() => {
+        jest.clearAllTimers(); // Clear any timers after each test
+    });
     test('prime numbers should only be divisible by 1 and itself', () => {
         fc.assert(
             fc.property(fc.integer({ min: 2, max: 1000 }), (num) => {

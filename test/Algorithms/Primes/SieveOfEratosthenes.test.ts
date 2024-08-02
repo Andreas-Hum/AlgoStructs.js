@@ -4,6 +4,9 @@ import { sieveOfEratosthenes, isPrime } from "../../../src/Algorithms/Primes";
 import * as fc from 'fast-check';
 
 describe('Sieve of Eratosthenes', () => {
+    afterEach(() => {
+        jest.clearAllTimers(); // Clear any timers after each test
+    });
     test('all numbers in the result should be prime', () => {
         fc.assert(
             fc.property(fc.integer({ min: 2, max: 1000 }), (limit) => {

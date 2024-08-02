@@ -1,4 +1,3 @@
-// JumpSearch.test.ts
 import { jumpSearch } from "../../../src/Algorithms/Search";
 import SearchOptions from "../../../src/Options/AlgorithmOptions/SearchOptions/SearchOptions";
 import * as fc from "fast-check";
@@ -123,7 +122,7 @@ describe("jumpSearch", () => {
                         compare: (a, b) => a.age - b.age
                     };
                     const index: number = jumpSearch(options);
-                    if (index !== -1) {
+                    if (index !== -1 && index < people.length) {
                         return people[index].age === targetPerson.age;
                     } else {
                         return !people.some(person => person.age === targetPerson.age);

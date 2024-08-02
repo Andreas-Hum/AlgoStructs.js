@@ -3,6 +3,9 @@ import { greatestCommonDivisor } from "../../../src/Algorithms/Divisor";
 import * as fc from "fast-check";
 
 describe("greatestCommonDivisor", () => {
+    afterEach(() => {
+        jest.clearAllTimers(); // Clear any timers after each test
+    });
     it("should return the correct GCD for two non-negative integers", () => {
         fc.assert(
             fc.property(

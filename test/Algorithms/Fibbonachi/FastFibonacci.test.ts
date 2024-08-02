@@ -3,6 +3,9 @@ import { fastFibonacci } from "../../../src/Algorithms/Fibbonachi";
 import * as fc from 'fast-check';
 
 describe('fastFibonacci Function', () => {
+    afterEach(() => {
+        jest.clearAllTimers(); // Clear any timers after each test
+    });
     test('should return 0 for input 0', () => {
         expect(fastFibonacci(0)).toBe(0);
     });
