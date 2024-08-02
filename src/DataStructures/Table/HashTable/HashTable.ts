@@ -1,4 +1,4 @@
-import Node from "./HashTableNode";
+import Node from "../Nodes/HashTableNode";
 
 /**
  * Represents a hash table.
@@ -30,10 +30,10 @@ export default class HashTable<K, V> {
      * };
      * const hashTable: HashTable<string, number> = new HashTable<string, number>(10, toNumber);
      */
-    constructor(size: number, toNumber: (key: K) => number) {
-        this._size = size;
-        this._toNumber = toNumber;
-        this._table = new Array(size).fill(null);
+    constructor(options: { size: number, toNumber: (key: K) => number }) {
+        this._size = options.size;
+        this._toNumber = options.toNumber;
+        this._table = new Array(options.size).fill(null);
         this._count = 0;
         this._loadFactor = 0.75;
     }

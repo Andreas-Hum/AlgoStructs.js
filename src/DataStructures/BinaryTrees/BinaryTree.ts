@@ -1,4 +1,4 @@
-import Node from "./BinaryTreeNode";
+import Node from "./Nodes/BinaryTreeNode";
 
 /**
  * Represents a binary tree.

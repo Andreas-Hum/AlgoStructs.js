@@ -1,4 +1,4 @@
-import Node from "./SinglyLinkedListNode"
+import Node from "./Nodes/SinglyLinkedListNode"
 
 /**
  * A class representing a singly linked list.
