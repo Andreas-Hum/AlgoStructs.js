@@ -65,7 +65,7 @@ export function dijkstra<T>({ getNeighbors, getWeight, startNode, visit, targetN
 
     while (pq.length > 0) {
         pq.sort((a, b) => a[1] - b[1]);
-        const [currentNode, currentDistance] = pq.shift()!;
+        const [currentNode, currentDistance]: [T, number] = pq.shift()!;
 
         if (visited.has(currentNode)) {
             continue;
@@ -83,8 +83,8 @@ export function dijkstra<T>({ getNeighbors, getWeight, startNode, visit, targetN
         const neighbors: T[] = getNeighbors(currentNode);
         for (const neighbor of neighbors) {
             if (!visited.has(neighbor)) {
-                const weight = getWeight(currentNode, neighbor);
-                const distance = currentDistance + weight;
+                const weight: number = getWeight(currentNode, neighbor);
+                const distance: number = currentDistance + weight;
 
                 if (distance < (distances.get(neighbor) || Infinity)) {
                     distances.set(neighbor, distance);
