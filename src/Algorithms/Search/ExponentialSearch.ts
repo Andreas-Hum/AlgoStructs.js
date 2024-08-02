@@ -1,13 +1,14 @@
 import binarySearch from "./BinarySearch";
-
+import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOptions";
 
 /**
  * Performs an exponential search on a sorted array.
  * 
  * @template T - The type of elements in the array.
- * @param {T[]} array - The sorted array to search.
- * @param {T} target - The element to search for.
- * @param {(a: T, b: T) => number} compare - The comparison function.
+ * @param {SearchOptions<T>} options - The options for the exponential search.
+ * @param {T[]} options.array - The sorted array to search.
+ * @param {T} options.target - The element to search for.
+ * @param {(a: T, b: T) => number} options.compare - The comparison function.
  * @returns {number} - The index of the target element, or -1 if not found.
  * 
  * @remarks
@@ -16,7 +17,7 @@ import binarySearch from "./BinarySearch";
  * - Zero if the first argument is equal to the second.
  * - A positive number if the first argument is greater than the second.
  * 
-* @complexity
+ * @complexity
  * Time complexity: O(log n) - Exponential search runs in logarithmic time.
  * Space complexity: O(1) - We use a constant amount of space.
  * 
@@ -33,18 +34,16 @@ import binarySearch from "./BinarySearch";
  * // For numbers
  * const numbers: number[]  = [1, 2, 3, 4, 5, 6, 7, 8, 9];
  * const targetNumber :number  = 5;
- * const index: number  = exponentialSearch(numbers, targetNumber, (a, b) => a - b);
+ * const index: number  = exponentialSearch({ array: numbers, target: targetNumber, compare: (a, b) => a - b });
  * console.log(index); // Output: 4
  * @example
  * // For strings
  * const strings: string[] = ["apple", "banana", "cherry", "date"];
  * const targetString: string = "cherry";
- * const index: number = exponentialSearch(strings, targetString, (a, b) => a.localeCompare(b));
+ * const index: number = exponentialSearch({ array: strings, target: targetString, compare: (a, b) => a.localeCompare(b) });
  * console.log(index); // Output: 2
- * 
- * 
  */
-export default function exponentialSearch<T>(array: T[], target: T, compare: (a: T, b: T) => number): number {
+export default function exponentialSearch<T>({ array, target, compare }: SearchOptions<T>): number {
     let n: number = array.length;
 
     if (n === 0) {
@@ -57,5 +56,5 @@ export default function exponentialSearch<T>(array: T[], target: T, compare: (a:
         bound *= 2;
     }
 
-    return binarySearch(array, target, compare);
+    return binarySearch({ array, target, compare });
 }

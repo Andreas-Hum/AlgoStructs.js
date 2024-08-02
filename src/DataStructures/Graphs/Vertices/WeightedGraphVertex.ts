@@ -1,9 +1,9 @@
 import type {
-    WeightedAddEdgeOptions as AddEdgeOptions,
-    WeightedRemoveEdgeOptions as RemoveEdgeOptions,
-    WeightedSetEdgesOptions as SetEdgesOptions,
-    WeightedSetEdgeOptions as SetEdgeOptions
-} from "../../Options/Options";
+    WeightedAddEdgeOptions,
+    WeightedRemoveEdgeOptions,
+    WeightedSetEdgesOptions,
+    WeightedSetEdgeOptions
+} from "../Options/VertexGraphOptions/WeightedOptions";
 
 /**
  * Represents a vertex in a weighted graph.
@@ -27,10 +27,10 @@ export default class WeightedGraphVertex<T> {
     /**
      * Adds a directed or undirected edge from this vertex to another vertex with a specified weight.
      * 
-     * @param {AddEdgeOptions<T>} options - The options for adding an edge.
+     * @param {WeightedAddEdgeOptions<T>} options - The options for adding an edge.
      * @returns {boolean} - True if the edge was added, false if it already existed.
      */
-    public addEdge(options: AddEdgeOptions<T>): boolean {
+    public addEdge(options: WeightedAddEdgeOptions<T>): boolean {
         const { vertex, weight, undirected = false } = options;
         if (!this._edges.has(vertex)) {
             this._edges.set(vertex, []);
@@ -78,10 +78,10 @@ export default class WeightedGraphVertex<T> {
     /**
      * Removes the directed or undirected edge from this vertex to another vertex.
      * 
-     * @param {RemoveEdgeOptions<T>} options - The options for removing an edge.
+     * @param {WeightedRemoveEdgeOptions<T>} options - The options for removing an edge.
      * @returns {boolean} - True if the edge was removed, false if it did not exist.
      */
-    public removeEdge(options: RemoveEdgeOptions<T>): boolean {
+    public removeEdge(options: WeightedRemoveEdgeOptions<T>): boolean {
         const { vertex, weight, undirected = false } = options;
         if (!this._edges.has(vertex)) {
             return false;
@@ -106,9 +106,9 @@ export default class WeightedGraphVertex<T> {
     /**
      * Sets the edges of this vertex.
      * 
-     * @param {SetEdgesOptions<T>} options - The options for setting the edges.
+     * @param {WeightedSetEdgesOptions<T>} options - The options for setting the edges.
      */
-    public setEdges(options: SetEdgesOptions<T>): void {
+    public setEdges(options: WeightedSetEdgesOptions<T>): void {
         const { edges, undirected = false } = options;
         this._edges.clear();
         for (const { vertex, weights } of edges) {
@@ -122,10 +122,10 @@ export default class WeightedGraphVertex<T> {
      * Sets a directed or undirected edge from this vertex to another vertex.
      * If the edge already exists, it replaces the existing edge with the new vertex.
      * 
-     * @param {SetEdgeOptions<T>} options - The options for setting an edge.
+     * @param {WeightedSetEdgeOptions<T>} options - The options for setting an edge.
      * @returns {boolean} - True if the edge was replaced, false if the old vertex did not exist.
      */
-    public setEdge(options: SetEdgeOptions<T>): boolean {
+    public setEdge(options: WeightedSetEdgeOptions<T>): boolean {
         const { oldVertex, newVertex, weight, undirected = false } = options;
         if (!this._edges.has(oldVertex)) {
             return false;

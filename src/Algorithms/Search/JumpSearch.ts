@@ -1,14 +1,13 @@
-
-
-
+import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOptions";
 
 /**
  * Performs a Jump Search on a sorted array to find the index of a target element.
  * 
  * @template T - The type of elements in the array.
- * @param {T[]} array - The sorted array to search within.
- * @param {T} target - The target element to search for.
- * @param {(a: T, b: T) => number} compare - A comparison function.
+ * @param {SearchOptions<T>} options - The options for the jump search.
+ * @param {T[]} options.array - The sorted array to search within.
+ * @param {T} options.target - The target element to search for.
+ * @param {(a: T, b: T) => number} options.compare - A comparison function.
  * @returns {number} - The index of the target element in the array, or -1 if the target is not found.
  * 
  * @remark
@@ -34,28 +33,28 @@
  * @example
  * const numbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
  * const targetNumber: number = 5;
- * const index: number = JumpSearch(numbers, targetNumber, (a, b) => a - b);
+ * const index: number = JumpSearch({ array: numbers, target: targetNumber, compare: (a, b) => a - b });
  * console.log(index); // Output: 4
  * 
  * @example
  * // For strings
  * const strings: string[] = ["apple", "banana", "cherry", "date"];
  * const targetString: string = "cherry";
- * const index: number = JumpSearch(strings, targetString, (a, b) => a.localeCompare(b));
+ * const index: number = JumpSearch({ array: strings, target: targetString, compare: (a, b) => a.localeCompare(b) });
  * console.log(index); // Output: 2
  * 
  */
-export default function JumpSearch<T>(array: T[], target: T, compare: (a: T, b: T) => number): number {
+export default function JumpSearch<T>({ array, target, compare }: SearchOptions<T>): number {
 
-    const n: number = array.length
+    const n: number = array.length;
     let prev: number = 0;
-    let step: number = Math.floor(Math.sqrt(n))
+    let step: number = Math.floor(Math.sqrt(n));
 
     while (compare(array[Math.min(step, n) - 1], target) < 0) {
         prev = step;
         step += Math.floor(Math.sqrt(n));
         if (prev >= n) {
-            return -1
+            return -1;
         }
     }
 
@@ -71,7 +70,4 @@ export default function JumpSearch<T>(array: T[], target: T, compare: (a: T, b: 
     } else {
         return -1;
     }
-
 }
-
-

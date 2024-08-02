@@ -1,40 +1,14 @@
 
 import WeightedGraphVertex from "../Vertices/WeightedGraphVertex";
 
-// General graph options
-export type GraphOptions<T> = {
-    isUndirected?: boolean;
-    compare: (a: T, b: T) => number;
-};
+import {
+    GraphOptions,
+    EdgeOptions,
+    SearchOptions,
+    TraverseOptions,
+    CreateRandomGraphOptions,
+} from '../Options/VertexGraphOptions/WeightedOptions';
 
-// Edge options for weighted graphs
-export type EdgeOptions<T> = {
-    vertex1: WeightedGraphVertex<T>;
-    vertex2: WeightedGraphVertex<T>;
-    weight?: number;
-};
-
-// Search options for graph traversal
-export type SearchOptions<T> = {
-    startVertex: WeightedGraphVertex<T>;
-    targetValue?: T | null;
-    returnPath?: boolean;
-}
-
-// Options for graph traversal
-export type TraverseOptions<T> = {
-    startVertex: WeightedGraphVertex<T>;
-    traversalType: "DFS" | "BFS";
-};
-
-// Options for creating a random graph
-export type CreateRandomGraphOptions = GraphOptions<number> & {
-    vertexCount: number;
-    minEdges?: number;
-    maxEdges?: number;
-    minWeight?: number;
-    maxWeight?: number;
-};
 
 export default class Graph<T> {
 
@@ -70,7 +44,7 @@ export default class Graph<T> {
      * Space complexity: O(1) - Constant space operation
      */
     public addVertex(val: T): WeightedGraphVertex<T> {
-        const vertex = new WeightedGraphVertex(val);
+        const vertex: WeightedGraphVertex<T> = new WeightedGraphVertex(val);
         this._vertices.add(vertex);
         return vertex;
     }

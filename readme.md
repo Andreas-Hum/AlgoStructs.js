@@ -40,6 +40,11 @@ This repository contains implementations of various data structures and algorith
     - [Linear Search](#linear-search)
     - [Meta Binary Search](#meta-binary-search)
     - [Ternary Search](#ternary-search)
+  - [Graph Algorithms](#graph-algorithms)
+    - [Breadth-First Search](#breadth-first-search)
+    - [Depth-First Search](#depth-first-search)
+    - [Dijkstra's Algorithm](#dijkstras-algorithm)
+    - [A* Search](#a-star-search)
 - [Getting Started](#getting-started)
 - [Contact](#contact)
 - [License](#license)
@@ -109,7 +114,16 @@ This repository contains implementations of various data structures and algorith
   - **[MetaBinarySearch](src/Algorithms/Search/MetaBinarySearch.ts)**: Implementation of the meta binary search algorithm. This algorithm is a variant of binary search that uses a different approach to divide the search space.
 - [Ternary Search](https://en.wikipedia.org/wiki/Ternary_search)
   - **[TernarySearch](src/Algorithms/Search/TernarySearch.ts)**: Implementation of the ternary search algorithm. This algorithm divides the array into three parts and recursively searches in the relevant part.
+### [Graph Algorithms](https://en.wikipedia.org/wiki/Graph_theory)
 
+- [Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search)
+  - **[BreadthFirstSearch](src/Algorithms/Graph/BreadthFirstSearch.ts)**: Implementation of the breadth-first search algorithm. This algorithm explores all the vertices of a graph in breadthward motion.
+- [Depth-First Search](https://en.wikipedia.org/wiki/Depth-first_search)
+  - **[DepthFirstSearch](src/Algorithms/Graph/DepthFirstSearch.ts)**: Implementation of the depth-first search algorithm. This algorithm explores all the vertices of a graph in depthward motion.
+- [Dijkstra's Algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+  - **[Dijkstra](src/Algorithms/Graph/Dijkstra.ts)**: Implementation of Dijkstra's shortest path algorithm. This algorithm finds the shortest path between nodes in a graph.
+- [A* Search](https://en.wikipedia.org/wiki/A*_search_algorithm)
+  - **[AStar](src/Algorithms/Graph/AStar.ts)**: Implementation of the A* search algorithm. This algorithm is used for finding the shortest path from a start node to a goal node in a graph.
 ## Getting Started
 
 To get started with this project, clone the repository and install the dependencies:

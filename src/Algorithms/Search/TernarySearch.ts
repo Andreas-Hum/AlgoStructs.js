@@ -1,10 +1,14 @@
+import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOptions";
+
+
 /**
  * Performs a ternary search on a sorted array.
  * 
  * @template T - The type of elements in the array.
- * @param {T[]} array - The sorted array to search.
- * @param {T} target - The element to search for.
- * @param {(a: T, b: T) => number} compare - The comparison function.
+ * @param {SearchOptions<T>} options - The options for the ternary search.
+ * @param {T[]} options.array - The sorted array to search.
+ * @param {T} options.target - The element to search for.
+ * @param {(a: T, b: T) => number} options.compare - The comparison function.
  * @returns {number} - The index of the target element, or -1 if not found.
  * 
  * @remarks
@@ -40,19 +44,16 @@
  * // For numbers
  * const numbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
  * const targetNumber: number = 5;
- * const index: number = ternarySearch(numbers, targetNumber, (a, b) => a - b);
+ * const index: number = ternarySearch({ array: numbers, target: targetNumber, compare: (a, b) => a - b });
  * console.log(index); // Output: 4
  * 
- * @example
  * // For strings
  * const strings: string[] = ["apple", "banana", "cherry", "date"];
  * const targetString: string = "cherry";
- * const index: number = ternarySearch(strings, targetString, (a, b) => a.localeCompare(b));
+ * const index: number = ternarySearch({ array: strings, target: targetString, compare: (a, b) => a.localeCompare(b) });
  * console.log(index); // Output: 2
- * 
-
  */
-export default function ternarySearch<T>(array: T[], target: T, compare: (a: T, b: T) => number): number {
+export default function ternarySearch<T>({ array, target, compare }: SearchOptions<T>): number {
     let left: number = 0;
     let right: number = array.length - 1;
 
@@ -80,4 +81,3 @@ export default function ternarySearch<T>(array: T[], target: T, compare: (a: T, 
 
     return -1;
 }
-
