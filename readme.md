@@ -124,7 +124,10 @@ cd datastructures
 npm install
 ```
 
-## Getting Started
+## Contact
 
 I am a computer science student from Aalborg University. You can contact me at [Andreas@hummelmose.dk](mailto:Andreas@hummelmose.dk).
 
+## Feel Free to Contribute
+
+If you have any suggestions, ideas, or improvements, please feel free to reach out or submit a pull request.
