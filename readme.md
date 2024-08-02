@@ -9,8 +9,8 @@ This repository contains implementations of various data structures and algorith
     - [BinaryTree](#binarytree)
     - [BinarySearchTree](#binarysearchtree)
   - [Graphs](#graphs)
-    - [Adjacency List](#adjacency-list)
-    - [Adjacency Matrix](#adjacency-matrix)
+    <!-- - [Adjacency List](#adjacency-list)
+    - [Adjacency Matrix](#adjacency-matrix) -->
     - [Vertex Graph](#vertex-graph)
   - [Lists](#lists)
     - [Doubly Linked Lists](#doubly-linked-lists)
@@ -45,6 +45,7 @@ This repository contains implementations of various data structures and algorith
     - [Depth-First Search](#depth-first-search)
     - [Dijkstra's Algorithm](#dijkstras-algorithm)
     - [A* Search](#a-star-search)
+    - [Topological Sort](#topological-sort)
 - [Getting Started](#getting-started)
 - [Contact](#contact)
 - [License](#license)
@@ -53,36 +54,50 @@ This repository contains implementations of various data structures and algorith
 
 ### [Binary Trees](https://en.wikipedia.org/wiki/Binary_search_tree)
 
-- **[BinaryTree](src/DataStructures/BinaryTree.ts)**: A binary tree implementation. Binary trees are hierarchical data structures in which each node has at most two children, referred to as the left child and the right child.
-- **[BinarySearchTree](src/DataStructures/BinarySearchTree.ts)**: A binary search tree implementation. Binary search trees are used to maintain a sorted order of elements, allowing for efficient insertion, deletion, and lookup operations.
+- **[BinaryTree](src/DataStructures/BinaryTrees/BinaryTree.ts)**: A binary tree implementation. Binary trees are hierarchical data structures in which each node has at most two children, referred to as the left child and the right child.
+- **[BinarySearchTree](src/DataStructures/BinaryTrees/BinarySearchTree.ts)**: A binary search tree implementation. Binary search trees are used to maintain a sorted order of elements, allowing for efficient insertion, deletion, and lookup operations.
+
 ### [Graphs](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))
-- [**Adjacency List**](https://en.wikipedia.org/wiki/Adjacency_list)
+
+<!-- - [**Adjacency List**](https://en.wikipedia.org/wiki/Adjacency_list)
   - **[UnweightedGraph](src/DataStructures/Graphs/AdjacencyListGraph/UnweightedGraph.ts)**: A graph data structure with support for unweighted edges. Uses an adjacency list to represent the graph.
   - **[WeightedGraph](src/DataStructures/Graphs/AdjacencyListGraph/WeightedGraph.ts)**: A graph data structure with support for weighted edges. Uses an adjacency list to represent the graph.
+
 - [**Adjacency Matrix**](https://en.wikipedia.org/wiki/Adjacency_matrix)
   - **[UnweightedGraph](src/DataStructures/Graphs/AdjacencyMatrixGraph/UnweightedGraph.ts)**: A graph data structure with support for unweighted edges. Uses an adjacency matrix to represent the graph.
-  - **[WeightedGraph](src/DataStructures/Graphs/AdjacencyMatrixGraph/WeightedGraph.ts)**: A graph data structure with support for weighted edges. Uses an adjacency matrix to represent the graph.
+  - **[WeightedGraph](src/DataStructures/Graphs/AdjacencyMatrixGraph/WeightedGraph.ts)**: A graph data structure with support for weighted edges. Uses an adjacency matrix to represent the graph. -->
+
 - [**Vertex Graph**](https://en.wikipedia.org/wiki/Vertex_(graph_theory))
   - **[UnweightedGraph](src/DataStructures/Graphs/VertexClassGraph/UnweightedGraph.ts)**: A graph data structure with support for unweighted edges. Uses a vertex class to represent the graph.
   - **[WeightedGraph](src/DataStructures/Graphs/VertexClassGraph/WeightedGraph.ts)**: A graph data structure with support for weighted edges. Uses a vertex class to represent the graph.
+
 ### [Lists](https://en.wikipedia.org/wiki/List_(abstract_data_type))
+
 - #### [Doubly Linked Lists](https://en.wikipedia.org/wiki/Doubly_linked_list)
   - **[DoublyLinkedList](src/DataStructures/Lists/DoublyLinkedList.ts)**: A doubly linked list implementation. Doubly linked lists are used to store a collection of elements where each element points to both its previous and next element, allowing for efficient bidirectional traversal.
 - #### [Singly Linked Lists](https://en.wikipedia.org/wiki/Linked_list)
   - **[SinglyLinkedList](src/DataStructures/Lists/SinglyLinkedList.ts)**: A singly linked list implementation. Singly linked lists are used to store a collection of elements where each element points to the next element, allowing for efficient unidirectional traversal.
-###  [Queues](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))
+
+### [Queues](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))
+
 - **[Queue](src/DataStructures/Queues/Queue.ts)**: A generic queue class implemented using an array. Queues follow the First-In-First-Out (FIFO) principle, where elements are added to the back and removed from the front.
+
 ### [Stacks](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
+
 - **[Stack](src/DataStructures/Stacks/Stack.ts)**: A generic stack class implemented using an array. Stacks follow the Last-In-First-Out (LIFO) principle, where elements are added and removed from the top.
+
 ### [Tables](https://en.wikipedia.org/wiki/Table_(information))
+
 - #### [Hash Tables](https://en.wikipedia.org/wiki/Hash_table)
-  - **[HashTable](src/DataStructures/HashTable.ts)**: A generic hash table implementation. Hash tables are used to store key-value pairs and provide efficient data retrieval. This implementation uses open addressing and linked lists to handle collisions.
+  - **[HashTable](src/DataStructures/Table/HashTable/HashTable.ts)**: A generic hash table implementation. Hash tables are used to store key-value pairs and provide efficient data retrieval. This implementation uses open addressing and linked lists to handle collisions.
 
 ## Algorithms
 
 ### [Divisor](https://en.wikipedia.org/wiki/Divisor)
+
 - [Greatest Common Divisor](https://en.wikipedia.org/wiki/Greatest_common_divisor)
   - **[GreatestCommonDivisor](src/Algorithms/Divisor/GreatestCommonDivisor.ts)**: Implementation of the greatest common divisor algorithm. This algorithm finds the largest positive integer that divides two numbers without leaving a remainder.
+
 - [Least Common Multiple](https://en.wikipedia.org/wiki/Least_common_multiple)
   - **[LeastCommonDivisor](src/Algorithms/Divisor/LeastCommonDivisor.ts)**: Implementation of the least common divisor algorithm. This algorithm finds the smallest positive integer that is a multiple of two numbers.
 
@@ -92,6 +107,7 @@ This repository contains implementations of various data structures and algorith
 - **[Fibonacci](src/Algorithms/Fibonacci/Fibonacci.ts)**: A basic implementation of the Fibonacci sequence. This implementation uses a simple recursive approach.
 
 ### [Primes](https://en.wikipedia.org/wiki/Prime_number)
+
 - [Miller-Rabin Primality Test](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test)
   - **[MillerRabin](src/Algorithms/Primes/MillerRabin.ts)**: Implementation of the Miller-Rabin primality test. This algorithm is used to determine if a number is a probable prime.
 - [Sieve of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin)
@@ -100,6 +116,7 @@ This repository contains implementations of various data structures and algorith
   - **[SieveOfEratosthenes](src/Algorithms/Primes/SieveOfEratosthenes.ts)**: Implementation of the Sieve of Eratosthenes algorithm. This algorithm is used to find all prime numbers up to a specified integer.
 
 ### [Search Algorithms](https://en.wikipedia.org/wiki/Search_algorithm)
+
 - [Binary Search](https://en.wikipedia.org/wiki/Binary_search_algorithm)
   - **[BinarySearch](src/Algorithms/Search/BinarySearch.ts)**: Implementation of the binary search algorithm. This algorithm finds the position of a target value within a sorted array.
 - [Exponential Search](https://en.wikipedia.org/wiki/Exponential_search)
@@ -114,6 +131,7 @@ This repository contains implementations of various data structures and algorith
   - **[MetaBinarySearch](src/Algorithms/Search/MetaBinarySearch.ts)**: Implementation of the meta binary search algorithm. This algorithm is a variant of binary search that uses a different approach to divide the search space.
 - [Ternary Search](https://en.wikipedia.org/wiki/Ternary_search)
   - **[TernarySearch](src/Algorithms/Search/TernarySearch.ts)**: Implementation of the ternary search algorithm. This algorithm divides the array into three parts and recursively searches in the relevant part.
+
 ### [Graph Algorithms](https://en.wikipedia.org/wiki/Graph_theory)
 
 - [Breadth-First Search](https://en.wikipedia.org/wiki/Breadth-first_search)
@@ -124,6 +142,10 @@ This repository contains implementations of various data structures and algorith
   - **[Dijkstra](src/Algorithms/Graph/Dijkstra.ts)**: Implementation of Dijkstra's shortest path algorithm. This algorithm finds the shortest path between nodes in a graph.
 - [A* Search](https://en.wikipedia.org/wiki/A*_search_algorithm)
   - **[AStar](src/Algorithms/Graph/AStar.ts)**: Implementation of the A* search algorithm. This algorithm is used for finding the shortest path from a start node to a goal node in a graph.
+- [Topological Sort](https://en.wikipedia.org/wiki/Topological_sorting)
+  - **[TopologicalSort](src/Algorithms/Graph/TopologicalSort.ts)**: Implementation of the topological sort algorithm. This algorithm orders the nodes in a directed acyclic graph (DAG) in a linear order.
+
+
 ## Getting Started
 
 To get started with this project, clone the repository and install the dependencies:
