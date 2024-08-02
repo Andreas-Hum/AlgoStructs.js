@@ -3,7 +3,7 @@ import type {
     WeightedRemoveEdgeOptions,
     WeightedSetEdgesOptions,
     WeightedSetEdgeOptions
-} from "../Options/VertexGraphOptions/WeightedOptions";
+} from "../../../Options/DataStructures/VertexGraphOptions/WeightedOptions";
 
 /**
  * Represents a vertex in a weighted graph.

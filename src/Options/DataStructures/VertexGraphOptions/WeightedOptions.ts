@@ -1,32 +1,28 @@
-import WeightedGraphVertex from "../Vertices/WeightedGraphVertex";
-import UnweightedGraphVertex from "../Vertices/UnweightedGraphVertex";
-
+import WeightedGraphVertex from "../../../DataStructures/Graphs/Vertices/WeightedGraphVertex";
 
 // General graph options
 export type GraphOptions<T> = {
-    isWeighted?: boolean;
     isUndirected?: boolean;
     compare: (a: T, b: T) => number;
 };
 
 // Edge options for weighted graphs
 export type EdgeOptions<T> = {
-    vertex1: WeightedGraphVertex<T> | UnweightedGraphVertex<T>;
-    vertex2: WeightedGraphVertex<T> | UnweightedGraphVertex<T>;
+    vertex1: WeightedGraphVertex<T>;
+    vertex2: WeightedGraphVertex<T>;
     weight?: number;
 };
 
 // Search options for graph traversal
-export type SearchOptions<T, VertexType> = {
-    startVertex: VertexType;
+export type SearchOptions<T> = {
+    startVertex: WeightedGraphVertex<T>;
     targetValue?: T | null;
     returnPath?: boolean;
 }
 
-
 // Options for graph traversal
 export type TraverseOptions<T> = {
-    startVertex: WeightedGraphVertex<T> | UnweightedGraphVertex<T>;
+    startVertex: WeightedGraphVertex<T>;
     traversalType: "DFS" | "BFS";
 };
 
@@ -38,6 +34,7 @@ export type CreateRandomGraphOptions = GraphOptions<number> & {
     minWeight?: number;
     maxWeight?: number;
 };
+
 
 // Options for adding edges to weighted graphs
 export type WeightedAddEdgeOptions<T> = {
@@ -64,30 +61,5 @@ export type WeightedSetEdgeOptions<T> = {
     oldVertex: WeightedGraphVertex<T>;
     newVertex: WeightedGraphVertex<T>;
     weight: number;
-    undirected?: boolean;
-};
-
-// Options for adding edges to unweighted graphs
-export type UnweightedAddEdgeOptions<T> = {
-    vertex: UnweightedGraphVertex<T>;
-    undirected?: boolean;
-};
-
-// Options for removing edges from unweighted graphs
-export type UnweightedRemoveEdgeOptions<T> = {
-    vertex: UnweightedGraphVertex<T>;
-    undirected?: boolean;
-};
-
-// Options for setting edges in unweighted graphs
-export type UnweightedSetEdgesOptions<T> = {
-    edges: Array<UnweightedGraphVertex<T>>;
-    undirected?: boolean;
-};
-
-// Options for setting a single edge in unweighted graphs
-export type UnweightedSetEdgeOptions<T> = {
-    oldVertex: UnweightedGraphVertex<T>;
-    newVertex: UnweightedGraphVertex<T>;
     undirected?: boolean;
 };

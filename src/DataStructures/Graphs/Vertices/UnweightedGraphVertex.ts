@@ -3,7 +3,7 @@ import type {
     UnweightedRemoveEdgeOptions,
     UnweightedSetEdgesOptions,
     UnweightedSetEdgeOptions
-} from "../Options/VertexGraphOptions/UnweightedOptions";
+} from "../../../Options/DataStructures/VertexGraphOptions/UnweightedOptions";
 
 /**
  * Represents a vertex in an unweighted graph.

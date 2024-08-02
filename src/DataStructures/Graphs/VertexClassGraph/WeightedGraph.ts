@@ -7,7 +7,7 @@ import {
     SearchOptions,
     TraverseOptions,
     CreateRandomGraphOptions,
-} from '../Options/VertexGraphOptions/WeightedOptions';
+} from '../../../Options/DataStructures/VertexGraphOptions/WeightedOptions';
 
 
 export default class Graph<T> {

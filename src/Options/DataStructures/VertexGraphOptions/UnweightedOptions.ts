@@ -1,4 +1,4 @@
-import UnweightedGraphVertex from "../../Vertices/UnweightedGraphVertex";
+import UnweightedGraphVertex from "../../../DataStructures/Graphs/Vertices/UnweightedGraphVertex";
 
 // General graph options
 export type GraphOptions<T> = {
