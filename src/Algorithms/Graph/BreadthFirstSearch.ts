@@ -1,34 +1,15 @@
-/**
- * Options for the BFS function.
- */
-interface BFSOptions<T> {
-    /**
-     * The function to get the neighbors of a node.
-     * @param node - The node whose neighbors are to be retrieved.
-     * @returns An array of neighboring nodes.
-     */
-    getNeighbors: (node: T) => T[];
-
-    /**
-     * The starting node for the BFS traversal.
-     */
-    startNode: T;
-
-    /**
-     * A callback function to process each visited node.
-     * @param node - The node that has been visited.
-     */
-    visit: (node: T) => void;
-}
+import GraphOptions from "../../Options/AlgorithmOptions/GraphOptions/GraphOptions"
 
 /**
  * Performs a breadth-first search (BFS) on a graph.
  * 
  * @template T - The type of the nodes in the graph.
- * @param {BFSOptions<T>} options - The options for the BFS traversal.
+ * @param {GraphOptions<T>} options - The options for the BFS traversal.
  * @param {(node: T) => T[]} options.getNeighbors - The function to get the neighbors of a node.
  * @param {T} options.startNode - The starting node for the BFS traversal.
- * @param {(node: T) => void} options.visit - A callback function to process each visited node.
+ * @param {(node: T) => void} [options.visit] - A callback function to process each visited node.
+ * @param {T} [options.targetNode] - The target node for the BFS traversal.
+ * @returns {T[]} - An array of visited nodes in order.
  * 
  * @remarks
  * The `getNeighbors` function should return an array of neighboring nodes for a given node.
@@ -48,13 +29,16 @@ interface BFSOptions<T> {
  *    a. Dequeue a node from the front of the queue.
  *    b. If the node has not been visited, do the following:
  *       i. Mark the node as visited.
- *       ii. Call the `visit` function with the node.
+ *       ii. Call the `visit` function with the node (if provided).
  *       iii. Enqueue all unvisited neighbors of the node.
  * 
- * @example
- * // Import the bfs function
- * import bfs from './BreadthFirstSearch';
+ * @remark
+ * The comparison function should return:
+ * - A negative number if the first argument is less than the second.
+ * - Zero if the first argument is equal to the second.
+ * - A positive number if the first argument is greater than the second.
  * 
+ * @example
  * // Define a simple graph using an object
  * const graph: { [key: number]: number[] } = {
  *      1: [2, 3],
@@ -73,19 +57,28 @@ interface BFSOptions<T> {
  * };
  * 
  * // Perform BFS
- * bfs({ getNeighbors, startNode: 1, visit });
+ * const visitedNodes = BreadthFirstSearch({ getNeighbors, startNode: 1, visit });
+ * console.log('Visited nodes in order:', visitedNodes);
  * 
  */
-export default function BFS<T>({ getNeighbors, startNode, visit }: BFSOptions<T>): void {
+export default function BreadthFirstSearch<T>({ getNeighbors, startNode, visit, targetNode }: GraphOptions<T>): T[] {
     const queue: T[] = [startNode];
     const visited: Set<T> = new Set();
+    const visitedNodes: T[] = [];
 
     while (queue.length > 0) {
         const currentNode: T = queue.shift() as T;
 
         if (!visited.has(currentNode)) {
-            visit(currentNode);
+            if (visit) {
+                visit(currentNode);
+            }
             visited.add(currentNode);
+            visitedNodes.push(currentNode);
+
+            if (currentNode === targetNode) {
+                return visitedNodes;
+            }
 
             const neighbors: T[] = getNeighbors(currentNode);
             for (const neighbor of neighbors) {
@@ -95,4 +88,6 @@ export default function BFS<T>({ getNeighbors, startNode, visit }: BFSOptions<T>
             }
         }
     }
+
+    return visitedNodes;
 }
