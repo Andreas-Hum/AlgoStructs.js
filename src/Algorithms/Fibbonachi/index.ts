@@ -1,2 +1,2 @@
-export * from './FastFibbonachi';
-export * from './Fibbonachi';
+export * from './FastFibonacci';
+export * from './Fibonacci';
