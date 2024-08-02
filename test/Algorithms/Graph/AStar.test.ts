@@ -17,11 +17,11 @@ describe('aStar', () => {
     const heuristic = (node: number, target: number): number => Math.abs(node - target);
 
     const aStarManual = (graph: { [key: number]: { neighbor: number, weight: number }[] }, startNode: number, targetNode: number): number[] => {
-        const openSet = new Set<number>([startNode]);
-        const cameFrom = new Map<number, number>();
+        const openSet: Set<number> = new Set<number>([startNode]);
+        const cameFrom: Map<number, number> = new Map<number, number>();
 
-        const gScore = new Map<number, number>();
-        const fScore = new Map<number, number>();
+        const gScore: Map<number, number> = new Map<number, number>();
+        const fScore: Map<number, number> = new Map<number, number>();
         gScore.set(startNode, 0);
         fScore.set(startNode, heuristic(startNode, targetNode));
 
@@ -29,7 +29,7 @@ describe('aStar', () => {
 
         while (openSet.size > 0) {
             pq.sort((a, b) => a[1] - b[1]);
-            const [current] = pq.shift()!;
+            const [current]: [number, number] = pq.shift()!;
             openSet.delete(current);
 
             if (current === targetNode) {
@@ -42,9 +42,13 @@ describe('aStar', () => {
                 return path.reverse();
             }
 
-            const neighbors = graph[current] || [];
+            const neighbors: {
+                neighbor: number;
+                weight: number;
+            }[] = graph[current] || [];
             for (const { neighbor, weight } of neighbors) {
-                const tentativeGScore = gScore.get(current)! + weight;
+                const tentativeGScore: number
+                    = gScore.get(current)! + weight;
 
                 if (tentativeGScore < (gScore.get(neighbor) || Infinity)) {
                     cameFrom.set(neighbor, current);
@@ -69,15 +73,18 @@ describe('aStar', () => {
                 fc.integer({ min: 1, max: 20 }),
                 fc.integer({ min: 1, max: 20 }),
                 (graph, startNode, targetNode) => {
-                    // Convert string keys to integer keys
-                    const intGraph = Object.fromEntries(Object.entries(graph).map(([key, value]) => [parseInt(key), value]));
+                    const intGraph: {
+                        [k: string]: {
+                            neighbor: number;
+                            weight: number;
+                        }[];
+                    } = Object.fromEntries(Object.entries(graph).map(([key, value]) => [parseInt(key), value]));
 
-                    const visit = jest.fn();
+                    const visit: jest.Mock<any, any, any> = jest.fn();
                     const options: WeightedGraphOptions<number> = { getNeighbors: getNeighbors(intGraph), getWeight: getWeight(intGraph), heuristic, startNode, targetNode, visit };
-                    const path = aStar(options);
+                    const path: number[] = aStar(options);
 
-                    // Perform manual A* to get the expected path
-                    const expectedPath = aStarManual(intGraph, startNode, targetNode);
+                    const expectedPath: number[] = aStarManual(intGraph, startNode, targetNode);
 
                     expect(path).toEqual(expectedPath);
                 }
@@ -92,12 +99,12 @@ describe('aStar', () => {
                 fc.integer({ min: 1, max: 20 }),
                 (startNode, targetNode) => {
                     const graph: { [key: number]: { neighbor: number, weight: number }[] } = {};
-                    for (let i = 1; i <= 20; i++) {
+                    for (let i: number = 1; i <= 20; i++) {
                         graph[i] = [];
                     }
-                    const visit = jest.fn();
+                    const visit: jest.Mock<any, any, any> = jest.fn();
                     const options: WeightedGraphOptions<number> = { getNeighbors: getNeighbors(graph), getWeight: getWeight(graph), heuristic, startNode, targetNode, visit };
-                    const path = aStar(options);
+                    const path: number[] = aStar(options);
 
                     expect(path).toEqual(startNode === targetNode ? [startNode] : []);
                 }
@@ -112,9 +119,9 @@ describe('aStar', () => {
                 fc.integer({ min: 1, max: 20 }),
                 (startNode, targetNode) => {
                     const graph: { [key: number]: { neighbor: number, weight: number }[] } = {};
-                    const visit = jest.fn();
+                    const visit: jest.Mock<any, any, any> = jest.fn();
                     const options: WeightedGraphOptions<number> = { getNeighbors: getNeighbors(graph), getWeight: getWeight(graph), heuristic, startNode, targetNode, visit };
-                    const path = aStar(options);
+                    const path:number[] = aStar(options);
 
                     expect(path).toEqual(startNode === targetNode ? [startNode] : []);
                 }

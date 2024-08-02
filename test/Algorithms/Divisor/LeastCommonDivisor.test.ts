@@ -15,10 +15,7 @@ describe("leastCommonDivisor", () => {
                 fc.integer({ min: 1, max: 1000000 }),  // Limiting the max to a reasonable range
                 fc.integer({ min: 1, max: 1000000 }),
                 (a, b) => {
-                    const lcd = leastCommonDivisor(a, b);
-                    if (lcd % a !== 0 || lcd % b !== 0) {
-                        console.error(`Test failed for a=${a}, b=${b}, lcd=${lcd}`);
-                    }
+                    const lcd: number = leastCommonDivisor(a, b);
                     return lcd % a === 0 && lcd % b === 0;
                 }
             )
@@ -30,8 +27,8 @@ describe("leastCommonDivisor", () => {
             fc.property(
                 fc.nat(),
                 (a) => {
-                    const lcd1 = leastCommonDivisor(a, 0);
-                    const lcd2 = leastCommonDivisor(0, a);
+                    const lcd1: number = leastCommonDivisor(a, 0);
+                    const lcd2: number = leastCommonDivisor(0, a);
                     return lcd1 === 0 && lcd2 === 0;
                 }
             )
@@ -44,8 +41,8 @@ describe("leastCommonDivisor", () => {
                 fc.integer({ min: 1, max: 1000 }),
                 fc.integer({ min: 1, max: 1000 }),
                 (a, b) => {
-                    const gcd = greatestCommonDivisor(a, b);
-                    const lcd = leastCommonDivisor(a, b);
+                    const gcd: number = greatestCommonDivisor(a, b);
+                    const lcd: number = leastCommonDivisor(a, b);
                     return gcd === 1 ? lcd === a * b : lcd % a === 0 && lcd % b === 0;
                 }
             )
@@ -61,15 +58,15 @@ describe("leastCommonDivisor", () => {
         ];
 
         cases.forEach(({ a, b, expected }) => {
-            const lcd = leastCommonDivisor(a, b);
+            const lcd: number = leastCommonDivisor(a, b);
             expect(lcd).toBe(expected);
         });
     });
 
     it("should handle large numbers", () => {
-        const a = 123456, b = 789012;
-        const lcd = leastCommonDivisor(a, b);
-        const gcd = greatestCommonDivisor(a, b);
+        const a: number = 123456, b: number = 789012;
+        const lcd: number = leastCommonDivisor(a, b);
+        const gcd: number = greatestCommonDivisor(a, b);
         expect(lcd).toBe((a * b) / gcd);
     });
 });

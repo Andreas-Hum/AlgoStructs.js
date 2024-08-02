@@ -14,9 +14,9 @@ describe('breadthFirstSearch', () => {
         if (!(startNode in graph)) {
             return [startNode];
         }
-        const queue = [startNode];
-        const visited = new Set<number>();
-        const order = [];
+        const queue: number[] = [startNode];
+        const visited: Set<number> = new Set<number>();
+        const order: number[] = [];
 
         while (queue.length > 0) {
             const node = queue.shift()!;
@@ -35,15 +35,15 @@ describe('breadthFirstSearch', () => {
                 fc.dictionary(fc.string(), fc.array(fc.integer({ min: 1, max: 20 }))),
                 fc.integer({ min: 1, max: 20 }),
                 (graph, startNode) => {
-                    // Convert string keys to integer keys
-                    const intGraph = Object.fromEntries(Object.entries(graph).map(([key, value]) => [parseInt(key), value]));
+                    const intGraph: {
+                        [k: string]: number[];
+                    } = Object.fromEntries(Object.entries(graph).map(([key, value]) => [parseInt(key), value]));
 
-                    const visit = jest.fn();
+                    const visit: jest.Mock<any, any, any> = jest.fn();
                     const options: GraphOptions<number> = { getNeighbors: getNeighbors(intGraph), startNode, visit };
-                    const visitedNodes = breadthFirstSearch(options);
+                    const visitedNodes: number[] = breadthFirstSearch(options);
 
-                    // Perform manual BFS to get the expected order
-                    const expectedOrder = bfsManual(intGraph, startNode);
+                    const expectedOrder: number[] = bfsManual(intGraph, startNode);
 
                     expect(visitedNodes).toEqual(expectedOrder);
                     expect(visit).toHaveBeenCalledTimes(expectedOrder.length);
@@ -62,14 +62,15 @@ describe('breadthFirstSearch', () => {
                 fc.integer({ min: 1, max: 20 }),
                 fc.integer({ min: 1, max: 20 }),
                 (graph, startNode, targetNode) => {
-                    // Convert string keys to integer keys
-                    const intGraph = Object.fromEntries(Object.entries(graph).map(([key, value]) => [parseInt(key), value]));
+                    const intGraph: {
+                        [k: string]: number[];
+                    } = Object.fromEntries(Object.entries(graph).map(([key, value]) => [parseInt(key), value]));
 
-                    const visit = jest.fn();
+                    const visit: jest.Mock<any, any, any> = jest.fn();
                     const options: GraphOptions<number> = { getNeighbors: getNeighbors(intGraph), startNode, visit, targetNode };
-                    const visitedNodes = breadthFirstSearch(options);
+                    const visitedNodes: number[] = breadthFirstSearch(options);
 
-                    const targetIndex = visitedNodes.indexOf(targetNode);
+                    const targetIndex: number = visitedNodes.indexOf(targetNode);
                     if (targetIndex !== -1) {
                         expect(visitedNodes.slice(0, targetIndex + 1)).toContain(targetNode);
                         expect(visit).toHaveBeenCalledTimes(targetIndex + 1);
@@ -86,12 +87,13 @@ describe('breadthFirstSearch', () => {
                 fc.integer({ min: 1, max: 20 }),
                 (startNode) => {
                     const graph: { [key: number]: number[] } = {};
-                    for (let i = 1; i <= 20; i++) {
+                    for (let i: number = 1; i <= 20; i++) {
                         graph[i] = [];
                     }
-                    const visit = jest.fn();
+
+                    const visit: jest.Mock<any, any, any> = jest.fn();
                     const options: GraphOptions<number> = { getNeighbors: getNeighbors(graph), startNode, visit };
-                    const visitedNodes = breadthFirstSearch(options);
+                    const visitedNodes: number[] = breadthFirstSearch(options);
 
                     expect(visitedNodes).toEqual([startNode]);
                     expect(visit).toHaveBeenCalledTimes(1);
@@ -107,9 +109,9 @@ describe('breadthFirstSearch', () => {
                 fc.integer({ min: 1, max: 20 }),
                 (startNode) => {
                     const graph: { [key: number]: number[] } = {};
-                    const visit = jest.fn();
+                    const visit: jest.Mock<any, any, any> = jest.fn();
                     const options: GraphOptions<number> = { getNeighbors: getNeighbors(graph), startNode, visit };
-                    const visitedNodes = breadthFirstSearch(options);
+                    const visitedNodes: number[] = breadthFirstSearch(options);
 
                     expect(visitedNodes).toEqual([startNode]);
                     expect(visit).toHaveBeenCalledTimes(1);

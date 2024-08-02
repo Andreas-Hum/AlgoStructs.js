@@ -12,7 +12,7 @@ describe("greatestCommonDivisor", () => {
                 fc.nat(),
                 fc.nat(),
                 (a, b) => {
-                    const gcd = greatestCommonDivisor(a, b);
+                    const gcd: number = greatestCommonDivisor(a, b);
                     return a % gcd === 0 && b % gcd === 0;
                 }
             )
@@ -24,7 +24,7 @@ describe("greatestCommonDivisor", () => {
             fc.property(
                 fc.nat(),
                 (a) => {
-                    const gcd = greatestCommonDivisor(a, 0);
+                    const gcd: number = greatestCommonDivisor(a, 0);
                     return gcd === a;
                 }
             )
@@ -36,7 +36,7 @@ describe("greatestCommonDivisor", () => {
             fc.property(
                 fc.nat(),
                 (b) => {
-                    const gcd = greatestCommonDivisor(0, b);
+                    const gcd: number = greatestCommonDivisor(0, b);
                     return gcd === b;
                 }
             )
@@ -50,7 +50,7 @@ describe("greatestCommonDivisor", () => {
                 fc.integer({ min: 1, max: 1000 }),
                 (a, b) => {
 
-                    const gcd = greatestCommonDivisor(a, b);
+                    const gcd: number = greatestCommonDivisor(a, b);
                     return gcd === 1 || (a % gcd === 0 && b % gcd === 0);
                 }
             )

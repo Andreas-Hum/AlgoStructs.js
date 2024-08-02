@@ -8,15 +8,19 @@ describe('depthFirstSearch', () => {
         jest.clearAllTimers(); // Clear any timers after each test
     });
 
-    const getNeighbors = (graph: { [key: number]: number[] }) => (node: number): number[] => graph[node] || [];
+    const getNeighbors: (graph: {
+        [key: number]: number[];
+    }) => (node: number) => number[] = (graph: { [key: number]: number[] }) => (node: number): number[] => graph[node] || [];
 
-    const dfsManual = (graph: { [key: number]: number[] }, startNode: number): number[] => {
+    const dfsManual: (graph: {
+        [key: number]: number[];
+    }, startNode: number) => number[] = (graph: { [key: number]: number[] }, startNode: number): number[] => {
         if (!(startNode in graph)) {
             return [startNode];
         }
-        const stack = [startNode];
-        const visited = new Set<number>();
-        const order = [];
+        const stack: number[] = [startNode];
+        const visited: Set<number> = new Set<number>();
+        const order: number[] = [];
 
         while (stack.length > 0) {
             const node = stack.pop()!;

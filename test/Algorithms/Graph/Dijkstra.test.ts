@@ -11,7 +11,8 @@ describe('dijkstra', () => {
     const getNeighbors = (graph: { [key: number]: { neighbor: number, weight: number }[] }) => (node: number): number[] => (graph[node] || []).map(edge => edge.neighbor);
 
     const getWeight = (graph: { [key: number]: { neighbor: number, weight: number }[] }) => (node: number, neighbor: number): number => {
-        return graph[node]?.find(edge => edge.neighbor === neighbor)?.weight || Infinity;
+        const edges = graph[node] || [];
+        return Math.min(...edges.filter(edge => edge.neighbor === neighbor).map(edge => edge.weight));
     };
 
     const dijkstraManual = (graph: { [key: number]: { neighbor: number, weight: number }[] }, startNode: number): Map<number, number> => {
@@ -24,7 +25,7 @@ describe('dijkstra', () => {
 
         while (pq.length > 0) {
             pq.sort((a, b) => a[1] - b[1]);
-            const [currentNode, currentDistance] = pq.shift()!;
+            const [currentNode, currentDistance]: [number, number] = pq.shift()!;
 
             if (visited.has(currentNode)) {
                 continue;
@@ -32,10 +33,13 @@ describe('dijkstra', () => {
 
             visited.add(currentNode);
 
-            const neighbors = graph[currentNode] || [];
+            const neighbors: {
+                neighbor: number;
+                weight: number;
+            }[] = graph[currentNode] || [];
             for (const { neighbor, weight } of neighbors) {
                 if (!visited.has(neighbor)) {
-                    const distance = currentDistance + weight;
+                    const distance: number = currentDistance + weight;
                     if (distance < (distances.get(neighbor) || Infinity)) {
                         distances.set(neighbor, distance);
                         pq.push([neighbor, distance]);
@@ -53,15 +57,18 @@ describe('dijkstra', () => {
                 fc.dictionary(fc.string(), fc.array(fc.record({ neighbor: fc.integer({ min: 1, max: 20 }), weight: fc.integer({ min: 1, max: 100 }) }))),
                 fc.integer({ min: 1, max: 20 }),
                 (graph, startNode) => {
-                    // Convert string keys to integer keys
-                    const intGraph = Object.fromEntries(Object.entries(graph).map(([key, value]) => [parseInt(key), value]));
+                    const intGraph: {
+                        [k: string]: {
+                            neighbor: number;
+                            weight: number;
+                        }[];
+                    } = Object.fromEntries(Object.entries(graph).map(([key, value]) => [parseInt(key), value]));
 
-                    const visit = jest.fn();
+                    const visit: jest.Mock<any, any, any> = jest.fn();
                     const options: WeightedGraphOptions<number> = { getNeighbors: getNeighbors(intGraph), getWeight: getWeight(intGraph), startNode, visit };
-                    const distances = dijkstra(options);
+                    const distances: Map<number, number> = dijkstra(options);
 
-                    // Perform manual Dijkstra's to get the expected distances
-                    const expectedDistances = dijkstraManual(intGraph, startNode);
+                    const expectedDistances: Map<number, number> = dijkstraManual(intGraph, startNode);
 
                     expect(distances).toEqual(expectedDistances);
                 }
@@ -75,15 +82,15 @@ describe('dijkstra', () => {
                 fc.integer({ min: 1, max: 20 }),
                 (startNode) => {
                     const graph: { [key: number]: { neighbor: number, weight: number }[] } = {};
-                    for (let i = 1; i <= 20; i++) {
+                    for (let i: number = 1; i <= 20; i++) {
                         graph[i] = [];
                     }
-                    const visit = jest.fn();
+                    const visit: jest.Mock<any, any, any> = jest.fn();
                     const options: WeightedGraphOptions<number> = { getNeighbors: getNeighbors(graph), getWeight: getWeight(graph), startNode, visit };
-                    const distances = dijkstra(options);
+                    const distances: Map<number, number> = dijkstra(options);
 
                     expect(distances.get(startNode)).toBe(0);
-                    for (let i = 1; i <= 20; i++) {
+                    for (let i: number = 1; i <= 20; i++) {
                         if (i !== startNode) {
                             expect(distances.get(i)).toBeUndefined();
                         }
@@ -99,10 +106,9 @@ describe('dijkstra', () => {
                 fc.integer({ min: 1, max: 20 }),
                 (startNode) => {
                     const graph: { [key: number]: { neighbor: number, weight: number }[] } = {};
-                    const visit = jest.fn();
+                    const visit: jest.Mock<any, any, any> = jest.fn();
                     const options: WeightedGraphOptions<number> = { getNeighbors: getNeighbors(graph), getWeight: getWeight(graph), startNode, visit };
-                    const distances = dijkstra(options);
-
+                    const distances: Map<number, number> = dijkstra(options);
                     expect(distances.get(startNode)).toBe(0);
                 }
             )
