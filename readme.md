@@ -75,18 +75,18 @@ This repository contains implementations of various data structures and algorith
 
 ## Algorithms
 
-### Divisor
+### [Divisor](https://en.wikipedia.org/wiki/Divisor)
 - [Greatest Common Divisor](https://en.wikipedia.org/wiki/Greatest_common_divisor)
   - **[GreatestCommonDivisor](src/Algorithms/Divisor/GreatestCommonDivisor.ts)**: Implementation of the greatest common divisor algorithm. This algorithm finds the largest positive integer that divides two numbers without leaving a remainder.
 - [Least Common Multiple](https://en.wikipedia.org/wiki/Least_common_multiple)
   - **[LeastCommonDivisor](src/Algorithms/Divisor/LeastCommonDivisor.ts)**: Implementation of the least common divisor algorithm. This algorithm finds the smallest positive integer that is a multiple of two numbers.
 
-### Fibonacci [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_number)
+### [Fibonacci](https://en.wikipedia.org/wiki/Fibonacci_number)
 
 - **[FastFibonacci](src/Algorithms/Fibonacci/FastFibonacci.ts)**: An optimized implementation of the Fibonacci sequence. This implementation uses memoization to improve performance.
 - **[Fibonacci](src/Algorithms/Fibonacci/Fibonacci.ts)**: A basic implementation of the Fibonacci sequence. This implementation uses a simple recursive approach.
 
-### Primes
+### [Primes](https://en.wikipedia.org/wiki/Prime_number)
 - [Miller-Rabin Primality Test](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test)
   - **[MillerRabin](src/Algorithms/Primes/MillerRabin.ts)**: Implementation of the Miller-Rabin primality test. This algorithm is used to determine if a number is a probable prime.
 - [Sieve of Atkin](https://en.wikipedia.org/wiki/Sieve_of_Atkin)
@@ -94,7 +94,7 @@ This repository contains implementations of various data structures and algorith
 - [Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
   - **[SieveOfEratosthenes](src/Algorithms/Primes/SieveOfEratosthenes.ts)**: Implementation of the Sieve of Eratosthenes algorithm. This algorithm is used to find all prime numbers up to a specified integer.
 
-### Search
+### [Search](https://en.wikipedia.org/wiki/Search_algorithm)
 - [Binary Search](https://en.wikipedia.org/wiki/Binary_search_algorithm)
   - **[BinarySearch](src/Algorithms/Search/BinarySearch.ts)**: Implementation of the binary search algorithm. This algorithm finds the position of a target value within a sorted array.
 - [Exponential Search](https://en.wikipedia.org/wiki/Exponential_search)
