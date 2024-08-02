@@ -46,11 +46,11 @@ import GraphOptions from "../../Options/AlgorithmOptions/GraphOptions/GraphOptio
  * };
  * 
  * // Perform DFS
- * const visitedNodes = DepthFirstSearch({ getNeighbors, startNode: 1, visit });
+ * const visitedNodes = depthFirstSearch({ getNeighbors, startNode: 1, visit });
  * console.log('Visited nodes in order:', visitedNodes);
  * 
  */
-export  function DepthFirstSearch<T>({ getNeighbors, startNode, visit, targetNode }: GraphOptions<T>): T[] {
+export  function depthFirstSearch<T>({ getNeighbors, startNode, visit, targetNode }: GraphOptions<T>): T[] {
     const visited: Set<T> = new Set();
     const visitedNodes: T[] = [];
 
