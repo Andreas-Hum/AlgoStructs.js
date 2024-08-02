@@ -3,7 +3,7 @@
  * 
  * @template T - The type of elements in the stack.
  */
-export default class Stack<T> {
+export  class Stack<T> {
     private items: T[] = [];
 
     /**

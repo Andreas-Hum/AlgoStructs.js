@@ -1,4 +1,4 @@
-import greatestCommonDivisor from "./GreatestCommonDivisor";
+import { greatestCommonDivisor } from "./GreatestCommonDivisor";
 
 
 /**
@@ -34,6 +34,6 @@ import greatestCommonDivisor from "./GreatestCommonDivisor";
  * const lcd: number = leastCommonDivisor(7, 5);
  * console.log(lcd); // 35
  */
-export default function leastCommonDivisor(a: number, b: number): number {
+export function leastCommonDivisor(a: number, b: number): number {
     return (Math.abs(a) * Math.abs(b)) / greatestCommonDivisor(a, b);
 }

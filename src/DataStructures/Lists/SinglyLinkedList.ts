@@ -4,7 +4,7 @@ import Node from "./Nodes/SinglyLinkedListNode"
  * A class representing a singly linked list.
  * @template T The type of elements in the linked list.
  */
-export default class LinkedList<T> {
+export  class LinkedList<T> {
     private _head: Node<T> | null;
     private _size: number;
     private _compare: (a: T, b: T) => number;

@@ -1,4 +1,4 @@
-import binarySearch from "./BinarySearch";
+import { binarySearch } from "./BinarySearch";
 import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOptions";
 
 /**
@@ -43,7 +43,7 @@ import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOp
  * const index: number = exponentialSearch({ array: strings, target: targetString, compare: (a, b) => a.localeCompare(b) });
  * console.log(index); // Output: 2
  */
-export default function exponentialSearch<T>({ array, target, compare }: SearchOptions<T>): number {
+export function exponentialSearch<T>({ array, target, compare }: SearchOptions<T>): number {
     let n: number = array.length;
 
     if (n === 0) {

@@ -42,7 +42,7 @@ import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOp
  * const index: number = interpolationSearch({ array: strings, target: targetString, compare: (a, b) => a.localeCompare(b) });
  * console.log(index); // Output: 2
  */
-export default function interpolationSearch<T>({ array, target, compare }: SearchOptions<T>): number {
+export function interpolationSearch<T>({ array, target, compare }: SearchOptions<T>): number {
     let low: number = 0;
     let high: number = array.length - 1;
 

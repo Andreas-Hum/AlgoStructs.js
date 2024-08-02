@@ -39,7 +39,7 @@
  * console.log(result2); // false
  *
  */
-export default function millerRabin(n: number, k: number): boolean {
+export  function millerRabin(n: number, k: number): boolean {
     if (n <= 1 || n === 4) return false;
     if (n <= 3) return true;
 

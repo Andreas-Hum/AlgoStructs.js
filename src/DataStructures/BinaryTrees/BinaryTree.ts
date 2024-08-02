@@ -5,7 +5,7 @@ import Node from "./Nodes/BinaryTreeNode";
  * 
  * @template T - The type of elements in the tree.
  */
-export default class BinaryTree<T> {
+export  class BinaryTree<T> {
     private _root: Node<T> | null;
     private _size: number;
     private _compare: (a: T, b: T) => number;

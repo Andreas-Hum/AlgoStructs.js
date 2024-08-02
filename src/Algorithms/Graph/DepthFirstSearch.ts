@@ -50,7 +50,7 @@ import GraphOptions from "../../Options/AlgorithmOptions/GraphOptions/GraphOptio
  * console.log('Visited nodes in order:', visitedNodes);
  * 
  */
-export default function DepthFirstSearch<T>({ getNeighbors, startNode, visit, targetNode }: GraphOptions<T>): T[] {
+export  function DepthFirstSearch<T>({ getNeighbors, startNode, visit, targetNode }: GraphOptions<T>): T[] {
     const visited: Set<T> = new Set();
     const visitedNodes: T[] = [];
 

@@ -53,7 +53,7 @@ import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOp
  * const index: number = ternarySearch({ array: strings, target: targetString, compare: (a, b) => a.localeCompare(b) });
  * console.log(index); // Output: 2
  */
-export default function ternarySearch<T>({ array, target, compare }: SearchOptions<T>): number {
+export function ternarySearch<T>({ array, target, compare }: SearchOptions<T>): number {
     let left: number = 0;
     let right: number = array.length - 1;
 

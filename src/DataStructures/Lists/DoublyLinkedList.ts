@@ -4,7 +4,7 @@ import Node from "./Nodes/DoublyLinkedListNode";
  * A class representing a doubly linked list.
  * @template T The type of elements in the linked list.
  */
-export default class LinkedList<T> {
+export  class LinkedList<T> {
     private _head: Node<T> | null;
     private _tail: Node<T> | null;
     private _size: number;

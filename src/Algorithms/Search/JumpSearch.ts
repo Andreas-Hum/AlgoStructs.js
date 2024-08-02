@@ -44,7 +44,7 @@ import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOp
  * console.log(index); // Output: 2
  * 
  */
-export default function JumpSearch<T>({ array, target, compare }: SearchOptions<T>): number {
+export function JumpSearch<T>({ array, target, compare }: SearchOptions<T>): number {
 
     const n: number = array.length;
     let prev: number = 0;

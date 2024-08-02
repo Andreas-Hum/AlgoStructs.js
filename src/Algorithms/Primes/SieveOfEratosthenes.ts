@@ -29,7 +29,7 @@
  * console.log(primesUpTo20); // [2, 3, 5, 7, 11, 13, 17, 19]
 
  */
-export default function sieveOfEratosthenes(n: number): number[] {
+export  function sieveOfEratosthenes(n: number): number[] {
     if (n < 2) return [];
 
     const isPrime: boolean[] = new Array(n + 1).fill(true);

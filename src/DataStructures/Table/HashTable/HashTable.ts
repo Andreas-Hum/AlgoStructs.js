@@ -5,7 +5,7 @@ import Node from "../Nodes/HashTableNode";
  * @template K - The type of the key.
  * @template V - The type of the value.
  */
-export default class HashTable<K, V> {
+export  class HashTable<K, V> {
     private _toNumber: (key: K) => number;
     private _size: number;
     private _table: Array<Node<K, V> | null>;

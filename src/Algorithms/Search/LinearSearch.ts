@@ -41,7 +41,7 @@ import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOp
  * const index: number = linearSearch({ array: strings, target: targetString, compare: (a, b) => a.localeCompare(b) });
  * console.log(index); // Output: 2
  */
-export default function linearSearch<T>({ array, target, compare }: SearchOptions<T>): number {
+export function linearSearch<T>({ array, target, compare }: SearchOptions<T>): number {
     const n: number = array.length;
 
     for (let i: number = 0; i < n; i++) {

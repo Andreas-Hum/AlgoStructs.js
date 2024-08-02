@@ -61,7 +61,7 @@ import GraphOptions from "../../Options/AlgorithmOptions/GraphOptions/GraphOptio
  * console.log('Visited nodes in order:', visitedNodes);
  * 
  */
-export default function BreadthFirstSearch<T>({ getNeighbors, startNode, visit, targetNode }: GraphOptions<T>): T[] {
+export  function BreadthFirstSearch<T>({ getNeighbors, startNode, visit, targetNode }: GraphOptions<T>): T[] {
     const queue: T[] = [startNode];
     const visited: Set<T> = new Set();
     const visitedNodes: T[] = [];

@@ -27,7 +27,7 @@
  * console.log(fib20); // 6765
 
  */
-export default function fibonacci(n: number): number {
+export  function fibonacci(n: number): number {
     if (n < 0) return -1;
 
     const fibonacci: number[] = [0];

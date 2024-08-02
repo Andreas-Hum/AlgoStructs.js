@@ -34,7 +34,7 @@
  * console.log(primesUpTo50); // [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
 
  */
-export default function sieveOfAtkin(limit: number): number[] {
+export  function sieveOfAtkin(limit: number): number[] {
     const primes: boolean[] = new Array(limit + 1).fill(false);
     const sqrtLimit: number = Math.sqrt(limit);
 

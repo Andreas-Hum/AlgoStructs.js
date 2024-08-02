@@ -49,7 +49,7 @@ import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOp
  * const index: number = metaBinarySearch({ array: strings, target: targetString, compare: (a, b) => a.localeCompare(b) });
  * console.log(index); // Output: 2
  */
-export default function metaBinarySearch<T>({ array, target, compare }: SearchOptions<T>): number {
+export function metaBinarySearch<T>({ array, target, compare }: SearchOptions<T>): number {
     const n: number = array.length;
     const max_steps: number = Math.floor(Math.log2(n - 1)) + 1;
 

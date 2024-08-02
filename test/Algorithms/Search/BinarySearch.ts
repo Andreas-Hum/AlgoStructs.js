@@ -1,2 +1,2 @@
-import binarySearch from "../../../src/Algorithms/Search/BinarySearch";
+import { binarySearch } from "../../../src/Algorithms/Search";
 

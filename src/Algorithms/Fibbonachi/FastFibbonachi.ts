@@ -31,7 +31,7 @@
  * console.log(fib20); // 6765
 
  */
-export default function fastFibonacci(n: number): number {
+export  function fastFibonacci(n: number): number {
     if (n < 0) return -1;
     if (n === 0) return 0;
     if (n === 1) return 1;
