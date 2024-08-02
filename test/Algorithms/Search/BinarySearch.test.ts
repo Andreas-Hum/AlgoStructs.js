@@ -146,13 +146,15 @@ describe("binarySearch", () => {
                     age: fc.integer().filter(age => age < -1000 || age > 1000) // Ensure target is outside typical range
                 }),
                 (people, targetPerson) => {
+                    // Ensure target is not in the array
+                    people = people.filter(person => person.age !== targetPerson.age);
                     const options: SearchOptions<Person> = {
                         array: people,
                         target: targetPerson,
                         compare: (a, b) => a.age - b.age
                     };
                     const index: number = binarySearch(options);
-                    return index === -1 || people[index].age !== targetPerson.age;
+                    return index === -1;
                 }
             ),
         );

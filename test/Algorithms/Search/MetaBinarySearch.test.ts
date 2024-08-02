@@ -26,7 +26,7 @@ describe("metaBinarySearch", () => {
                         return !numbers.includes(targetNumber);
                     }
                 }
-            ),
+            )
         );
     });
 
@@ -46,7 +46,7 @@ describe("metaBinarySearch", () => {
                     const index: number = metaBinarySearch(options);
                     return index === -1;
                 }
-            ),
+            )
         );
     });
 
@@ -69,7 +69,7 @@ describe("metaBinarySearch", () => {
                         return !strings.includes(targetString);
                     }
                 }
-            ),
+            )
         );
     });
 
@@ -90,7 +90,7 @@ describe("metaBinarySearch", () => {
                     const index: number = metaBinarySearch(options);
                     return index === -1;
                 }
-            ),
+            )
         );
     });
 
@@ -126,7 +126,7 @@ describe("metaBinarySearch", () => {
                         return !people.some(person => person.age === targetPerson.age);
                     }
                 }
-            ),
+            )
         );
     });
 
@@ -160,7 +160,7 @@ describe("metaBinarySearch", () => {
                     const index: number = metaBinarySearch(options);
                     return index === -1;
                 }
-            ),
+            )
         );
     });
 });
