@@ -99,7 +99,7 @@ This repository contains implementations of various data structures and algorith
 - [Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
   - **[SieveOfEratosthenes](src/Algorithms/Primes/SieveOfEratosthenes.ts)**: Implementation of the Sieve of Eratosthenes algorithm. This algorithm is used to find all prime numbers up to a specified integer.
 
-### [Search](https://en.wikipedia.org/wiki/Search_algorithm)
+### [Search Algorithms](https://en.wikipedia.org/wiki/Search_algorithm)
 - [Binary Search](https://en.wikipedia.org/wiki/Binary_search_algorithm)
   - **[BinarySearch](src/Algorithms/Search/BinarySearch.ts)**: Implementation of the binary search algorithm. This algorithm finds the position of a target value within a sorted array.
 - [Exponential Search](https://en.wikipedia.org/wiki/Exponential_search)
