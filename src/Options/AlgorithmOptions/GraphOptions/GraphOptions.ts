@@ -25,3 +25,8 @@ export default interface GraphOptions<T> {
      */
     targetNode?: T;
 }
+
+export interface WeightedGraphOptions<T> extends GraphOptions<T> {
+    getWeight: (node: T, neighbor: T) => number;
+    heuristic?: (node: T, target: T) => number; // Heuristic function for A*
+}
