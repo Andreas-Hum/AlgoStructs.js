@@ -18,7 +18,7 @@ export default class GraphNode<T> {
     }
 
     /**
-     * Adds an edge between this node and another node.
+     * Adds a directed edge from this node to another node.
      * 
      * @param {GraphNode<T>} node - The node to connect to.
      * @returns {boolean} - True if the edge was added, false if it already existed.
@@ -32,7 +32,7 @@ export default class GraphNode<T> {
     }
 
     /**
-     * Removes the edge between this node and another node.
+     * Removes the directed edge from this node to another node.
      * 
      * @param {GraphNode<T>} node - The node to disconnect from.
      * @returns {boolean} - True if the edge was removed, false if it did not exist.
@@ -43,19 +43,6 @@ export default class GraphNode<T> {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Gets the edge between this node and another node.
-     * 
-     * @param {GraphNode<T>} node - The node to check for an edge.
-     * @returns {GraphNode<T> | null} - The node if an edge exists, null otherwise.
-     */
-    public getEdge(node: GraphNode<T>): GraphNode<T> | null {
-        if (this._edges.has(node)) {
-            return node;
-        }
-        return null;
     }
 
     /**

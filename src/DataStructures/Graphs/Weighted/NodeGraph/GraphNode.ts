@@ -1,5 +1,5 @@
 /**
- * Represents a node in an unweighted graph.
+ * Represents a node in an weighted graph.
  * 
  * @template T - The type of the value stored in the node.
  */
