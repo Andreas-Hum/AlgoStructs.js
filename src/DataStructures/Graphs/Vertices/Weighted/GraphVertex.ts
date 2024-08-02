@@ -1,3 +1,10 @@
+import type {
+    WeightedAddEdgeOptions as AddEdgeOptions,
+    WeightedRemoveEdgeOptions as RemoveEdgeOptions,
+    WeightedSetEdgesOptions as SetEdgesOptions,
+    WeightedSetEdgeOptions as SetEdgeOptions
+} from "../../Options/Options";
+
 /**
  * Represents a vertex in a weighted graph.
  * 
@@ -20,12 +27,11 @@ export default class GraphVertex<T> {
     /**
      * Adds a directed or undirected edge from this vertex to another vertex with a specified weight.
      * 
-     * @param {GraphVertex<T>} vertex - The vertex to connect to.
-     * @param {number} weight - The weight of the edge.
-     * @param {boolean} [undirected=false] - Whether the edge is undirected.
+     * @param {AddEdgeOptions<T>} options - The options for adding an edge.
      * @returns {boolean} - True if the edge was added, false if it already existed.
      */
-    public addEdge(vertex: GraphVertex<T>, weight: number, undirected: boolean = false): boolean {
+    public addEdge(options: AddEdgeOptions<T>): boolean {
+        const { vertex, weight, undirected = false } = options;
         if (!this._edges.has(vertex)) {
             this._edges.set(vertex, []);
         }
@@ -36,7 +42,7 @@ export default class GraphVertex<T> {
         weights.push(weight);
 
         if (undirected) {
-            vertex.addEdge(this, weight, false);
+            vertex.addEdge({ vertex: this, weight, undirected: false });
         }
         return true;
     }
@@ -72,12 +78,11 @@ export default class GraphVertex<T> {
     /**
      * Removes the directed or undirected edge from this vertex to another vertex.
      * 
-     * @param {GraphVertex<T>} vertex - The vertex to disconnect from.
-     * @param {number} weight - The weight of the edge to remove.
-     * @param {boolean} [undirected=false] - Whether the edge is undirected.
+     * @param {RemoveEdgeOptions<T>} options - The options for removing an edge.
      * @returns {boolean} - True if the edge was removed, false if it did not exist.
      */
-    public removeEdge(vertex: GraphVertex<T>, weight: number, undirected: boolean = false): boolean {
+    public removeEdge(options: RemoveEdgeOptions<T>): boolean {
+        const { vertex, weight, undirected = false } = options;
         if (!this._edges.has(vertex)) {
             return false;
         }
@@ -92,7 +97,7 @@ export default class GraphVertex<T> {
         }
 
         if (undirected) {
-            vertex.removeEdge(this, weight, false);
+            vertex.removeEdge({ vertex: this, weight, undirected: false });
         }
 
         return true;
@@ -101,14 +106,14 @@ export default class GraphVertex<T> {
     /**
      * Sets the edges of this vertex.
      * 
-     * @param {Array<{vertex: GraphVertex<T>, weights: number[]}>} edges - An array of vertices and their weights to set as edges.
-     * @param {boolean} [undirected=false] - Whether the edges are undirected.
+     * @param {SetEdgesOptions<T>} options - The options for setting the edges.
      */
-    public setEdges(edges: Array<{ vertex: GraphVertex<T>, weights: number[] }>, undirected: boolean = false): void {
+    public setEdges(options: SetEdgesOptions<T>): void {
+        const { edges, undirected = false } = options;
         this._edges.clear();
         for (const { vertex, weights } of edges) {
             for (const weight of weights) {
-                this.addEdge(vertex, weight, undirected);
+                this.addEdge({ vertex, weight, undirected });
             }
         }
     }
@@ -117,21 +122,20 @@ export default class GraphVertex<T> {
      * Sets a directed or undirected edge from this vertex to another vertex.
      * If the edge already exists, it replaces the existing edge with the new vertex.
      * 
-     * @param {GraphVertex<T>} oldVertex - The existing vertex to be replaced.
-     * @param {GraphVertex<T>} newVertex - The new vertex to connect to.
-     * @param {number} weight - The weight of the new edge.
-     * @param {boolean} [undirected=false] - Whether the edge is undirected.
+     * @param {SetEdgeOptions<T>} options - The options for setting an edge.
+     * @returns {boolean} - True if the edge was replaced, false if the old vertex did not exist.
      */
-    public setEdge(oldVertex: GraphVertex<T>, newVertex: GraphVertex<T>, weight: number, undirected: boolean = false): boolean {
+    public setEdge(options: SetEdgeOptions<T>): boolean {
+        const { oldVertex, newVertex, weight, undirected = false } = options;
         if (!this._edges.has(oldVertex)) {
             return false;
         }
         this._edges.delete(oldVertex);
-        this.addEdge(newVertex, weight, undirected);
+        this.addEdge({ vertex: newVertex, weight, undirected });
 
         if (undirected) {
-            oldVertex.removeEdge(this, weight, false);
-            newVertex.addEdge(this, weight, false);
+            oldVertex.removeEdge({ vertex: this, weight, undirected: false });
+            newVertex.addEdge({ vertex: this, weight, undirected: false });
         }
 
         return true;
