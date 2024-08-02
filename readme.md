@@ -1,4 +1,4 @@
-# StructAlgo.ts: Data Structures and Algorithms
+# AlgoStructs.ts: Data Structures and Algorithms
 
 This repository contains implementations of various data structures and algorithms in TypeScript. It is intended to be used as a library for beginners to see how data structures are implemented. The project is organized into different categories for ease of navigation.
 
@@ -119,7 +119,7 @@ This repository contains implementations of various data structures and algorith
 To get started with this project, clone the repository and install the dependencies:
 
 ```sh
-git clone https://github.com/yourusername/datastructures.git
+git clone https://github.com/Andreas-Hum/AlgoStructs.ts
 cd datastructures
 npm install
 ```
