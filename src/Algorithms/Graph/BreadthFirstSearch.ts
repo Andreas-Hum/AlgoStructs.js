@@ -1,4 +1,4 @@
-import GraphOptions from "../../Options/AlgorithmOptions/GraphOptions/GraphOptions"
+import {GraphOptions} from "../../Options/AlgorithmOptions/GraphOptions/GraphOptions"
 
 /**
  * Performs a breadth-first search (BFS) on a graph.

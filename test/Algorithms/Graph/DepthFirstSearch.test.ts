@@ -1,6 +1,6 @@
 // DepthFirstSearch.test.ts
 import { depthFirstSearch } from '../../../src/Algorithms/Graph';
-import GraphOptions from '../../../src/Options/AlgorithmOptions/GraphOptions/GraphOptions';
+import {GraphOptions} from '../../../src/Options/AlgorithmOptions/GraphOptions/GraphOptions';
 import * as fc from 'fast-check';
 
 describe('depthFirstSearch', () => {

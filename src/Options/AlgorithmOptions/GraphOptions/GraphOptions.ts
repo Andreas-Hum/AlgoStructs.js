@@ -1,7 +1,7 @@
 /**
  * Options for graph algorithms function.
  */
-export default interface GraphOptions<T> {
+export interface GraphOptions<T> {
     /**
      * The function to get the neighbors of a node.
      * @param node - The node whose neighbors are to be retrieved.
@@ -29,4 +29,10 @@ export default interface GraphOptions<T> {
 export interface WeightedGraphOptions<T> extends GraphOptions<T> {
     getWeight: (node: T, neighbor: T) => number;
     heuristic?: (node: T, target: T) => number; // Heuristic function for A*
+}
+
+
+export interface TopologicalSortOptions<T> {
+    getNeighbors: (node: T) => T[];
+    nodes: T[];
 }
