@@ -35,5 +35,6 @@ import { greatestCommonDivisor } from "./GreatestCommonDivisor";
  * console.log(lcd); // 35
  */
 export function leastCommonDivisor(a: number, b: number): number {
-    return (Math.abs(a) * Math.abs(b)) / greatestCommonDivisor(a, b);
+    if (a === 0 || b === 0) return 0;
+    return Math.abs(a * b) / greatestCommonDivisor(a, b);
 }
