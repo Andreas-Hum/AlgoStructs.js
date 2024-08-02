@@ -18,31 +18,43 @@ export default class GraphNode<T> {
     }
 
     /**
-     * Adds a directed edge from this node to another node.
+     * Adds a directed or undirected edge from this node to another node.
      * 
      * @param {GraphNode<T>} node - The node to connect to.
+     * @param {boolean} [undirected=false] - Whether the edge is undirected.
      * @returns {boolean} - True if the edge was added, false if it already existed.
      */
-    public addEdge(node: GraphNode<T>): boolean {
+    public addEdge(node: GraphNode<T>, undirected: boolean = false): boolean {
         if (this._edges.has(node)) {
             return false;
         }
         this._edges.add(node);
+
+        if (undirected) {
+            node.addEdge(this, false);
+        }
+
         return true;
     }
 
     /**
-     * Removes the directed edge from this node to another node.
+     * Removes the directed or undirected edge from this node to another node.
      * 
      * @param {GraphNode<T>} node - The node to disconnect from.
+     * @param {boolean} [undirected=false] - Whether the edge is undirected.
      * @returns {boolean} - True if the edge was removed, false if it did not exist.
      */
-    public removeEdge(node: GraphNode<T>): boolean {
-        if (this._edges.has(node)) {
-            this._edges.delete(node);
-            return true;
+    public removeEdge(node: GraphNode<T>, undirected: boolean = false): boolean {
+        if (!this._edges.has(node)) {
+            return false;
         }
-        return false;
+        this._edges.delete(node);
+
+        if (undirected) {
+            node.removeEdge(this, false);
+        }
+
+        return true;
     }
 
     /**
@@ -55,30 +67,12 @@ export default class GraphNode<T> {
     }
 
     /**
-     * Sets the value of the node.
-     * 
-     * @param {T} val - The new value to store in the node.
-     */
-    public set(val: T): void {
-        this._val = val;
-    }
-
-    /**
      * Gets the value of the node.
      * 
      * @returns {T} - The value stored in the node.
      */
-    public get(): T {
+    public getValue(): T {
         return this._val;
-    }
-
-    /**
-     * Gets the degree of the node (number of edges).
-     * 
-     * @returns {number} - The number of edges connected to this node.
-     */
-    public degree(): number {
-        return this._edges.size;
     }
 
     /**
@@ -89,12 +83,5 @@ export default class GraphNode<T> {
      */
     public hasEdge(node: GraphNode<T>): boolean {
         return this._edges.has(node);
-    }
-
-    /**
-     * Clears all edges from this node.
-     */
-    public clearEdges(): void {
-        this._edges.clear();
     }
 }
