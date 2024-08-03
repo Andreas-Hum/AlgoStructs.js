@@ -47,12 +47,17 @@ This repository contains implementations of various data structures and algorith
     - [A* Search](#a-star-search)
     - [Topological Sort](#topological-sort)
   - [Sorting Algorithms](#sorting-algorithms)
-    - [Selection Sort](#selection-sort)
-    - [Bubble Sort](#bubble-sort)
-    - [Insertion Sort](#insertion-sort)
-    - [Merge Sort](#merge-sort)
-    - [Quick Sort](#quick-sort)
-    - [Heap Sort](#heap-sort)
+    - [O(n^2) Algorithms](#on2-algorithms)
+        - [Selection Sort](#selection-sort)
+        - [Bubble Sort](#bubble-sort)
+        - [Insertion Sort](#insertion-sort)
+        - [Exchange Sort](#exchange-sort)
+    - [O(n log n) Algorithms](#on-log-n-algorithms)
+        - [Merge Sort](#merge-sort)
+        - [Quick Sort](#quick-sort)
+        - [Heap Sort](#heap-sort)
+    - [O(n + k) Algorithms](#on--k-algorithms)
+        - [Counting Sort](#counting-sort)
 - [Getting Started](#getting-started)
 - [Contact](#contact)
 - [License](#license)
@@ -154,18 +159,30 @@ This repository contains implementations of various data structures and algorith
 
 ### [Sorting Algorithms](https://en.wikipedia.org/wiki/Sorting_algorithm)
 
+#### O(n^2) Algorithms
+
 - [Selection Sort](https://en.wikipedia.org/wiki/Selection_sort)
   - **[SelectionSort](src/Algorithms/Sorting/SelectionSort.ts)**: Implementation of the selection sort algorithm. This algorithm divides the array into a sorted and an unsorted region and repeatedly selects the smallest element from the unsorted region to move to the sorted region.
 - [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort)
   - **[BubbleSort](src/Algorithms/Sorting/BubbleSort.ts)**: Implementation of the bubble sort algorithm. This algorithm repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.
 - [Insertion Sort](https://en.wikipedia.org/wiki/Insertion_sort)
   - **[InsertionSort](src/Algorithms/Sorting/InsertionSort.ts)**: Implementation of the insertion sort algorithm. This algorithm builds the final sorted array one item at a time, with the assumption that the first item is already sorted.
+- [Exchange Sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Exchange_sort)
+  - **[ExchangeSort](src/Algorithms/Sorting/ExchangeSort.ts)**: Implementation of the exchange sort algorithm. This algorithm compares each pair of elements and swaps them if they are in the wrong order.
+
+#### O(n log n) Algorithms
+
 - [Merge Sort](https://en.wikipedia.org/wiki/Merge_sort)
   - **[MergeSort](src/Algorithms/Sorting/MergeSort.ts)**: Implementation of the merge sort algorithm. This algorithm divides the array into two halves, recursively sorts them, and then merges the sorted halves.
 - [Quick Sort](https://en.wikipedia.org/wiki/Quicksort)
   - **[QuickSort](src/Algorithms/Sorting/QuickSort.ts)**: Implementation of the quick sort algorithm. This algorithm picks an element as a pivot, partitions the array around the pivot, and recursively sorts the partitions.
 - [Heap Sort](https://en.wikipedia.org/wiki/Heapsort)
   - **[HeapSort](src/Algorithms/Sorting/HeapSort.ts)**: Implementation of the heap sort algorithm. This algorithm builds a max heap from the input data, then repeatedly extracts the maximum element from the heap and rebuilds the heap.
+
+#### O(n + k) Algorithms
+
+- [Counting Sort](https://en.wikipedia.org/wiki/Counting_sort)
+  - **[CountingSort](src/Algorithms/Sorting/CountingSort.ts)**: Implementation of the counting sort algorithm. This algorithm counts the number of occurrences of each unique element in the input array and uses this count to determine the position of each element in the sorted array.
 
 ## Getting Started
 
