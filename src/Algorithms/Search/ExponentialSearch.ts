@@ -1,6 +1,5 @@
 import { binarySearch } from "./BinarySearch";
-import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOptions";
-
+import { SearchOptions } from "../../Options/AlgorithmOptions";
 /**
  * Performs an exponential search on a sorted array.
  * 

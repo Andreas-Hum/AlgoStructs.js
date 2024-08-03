@@ -1,5 +1,4 @@
-import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOptions";
-
+import { SearchOptions } from "../../Options/AlgorithmOptions";
 
 /**
  * Performs a ternary search on a sorted array.

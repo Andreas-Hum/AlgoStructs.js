@@ -1,6 +1,7 @@
 // InterpolationSearch.test.ts
 import { interpolationSearch } from "../../../src/Algorithms/Search";
-import SearchOptions from "../../../src/Options/AlgorithmOptions/SearchOptions/SearchOptions";
+import { SearchOptions } from "../../../src/Options/AlgorithmOptions/";
+
 import * as fc from "fast-check";
 
 describe("interpolationSearch", () => {

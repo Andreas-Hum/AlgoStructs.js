@@ -1,5 +1,4 @@
-import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOptions";
-
+import { SearchOptions } from "../../Options/AlgorithmOptions";
 /**
  * Performs a Jump Search on a sorted array to find the index of a target element.
  * 

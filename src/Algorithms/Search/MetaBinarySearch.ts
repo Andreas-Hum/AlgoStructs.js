@@ -1,5 +1,4 @@
-import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOptions";
-
+import { SearchOptions } from "../../Options/AlgorithmOptions";
 /**
  * Performs a meta binary search on a sorted array this is also known as one-sided binary search.
  * 

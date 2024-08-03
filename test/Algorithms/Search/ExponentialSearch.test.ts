@@ -1,6 +1,6 @@
 // ExponentialSearch.test.ts
 import { exponentialSearch } from "../../../src/Algorithms/Search";
-import SearchOptions from "../../../src/Options/AlgorithmOptions/SearchOptions/SearchOptions";
+import { SearchOptions } from "../../../src/Options/AlgorithmOptions/";
 import * as fc from "fast-check";
 
 describe("exponentialSearch", () => {

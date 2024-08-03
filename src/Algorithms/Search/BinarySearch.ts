@@ -1,4 +1,4 @@
-import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOptions";
+import { SearchOptions } from "../../Options/AlgorithmOptions";
 
 /**
  * Performs a binary search on a sorted array.

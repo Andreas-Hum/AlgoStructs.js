@@ -1,5 +1,4 @@
-import SearchOptions from "../../Options/AlgorithmOptions/SearchOptions/SearchOptions";
-
+import { SearchOptions } from "../../Options/AlgorithmOptions";
 /**
  * Performs an interpolation search on a sorted array. Very useful for data uniformly spread.
  * 
