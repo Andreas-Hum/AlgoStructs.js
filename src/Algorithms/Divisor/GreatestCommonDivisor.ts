@@ -28,7 +28,10 @@
  * console.log(gcd); // 1
 
  */
-export  function greatestCommonDivisor(a: number, b: number): number {
+export function greatestCommonDivisor(a: number, b: number): number {
+    if (a === 0 && b === 0) {
+        return 0
+    }
     while (b !== 0) {
         let t: number = b;
         b = a % b;

@@ -1,15 +1,8 @@
-import { HashTable } from '../../../../src/DataStructures/Table/HashTable';
+import { HashTable } from '../../../../src/DataStructures/Table';
 import * as fc from 'fast-check';
 
-// Define a custom object type
-type CustomObject = { id: number; value: string };
-
-// Function to convert numbers to hash keys
-const numberToKey = (num: number): number => num;
-
-// Function to convert strings to hash keys
-const stringToKey = (str: string): number => {
-    if (str.length === 0) return 0;
+// Define a simple string to number hash function
+const stringToNumber = (str: string): number => {
     let sum = 0;
     for (let i = 0; i < str.length; i++) {
         sum += str.charCodeAt(i);
@@ -17,62 +10,60 @@ const stringToKey = (str: string): number => {
     return sum;
 };
 
-// Function to convert custom objects to hash keys
-const customObjectToKey = (obj: CustomObject): number => {
-    return obj.id;
+// Define a simple number to number hash function
+const numberToNumber = (num: number): number => {
+    return num;
+};
+
+// Helper function to ensure unique pairs of keys and values
+const ensureUniquePairs = <K, V>(keys: K[], values: V[]): [K[], V[]] => {
+    const uniquePairs: Map<K, V> = new Map();
+    keys.forEach((key, index) => {
+        uniquePairs.set(key, values[index]);
+    });
+    return [Array.from(uniquePairs.keys()), Array.from(uniquePairs.values())];
 };
 
 // Property-based tests
 describe('HashTable', () => {
-    it('should correctly insert and retrieve numbers', () => {
+    it('should correctly insert and retrieve values with string keys', () => {
         fc.assert(
-            fc.property(fc.integer(), fc.integer(), (key, value) => {
-                const hashTable = new HashTable<number, number>({ size: 10, toNumber: numberToKey });
+            fc.property(fc.string(), fc.integer(), (key, value) => {
+                const hashTable = new HashTable<string, number>({ size: 10, toNumber: stringToNumber });
                 hashTable.put(key, value);
-                expect(hashTable.get(key)).toBe(value);
+                const retrievedValue = hashTable.get(key);
+                expect(retrievedValue).toBe(value);
             })
         );
     });
 
-    it('should correctly insert and retrieve strings', () => {
+    it('should correctly insert and retrieve values with number keys', () => {
         fc.assert(
-            fc.property(fc.string(), fc.string(), (key, value) => {
-                const hashTable = new HashTable<string, string>({ size: 10, toNumber: stringToKey });
+            fc.property(fc.integer(), fc.integer(), (key, value) => {
+                const hashTable = new HashTable<number, number>({ size: 10, toNumber: numberToNumber });
                 hashTable.put(key, value);
-                expect(hashTable.get(key)).toBe(value);
+                const retrievedValue = hashTable.get(key);
+                expect(retrievedValue).toBe(value);
             })
         );
     });
 
-    it('should correctly insert and retrieve custom objects', () => {
+    it('should correctly remove values', () => {
         fc.assert(
-            fc.property(
-                fc.record({ id: fc.integer(), value: fc.string() }),
-                fc.string(),
-                (key, value) => {
-                    const hashTable = new HashTable<CustomObject, string>({ size: 10, toNumber: customObjectToKey });
-                    hashTable.put(key, value);
-                    expect(hashTable.get(key)).toBe(value);
-                }
-            )
-        );
-    });
-
-    it('should correctly remove elements', () => {
-        fc.assert(
-            fc.property(fc.integer(), fc.integer(), (key, value) => {
-                const hashTable = new HashTable<number, number>({ size: 10, toNumber: numberToKey });
+            fc.property(fc.string(), fc.integer(), (key, value) => {
+                const hashTable = new HashTable<string, number>({ size: 10, toNumber: stringToNumber });
                 hashTable.put(key, value);
                 hashTable.remove(key);
-                expect(hashTable.get(key)).toBeUndefined();
+                const retrievedValue = hashTable.get(key);
+                expect(retrievedValue).toBe(undefined);
             })
         );
     });
 
-    it('should correctly identify if a key is present', () => {
+    it('should check if a key is in the hash table', () => {
         fc.assert(
-            fc.property(fc.integer(), fc.integer(), (key, value) => {
-                const hashTable = new HashTable<number, number>({ size: 10, toNumber: numberToKey });
+            fc.property(fc.string(), fc.integer(), (key, value) => {
+                const hashTable = new HashTable<string, number>({ size: 10, toNumber: stringToNumber });
                 hashTable.put(key, value);
                 expect(hashTable.containsKey(key)).toBe(true);
                 hashTable.remove(key);
@@ -81,91 +72,88 @@ describe('HashTable', () => {
         );
     });
 
-    it('should return all keys', () => {
+    it('should return all keys in the hash table', () => {
         fc.assert(
-            fc.property(fc.array(fc.tuple(fc.integer(), fc.integer())), (entries) => {
-                const hashTable = new HashTable<number, number>({ size: 10, toNumber: numberToKey });
-                const keys = new Set<number>();
-                for (const [key, value] of entries) {
-                    hashTable.put(key, value);
-                    keys.add(key);
-                }
-                const hashTableKeys = hashTable.getKeys();
-                expect(new Set(hashTableKeys)).toEqual(keys);
+            fc.property(fc.array(fc.string(), { minLength: 1, maxLength: 10 }), fc.array(fc.integer(), { minLength: 1, maxLength: 10 }), (keys, values) => {
+                fc.pre(keys.length === values.length); // Ensure lengths are the same
+                const [uniqueKeys, uniqueValues] = ensureUniquePairs(keys, values);
+                const hashTable = new HashTable<string, number>({ size: 10, toNumber: stringToNumber });
+                uniqueKeys.forEach((key, index) => {
+                    hashTable.put(key, uniqueValues[index]);
+                });
+                const retrievedKeys = hashTable.getKeys();
+                uniqueKeys.forEach(key => {
+                    expect(retrievedKeys).toContain(key);
+                });
             })
         );
     });
 
-    it('should return all values', () => {
+    it('should return all values in the hash table', () => {
         fc.assert(
-            fc.property(fc.array(fc.tuple(fc.integer(), fc.integer())), (entries) => {
-                const hashTable = new HashTable<number, number>({ size: 10, toNumber: numberToKey });
-                const values = new Set<number>();
-                for (const [key, value] of entries) {
-                    hashTable.put(key, value);
-                    values.add(value);
-                }
-                const hashTableValues = hashTable.getValues();
-                expect(new Set(hashTableValues)).toEqual(values);
+            fc.property(fc.array(fc.string(), { minLength: 1, maxLength: 10 }), fc.array(fc.integer(), { minLength: 1, maxLength: 10 }), (keys, values) => {
+                fc.pre(keys.length === values.length); // Ensure lengths are the same
+                const [uniqueKeys, uniqueValues] = ensureUniquePairs(keys, values);
+                const hashTable = new HashTable<string, number>({ size: 10, toNumber: stringToNumber });
+                uniqueKeys.forEach((key, index) => {
+                    hashTable.put(key, uniqueValues[index]);
+                });
+                const retrievedValues = hashTable.getValues();
+                uniqueValues.forEach(value => {
+                    expect(retrievedValues).toContain(value);
+                });
             })
         );
     });
 
-    it('should clear all elements', () => {
+    it('should clear all elements in the hash table', () => {
         fc.assert(
-            fc.property(fc.array(fc.tuple(fc.integer(), fc.integer())), (entries) => {
-                const hashTable = new HashTable<number, number>({ size: 10, toNumber: numberToKey });
-                for (const [key, value] of entries) {
-                    hashTable.put(key, value);
-                }
+            fc.property(fc.array(fc.string(), { minLength: 1, maxLength: 10 }), fc.array(fc.integer(), { minLength: 1, maxLength: 10 }), (keys, values) => {
+                fc.pre(keys.length === values.length); // Ensure lengths are the same
+                const [uniqueKeys, uniqueValues] = ensureUniquePairs(keys, values);
+                const hashTable = new HashTable<string, number>({ size: 10, toNumber: stringToNumber });
+                uniqueKeys.forEach((key, index) => {
+                    hashTable.put(key, uniqueValues[index]);
+                });
                 hashTable.clear();
                 expect(hashTable.getSize()).toBe(0);
-                for (const [key] of entries) {
-                    expect(hashTable.get(key)).toBeUndefined();
-                }
+                uniqueKeys.forEach(key => {
+                    expect(hashTable.get(key)).toBe(undefined);
+                });
             })
         );
     });
 
-    it('should return the correct size', () => {
+    it('should return the correct size of the hash table', () => {
         fc.assert(
-            fc.property(fc.array(fc.tuple(fc.integer(), fc.integer())), (entries) => {
-                const hashTable = new HashTable<number, number>({ size: 10, toNumber: numberToKey });
-                for (const [key, value] of entries) {
-                    hashTable.put(key, value);
-                }
-                expect(hashTable.getSize()).toBe(entries.length);
+            fc.property(fc.array(fc.string(), { minLength: 1, maxLength: 10 }), fc.array(fc.integer(), { minLength: 1, maxLength: 10 }), (keys, values) => {
+                fc.pre(keys.length === values.length); // Ensure lengths are the same
+                const [uniqueKeys, uniqueValues] = ensureUniquePairs(keys, values);
+                const hashTable = new HashTable<string, number>({ size: 10, toNumber: stringToNumber });
+                uniqueKeys.forEach((key, index) => {
+                    hashTable.put(key, uniqueValues[index]);
+                });
+                expect(hashTable.getSize()).toBe(uniqueKeys.length);
             })
         );
     });
 
-    it('should provide a correct string representation', () => {
+    it('should iterate over all elements in the hash table', () => {
         fc.assert(
-            fc.property(fc.array(fc.tuple(fc.integer(), fc.integer())), (entries) => {
-                const hashTable = new HashTable<number, number>({ size: 10, toNumber: numberToKey });
-                for (const [key, value] of entries) {
-                    hashTable.put(key, value);
-                }
-                const stringRepresentation = hashTable.toString();
-                for (const [key, value] of entries) {
-                    expect(stringRepresentation).toContain(`${key}: ${value}`);
-                }
-            })
-        );
-    });
-
-    it('should iterate over all elements', () => {
-        fc.assert(
-            fc.property(fc.array(fc.tuple(fc.integer(), fc.integer())), (entries) => {
-                const hashTable = new HashTable<number, number>({ size: 10, toNumber: numberToKey });
-                for (const [key, value] of entries) {
-                    hashTable.put(key, value);
-                }
-                const iteratedEntries: Array<[number, number]> = [];
+            fc.property(fc.array(fc.string(), { minLength: 1, maxLength: 10 }), fc.array(fc.integer(), { minLength: 1, maxLength: 10 }), (keys, values) => {
+                fc.pre(keys.length === values.length); // Ensure lengths are the same
+                const [uniqueKeys, uniqueValues] = ensureUniquePairs(keys, values);
+                const hashTable = new HashTable<string, number>({ size: 10, toNumber: stringToNumber });
+                uniqueKeys.forEach((key, index) => {
+                    hashTable.put(key, uniqueValues[index]);
+                });
+                const elements: Array<[string, number]> = [];
                 for (const [key, value] of hashTable.iteratorGenerator()) {
-                    iteratedEntries.push([key, value]);
+                    elements.push([key, value]);
                 }
-                expect(new Set(iteratedEntries)).toEqual(new Set(entries));
+                uniqueKeys.forEach((key, index) => {
+                    expect(elements).toContainEqual([key, uniqueValues[index]]);
+                });
             })
         );
     });

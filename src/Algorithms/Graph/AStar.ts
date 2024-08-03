@@ -63,15 +63,15 @@ import { WeightedGraphOptions } from "../../Options/AlgorithmOptions/GraphOption
  * 
  */
 export function aStar<T>({ getNeighbors, getWeight, heuristic, startNode, targetNode, visit }: WeightedGraphOptions<T>): T[] {
-    const openSet = new Set<T>([startNode]);
-    const cameFrom = new Map<T, T>();
+    const openSet: Set<T> = new Set<T>([startNode]);
+    const cameFrom: Map<T, T | null> = new Map<T, T | null>();
 
-    const gScore = new Map<T, number>();
-    const fScore = new Map<T, number>();
+    const gScore: Map<T, number> = new Map<T, number>();
+    const fScore: Map<T, number> = new Map<T, number>();
     gScore.set(startNode, 0);
     fScore.set(startNode, heuristic ? heuristic(startNode, targetNode!) : 0);
 
-    const pq: [T, number][] = [[startNode, fScore.get(startNode)!]];
+    const pq: Array<[T, number]> = [[startNode, fScore.get(startNode)!]];
 
     while (openSet.size > 0) {
         pq.sort((a, b) => a[1] - b[1]);
@@ -84,30 +84,49 @@ export function aStar<T>({ getNeighbors, getWeight, heuristic, startNode, target
 
         if (current === targetNode) {
             const path: T[] = [];
-            let temp: T | undefined = current;
-            while (temp) {
+            let temp: T | null = current;
+            const visited: Set<T> = new Set<T>(); // Add a visited set to prevent infinite loops
+            while (temp !== null) {
+                if (visited.has(temp)) {
+                    throw new Error('Detected a circular reference in the path reconstruction.');
+                }
+                visited.add(temp);
                 path.push(temp);
-                temp = cameFrom.get(temp);
+                temp = cameFrom.get(temp) ?? null;
             }
             return path.reverse();
         }
 
         const neighbors: T[] = getNeighbors(current);
         for (const neighbor of neighbors) {
-            const tentativeGScore = gScore.get(current)! + getWeight(current, neighbor);
+            const tentativeGScore: number = gScore.get(current)! + getWeight(current, neighbor);
 
             if (tentativeGScore < (gScore.get(neighbor) || Infinity)) {
-                cameFrom.set(neighbor, current);
-                gScore.set(neighbor, tentativeGScore);
-                fScore.set(neighbor, tentativeGScore + (heuristic ? heuristic(neighbor, targetNode!) : 0));
+                // Check for potential circular references before setting cameFrom
+                if (!isCircularReference(neighbor, current, cameFrom)) {
+                    cameFrom.set(neighbor, current);
+                    gScore.set(neighbor, tentativeGScore);
+                    fScore.set(neighbor, tentativeGScore + (heuristic ? heuristic(neighbor, targetNode!) : 0));
 
-                if (!openSet.has(neighbor)) {
-                    openSet.add(neighbor);
-                    pq.push([neighbor, fScore.get(neighbor)!]);
+                    if (!openSet.has(neighbor)) {
+                        openSet.add(neighbor);
+                        pq.push([neighbor, fScore.get(neighbor)!]);
+                    }
                 }
             }
         }
     }
 
     return [];
+}
+
+function isCircularReference<T>(neighbor: T, current: T, cameFrom: Map<T, T | null>): boolean {
+    let temp: T | null = current;
+    while (temp !== null) {
+        if (temp === neighbor) {
+            return true;
+        }
+        temp = cameFrom.get(temp) ?? null;
+    }
+    return false;
 }

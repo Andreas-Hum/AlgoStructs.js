@@ -14,7 +14,7 @@
  * 
  * This implementation uses separate chaining to resolve collisions, where each bucket is an array that can hold multiple key-value pairs.
  * 
- * The algorithm works as follows:
+ * The class provides the following methods:
  * 1. The `put` method hashes the key and stores the value in the corresponding bucket.
  * 2. The `get` method hashes the key and retrieves the value from the corresponding bucket.
  * 3. The `remove` method hashes the key and removes the key-value pair from the corresponding bucket.
@@ -28,7 +28,7 @@
  * 
  * @example
  * // Create a new hash table
- * const hashTable = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
+ * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
  * 
  * // Add elements to the hash table
  * hashTable.put("key1", 1);
@@ -53,10 +53,6 @@
  * // Clear the hash table
  * hashTable.clear();
  * console.log(hashTable.getSize()); // Output: 0
- * 
- * @complexity
- * Time complexity: O(1) on average for put, get, and remove operations, assuming a good hash function and a low load factor.
- * Space complexity: O(n), where n is the number of elements in the hash table.
  */
 export class HashTable<K, V> {
     private _toNumber: (key: K) => number;
@@ -85,6 +81,11 @@ export class HashTable<K, V> {
      * @complexity
      * Time complexity: O(1) - Constant time operation.
      * Space complexity: O(1) - Constant space operation.
+     * 
+     * @example
+     * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
+     * const index: number = hashTable['hash']("key1");
+     * console.log(index); // Output: some number based on the hash function
      */
     private hash(key: K): number {
         return Math.abs(this._toNumber(key) % this._size);
@@ -97,9 +98,14 @@ export class HashTable<K, V> {
      * 
      * @complexity
      * Time complexity: O(1) on average - Adding or updating a key-value pair is constant time on average.
-     * Space complexity: O(1) - TConstant space operation.
+     * Space complexity: O(1) - Constant space operation.
+     * 
+     * @example
+     * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
+     * hashTable.put("key1", 1);
+     * console.log(hashTable.get("key1")); // Output: 1
      */
-    put(key: K, value: V): void {
+    public put(key: K, value: V): void {
         const index: number = this.hash(key);
         const bucket: Array<[K, V]> = this._table[index];
         for (let i: number = 0; i < bucket.length; i++) {
@@ -120,8 +126,14 @@ export class HashTable<K, V> {
      * @complexity
      * Time complexity: O(1) on average - Retrieving a value is constant time on average.
      * Space complexity: O(1) - Constant space operation.
+     * 
+     * @example
+     * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
+     * hashTable.put("key1", 1);
+     * console.log(hashTable.get("key1")); // Output: 1
+     * console.log(hashTable.get("key2")); // Output: undefined
      */
-    get(key: K): V | undefined {
+    public get(key: K): V | undefined {
         const index: number = this.hash(key);
         const bucket: Array<[K, V]> = this._table[index];
         for (const [k, v] of bucket) {
@@ -139,8 +151,14 @@ export class HashTable<K, V> {
      * @complexity
      * Time complexity: O(1) on average - Removing a key-value pair is constant time on average.
      * Space complexity: O(1) - Constant space operation.
+     * 
+     * @example
+     * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
+     * hashTable.put("key1", 1);
+     * hashTable.remove("key1");
+     * console.log(hashTable.get("key1")); // Output: undefined
      */
-    remove(key: K): void {
+    public remove(key: K): void {
         const index: number = this.hash(key);
         const bucket: Array<[K, V]> = this._table[index];
         for (let i: number = 0; i < bucket.length; i++) {
@@ -155,13 +173,19 @@ export class HashTable<K, V> {
     /**
      * Determines whether the hash table contains the specified key.
      * @param {K} key - The key to locate in the hash table.
-     * @returns {boolean} - true if the hash table contains an element with the specified key; otherwise, false.
+     * @returns {boolean} - True if the hash table contains an element with the specified key; otherwise, false.
      * 
      * @complexity
      * Time complexity: O(1) on average - Checking for the presence of a key is constant time on average.
      * Space complexity: O(1) - Constant space operation.
+     * 
+     * @example
+     * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
+     * hashTable.put("key1", 1);
+     * console.log(hashTable.containsKey("key1")); // Output: true
+     * console.log(hashTable.containsKey("key2")); // Output: false
      */
-    containsKey(key: K): boolean {
+    public containsKey(key: K): boolean {
         return this.get(key) !== undefined;
     }
 
@@ -172,8 +196,14 @@ export class HashTable<K, V> {
      * @complexity
      * Time complexity: O(n) - Collecting all keys requires iterating over all elements.
      * Space complexity: O(n) - Storing all keys requires space proportional to the number of elements.
+     * 
+     * @example
+     * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
+     * hashTable.put("key1", 1);
+     * hashTable.put("key2", 2);
+     * console.log(hashTable.getKeys()); // Output: ["key1", "key2"]
      */
-    getKeys(): K[] {
+    public getKeys(): K[] {
         const keys: K[] = [];
         for (const bucket of this._table) {
             for (const [key] of bucket) {
@@ -190,8 +220,14 @@ export class HashTable<K, V> {
      * @complexity
      * Time complexity: O(n) - Collecting all values requires iterating over all elements.
      * Space complexity: O(n) - Storing all values requires space proportional to the number of elements.
+     * 
+     * @example
+     * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
+     * hashTable.put("key1", 1);
+     * hashTable.put("key2", 2);
+     * console.log(hashTable.getValues()); // Output: [1, 2]
      */
-    getValues(): V[] {
+    public getValues(): V[] {
         const values: V[] = [];
         for (const bucket of this._table) {
             for (const [, value] of bucket) {
@@ -207,8 +243,14 @@ export class HashTable<K, V> {
      * @complexity
      * Time complexity: O(n) - Clearing the table requires iterating over all elements.
      * Space complexity: O(n) - The space is freed, but the method itself uses constant space.
+     * 
+     * @example
+     * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
+     * hashTable.put("key1", 1);
+     * hashTable.clear();
+     * console.log(hashTable.getSize()); // Output: 0
      */
-    clear(): void {
+    public clear(): void {
         this._table = Array.from({ length: this._size }, () => [] as Array<[K, V]>);
         this._count = 0;
     }
@@ -220,8 +262,13 @@ export class HashTable<K, V> {
      * @complexity
      * Time complexity: O(1) - Constant time operation.
      * Space complexity: O(1) - Constant space operation.
+     * 
+     * @example
+     * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
+     * hashTable.put("key1", 1);
+     * console.log(hashTable.getSize()); // Output: 1
      */
-    getSize(): number {
+    public getSize(): number {
         return this._count;
     }
 
@@ -232,8 +279,14 @@ export class HashTable<K, V> {
      * @complexity
      * Time complexity: O(n) - Generating the string requires iterating over all elements.
      * Space complexity: O(n) - Storing the string representation requires space proportional to the number of elements.
+     * 
+     * @example
+     * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
+     * hashTable.put("key1", 1);
+     * hashTable.put("key2", 2);
+     * console.log(hashTable.toString()); // Output: "{ key1: 1, key2: 2 }"
      */
-    toString(): string {
+    public toString(): string {
         const items: string[] = [];
         for (const bucket of this._table) {
             for (const [key, value] of bucket) {
@@ -250,6 +303,14 @@ export class HashTable<K, V> {
      * @complexity
      * Time complexity: O(n) - Iterating over all elements requires visiting each element once.
      * Space complexity: O(1) - Constant space operation.
+     * 
+     * @example
+     * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber: stringToKey });
+     * hashTable.put("key1", 1);
+     * hashTable.put("key2", 2);
+     * for (const [key, value] of hashTable.iteratorGenerator()) {
+     *     console.log(`${key}: ${value}`); // Output: "key1: 1", "key2: 2"
+     * }
      */
     *iteratorGenerator(): IterableIterator<[K, V]> {
         for (const bucket of this._table) {

@@ -2,10 +2,12 @@
 import { greatestCommonDivisor } from "../../../src/Algorithms/Divisor";
 import * as fc from "fast-check";
 
+
 describe("greatestCommonDivisor", () => {
     afterEach(() => {
         jest.clearAllTimers(); // Clear any timers after each test
     });
+
     it("should return the correct GCD for two non-negative integers", () => {
         fc.assert(
             fc.property(
@@ -13,6 +15,9 @@ describe("greatestCommonDivisor", () => {
                 fc.nat(),
                 (a, b) => {
                     const gcd: number = greatestCommonDivisor(a, b);
+                    if (a === 0 && b === 0) {
+                        return gcd === 0;
+                    }
                     return a % gcd === 0 && b % gcd === 0;
                 }
             )
@@ -49,7 +54,6 @@ describe("greatestCommonDivisor", () => {
                 fc.integer({ min: 1, max: 1000 }),
                 fc.integer({ min: 1, max: 1000 }),
                 (a, b) => {
-
                     const gcd: number = greatestCommonDivisor(a, b);
                     return gcd === 1 || (a % gcd === 0 && b % gcd === 0);
                 }
