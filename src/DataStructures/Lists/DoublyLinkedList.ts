@@ -4,14 +4,14 @@ import Node from "./Nodes/DoublyLinkedListNode";
  * A class representing a doubly linked list.
  * @template T The type of elements in the linked list.
  */
-export  class LinkedList<T> {
+export class DoublyLinkedList<T> {
     private _head: Node<T> | null;
     private _tail: Node<T> | null;
     private _size: number;
     private _compare: (a: T, b: T) => number;
 
     /**
-     * Creates an instance of LinkedList.
+     * Creates an instance of DoublyLinkedList.
      * @param {(a: T, b: T) => number} compare - The comparison function.
      * @remarks
      * The comparison function should return:
@@ -21,7 +21,7 @@ export  class LinkedList<T> {
      *
      * @example
      * const compareNumbers: (a: number, b: numbers) => number = (a: number, b: number) => a - b;
-     * const LinkedList: LinkedList<number> = new LinkedList<number>(compareNumbers);
+     * const DoublyLinkedList: DoublyLinkedList<number> = new DoublyLinkedList<number>(compareNumbers);
      */
     constructor(compare: (a: T, b: T) => number) {
         this._head = null;
@@ -60,13 +60,13 @@ export  class LinkedList<T> {
     }
 
     /**
-     * Removes the first occurrence of the specified value from the linked list.
-     * @param {T} value The value to remove.
-     * @returns {T | null} The removed value, or null if the value was not found.
-     * @complexity
-     * Time complexity: O(n) - Where n is the number of elements in the list.
-     * Space complexity: O(1) - Constant space operation
-     */
+   * Removes the first occurrence of the specified value from the linked list.
+   * @param {T} value The value to remove.
+   * @returns {T | null} The removed value, or null if the value was not found.
+   * @complexity
+   * Time complexity: O(n) - Where n is the number of elements in the list.
+   * Space complexity: O(1) - Constant space operation.
+   */
     public remove(value: T): T | null {
         if (this._head === null) {
             return null;
@@ -103,6 +103,7 @@ export  class LinkedList<T> {
         return null;
     }
 
+    
     /**
      * Checks if the linked list contains the specified value.
      * @param {T} value The value to check for.

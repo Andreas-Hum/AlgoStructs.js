@@ -4,13 +4,13 @@ import Node from "./Nodes/SinglyLinkedListNode"
  * A class representing a singly linked list.
  * @template T The type of elements in the linked list.
  */
-export  class LinkedList<T> {
+export  class SinglyLinkedList<T> {
     private _head: Node<T> | null;
     private _size: number;
     private _compare: (a: T, b: T) => number;
 
     /**
-     * Creates an instance of LinkedList.
+     * Creates an instance of SinglyLinkedList.
      * @param {(a: T, b: T) => number} compare - The comparison function.
      * @remarks
      * The comparison function should return:
@@ -20,7 +20,7 @@ export  class LinkedList<T> {
      * 
      * @example
      * const compareNumbers: (a: number, b: number) => number = (a: number, b: number) => a - b;
-     * const LinkedList: LinkedList<number> = new LinkedList<number>(compareNumbers);
+     * const SinglyLinkedList: SinglyLinkedList<number> = new SinglyLinkedList<number>(compareNumbers);
      */
     constructor(compare: (a: T, b: T) => number) {
         this._head = null;
