@@ -1,4 +1,4 @@
-export default interface SearchOptions<T> {
+export interface SearchOptions<T> {
     /**
      * The sorted array to search.
      */
