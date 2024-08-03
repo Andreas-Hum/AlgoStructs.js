@@ -46,6 +46,9 @@ This repository contains implementations of various data structures and algorith
     - [Dijkstra's Algorithm](#dijkstras-algorithm)
     - [A* Search](#a-star-search)
     - [Topological Sort](#topological-sort)
+  - [Sorting Algorithms](#sorting-algorithms)
+    - [Selection Sort](#selection-sort)
+    - [Bubble Sort](#bubble-sort)
 - [Getting Started](#getting-started)
 - [Contact](#contact)
 - [License](#license)
@@ -145,6 +148,12 @@ This repository contains implementations of various data structures and algorith
 - [Topological Sort](https://en.wikipedia.org/wiki/Topological_sorting)
   - **[TopologicalSort](src/Algorithms/Graph/TopologicalSort.ts)**: Implementation of the topological sort algorithm. This algorithm orders the nodes in a directed acyclic graph (DAG) in a linear order.
 
+### [Sorting Algorithms](https://en.wikipedia.org/wiki/Sorting_algorithm)
+
+- [Selection Sort](https://en.wikipedia.org/wiki/Selection_sort)
+  - **[SelectionSort](src/Algorithms/Sorting/SelectionSort.ts)**: Implementation of the selection sort algorithm. This algorithm divides the array into a sorted and an unsorted region and repeatedly selects the smallest element from the unsorted region to move to the sorted region.
+- [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort)
+  - **[BubbleSort](src/Algorithms/Sorting/BubbleSort.ts)**: Implementation of the bubble sort algorithm. This algorithm repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.
 
 ## Getting Started
 
