@@ -42,11 +42,19 @@ import { SortOptions } from "../../Options/AlgorithmOptions/SortOptions/SortOpti
  * console.log(sortedStrings); // Output: ["apple", "banana", "cherry"]
  */
 export function bubbleSort<T>({ array, compare }: SortOptions<T>): T[] {
-    for (let i: number = 0; i < array.length; i++) {
-        for (let j: number = i; j < array.length; j++) {
-            if (compare(array[i], array[j]) > 0) {
-                [array[i], array[j]] = [array[j], array[i]];
+    const n: number = array.length;
+    let swapped: boolean;
+
+    for (let i: number = 0; i < n; i++) {
+        swapped = false;
+        for (let j: number = 0; j < n - 1 - i; j++) {
+            if (compare(array[j], array[j + 1]) > 0) {
+                [array[j], array[j + 1]] = [array[j + 1], array[j]];
+                swapped = true;
             }
+        }
+        if (!swapped) {
+            break;
         }
     }
     return array;
