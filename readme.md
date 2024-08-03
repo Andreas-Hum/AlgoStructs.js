@@ -49,6 +49,10 @@ This repository contains implementations of various data structures and algorith
   - [Sorting Algorithms](#sorting-algorithms)
     - [Selection Sort](#selection-sort)
     - [Bubble Sort](#bubble-sort)
+    - [Insertion Sort](#insertion-sort)
+    - [Merge Sort](#merge-sort)
+    - [Quick Sort](#quick-sort)
+    - [Heap Sort](#heap-sort)
 - [Getting Started](#getting-started)
 - [Contact](#contact)
 - [License](#license)
@@ -154,6 +158,14 @@ This repository contains implementations of various data structures and algorith
   - **[SelectionSort](src/Algorithms/Sorting/SelectionSort.ts)**: Implementation of the selection sort algorithm. This algorithm divides the array into a sorted and an unsorted region and repeatedly selects the smallest element from the unsorted region to move to the sorted region.
 - [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort)
   - **[BubbleSort](src/Algorithms/Sorting/BubbleSort.ts)**: Implementation of the bubble sort algorithm. This algorithm repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.
+- [Insertion Sort](https://en.wikipedia.org/wiki/Insertion_sort)
+  - **[InsertionSort](src/Algorithms/Sorting/InsertionSort.ts)**: Implementation of the insertion sort algorithm. This algorithm builds the final sorted array one item at a time, with the assumption that the first item is already sorted.
+- [Merge Sort](https://en.wikipedia.org/wiki/Merge_sort)
+  - **[MergeSort](src/Algorithms/Sorting/MergeSort.ts)**: Implementation of the merge sort algorithm. This algorithm divides the array into two halves, recursively sorts them, and then merges the sorted halves.
+- [Quick Sort](https://en.wikipedia.org/wiki/Quicksort)
+  - **[QuickSort](src/Algorithms/Sorting/QuickSort.ts)**: Implementation of the quick sort algorithm. This algorithm picks an element as a pivot, partitions the array around the pivot, and recursively sorts the partitions.
+- [Heap Sort](https://en.wikipedia.org/wiki/Heapsort)
+  - **[HeapSort](src/Algorithms/Sorting/HeapSort.ts)**: Implementation of the heap sort algorithm. This algorithm builds a max heap from the input data, then repeatedly extracts the maximum element from the heap and rebuilds the heap.
 
 ## Getting Started
 
