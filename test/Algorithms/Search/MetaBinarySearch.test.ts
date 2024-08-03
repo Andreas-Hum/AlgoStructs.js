@@ -1,4 +1,3 @@
-// MetaBinarySearch.test.ts
 import { metaBinarySearch } from "../../../src/Algorithms/Search";
 import SearchOptions from "../../../src/Options/AlgorithmOptions/SearchOptions/SearchOptions";
 import * as fc from "fast-check";
@@ -26,7 +25,8 @@ describe("metaBinarySearch", () => {
                         return !numbers.includes(targetNumber);
                     }
                 }
-            )
+            ),
+            { verbose: true }
         );
     });
 
@@ -46,7 +46,8 @@ describe("metaBinarySearch", () => {
                     const index: number = metaBinarySearch(options);
                     return index === -1;
                 }
-            )
+            ),
+            { verbose: true }
         );
     });
 
@@ -69,7 +70,8 @@ describe("metaBinarySearch", () => {
                         return !strings.includes(targetString);
                     }
                 }
-            )
+            ),
+            { verbose: true }
         );
     });
 
@@ -90,7 +92,8 @@ describe("metaBinarySearch", () => {
                     const index: number = metaBinarySearch(options);
                     return index === -1;
                 }
-            )
+            ),
+            { verbose: true }
         );
     });
 
@@ -126,7 +129,8 @@ describe("metaBinarySearch", () => {
                         return !people.some(person => person.age === targetPerson.age);
                     }
                 }
-            )
+            ),
+            { verbose: true }
         );
     });
 
@@ -160,7 +164,8 @@ describe("metaBinarySearch", () => {
                     const index: number = metaBinarySearch(options);
                     return index === -1;
                 }
-            )
+            ),
+            { verbose: true }
         );
     });
 });

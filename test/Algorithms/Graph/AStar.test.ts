@@ -15,46 +15,41 @@ describe('aStar', () => {
     };
 
     const heuristic = (node: number, target: number): number => Math.abs(node - target);
-
     const aStarManual = (graph: { [key: number]: { neighbor: number, weight: number }[] }, startNode: number, targetNode: number): number[] => {
         const openSet: Set<number> = new Set<number>([startNode]);
         const cameFrom: Map<number, number> = new Map<number, number>();
-
+    
         const gScore: Map<number, number> = new Map<number, number>();
         const fScore: Map<number, number> = new Map<number, number>();
         gScore.set(startNode, 0);
         fScore.set(startNode, heuristic(startNode, targetNode));
-
+    
         const pq: [number, number][] = [[startNode, fScore.get(startNode)!]];
-
+    
         while (openSet.size > 0) {
             pq.sort((a, b) => a[1] - b[1]);
-            const [current]: [number, number] = pq.shift()!;
+            const [current] = pq.shift()!;
             openSet.delete(current);
-
+    
             if (current === targetNode) {
                 const path: number[] = [];
                 let temp: number | undefined = current;
                 while (temp !== undefined) {
-                    path.push(temp);
+                    path.unshift(temp);
                     temp = cameFrom.get(temp);
                 }
-                return path.reverse();
+                return path;
             }
-
-            const neighbors: {
-                neighbor: number;
-                weight: number;
-            }[] = graph[current] || [];
+    
+            const neighbors = graph[current] || [];
             for (const { neighbor, weight } of neighbors) {
-                const tentativeGScore: number
-                    = gScore.get(current)! + weight;
-
-                if (tentativeGScore < (gScore.get(neighbor) || Infinity)) {
+                const tentativeGScore = gScore.get(current)! + weight;
+    
+                if (tentativeGScore < (gScore.get(neighbor) ?? Infinity)) {
                     cameFrom.set(neighbor, current);
                     gScore.set(neighbor, tentativeGScore);
                     fScore.set(neighbor, tentativeGScore + heuristic(neighbor, targetNode));
-
+    
                     if (!openSet.has(neighbor)) {
                         openSet.add(neighbor);
                         pq.push([neighbor, fScore.get(neighbor)!]);
@@ -62,7 +57,7 @@ describe('aStar', () => {
                 }
             }
         }
-
+    
         return [];
     };
 
