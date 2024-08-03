@@ -1,14 +1,13 @@
 import { SinglyLinkedList } from '../../../src/DataStructures/Lists';
 import * as fc from 'fast-check';
 
-
 describe('SinglyLinkedList', () => {
     let numberList: SinglyLinkedList<number>;
     let stringList: SinglyLinkedList<string>;
 
     beforeEach(() => {
-        numberList = new SinglyLinkedList<number>((a, b) => a - b);
-        stringList = new SinglyLinkedList<string>((a, b) => a.localeCompare(b));
+        numberList = new SinglyLinkedList<number>((a: number, b: number) => a - b);
+        stringList = new SinglyLinkedList<string>((a: string, b: string) => a.localeCompare(b));
     });
 
     afterEach(() => {
@@ -17,7 +16,7 @@ describe('SinglyLinkedList', () => {
 
     test('should add elements correctly', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (numbers) => {
+            fc.property(fc.array(fc.integer()), (numbers: number[]) => {
                 numberList.clear();
                 numberList.add(...numbers);
                 expect(numberList.size()).toBe(numbers.length);
@@ -26,7 +25,7 @@ describe('SinglyLinkedList', () => {
         );
 
         fc.assert(
-            fc.property(fc.array(fc.string({ minLength: 1 })), (strings) => {
+            fc.property(fc.array(fc.string({ minLength: 1 })), (strings: string[]) => {
                 stringList.clear();
                 stringList.add(...strings);
                 expect(stringList.size()).toBe(strings.length);
@@ -37,11 +36,11 @@ describe('SinglyLinkedList', () => {
 
     test('should remove elements correctly', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), fc.integer(), (numbers, numToRemove) => {
+            fc.property(fc.array(fc.integer()), fc.integer(), (numbers: number[], numToRemove: number) => {
                 numberList.clear();
                 numberList.add(...numbers);
-                const removed = numberList.remove(numToRemove);
-                const expectedArray = numbers.filter(num => num !== numToRemove);
+                const removed: number | null = numberList.remove(numToRemove);
+                const expectedArray: number[] = numbers.filter(num => num !== numToRemove);
                 expect(numberList.size()).toBe(expectedArray.length);
                 expect(numberList.toArray()).toEqual(expectedArray);
                 if (numbers.includes(numToRemove)) {
@@ -53,11 +52,11 @@ describe('SinglyLinkedList', () => {
         );
 
         fc.assert(
-            fc.property(fc.array(fc.string({ minLength: 1 })), fc.string({ minLength: 1 }), (strings, strToRemove) => {
+            fc.property(fc.array(fc.string({ minLength: 1 })), fc.string({ minLength: 1 }), (strings: string[], strToRemove: string) => {
                 stringList.clear();
                 stringList.add(...strings);
-                const removed = stringList.remove(strToRemove);
-                const expectedArray = strings.filter(str => str !== strToRemove);
+                const removed: string | null = stringList.remove(strToRemove);
+                const expectedArray: string[] = strings.filter(str => str !== strToRemove);
                 expect(stringList.size()).toBe(expectedArray.length);
                 expect(stringList.toArray()).toEqual(expectedArray);
                 if (strings.includes(strToRemove)) {
@@ -71,7 +70,7 @@ describe('SinglyLinkedList', () => {
 
     test('should check if the list contains an element', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), fc.integer(), (numbers, numToCheck) => {
+            fc.property(fc.array(fc.integer()), fc.integer(), (numbers: number[], numToCheck: number) => {
                 numberList.clear();
                 numberList.add(...numbers);
                 expect(numberList.contains(numToCheck)).toBe(numbers.includes(numToCheck));
@@ -79,7 +78,7 @@ describe('SinglyLinkedList', () => {
         );
 
         fc.assert(
-            fc.property(fc.array(fc.string({ minLength: 1 })), fc.string({ minLength: 1 }), (strings, strToCheck) => {
+            fc.property(fc.array(fc.string({ minLength: 1 })), fc.string({ minLength: 1 }), (strings: string[], strToCheck: string) => {
                 stringList.clear();
                 stringList.add(...strings);
                 expect(stringList.contains(strToCheck)).toBe(strings.includes(strToCheck));
@@ -89,7 +88,7 @@ describe('SinglyLinkedList', () => {
 
     test('should check if the list is empty', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (numbers) => {
+            fc.property(fc.array(fc.integer()), (numbers: number[]) => {
                 numberList.clear();
                 expect(numberList.isEmpty()).toBe(true);
                 numberList.add(...numbers);
@@ -98,7 +97,7 @@ describe('SinglyLinkedList', () => {
         );
 
         fc.assert(
-            fc.property(fc.array(fc.string({ minLength: 1 })), (strings) => {
+            fc.property(fc.array(fc.string({ minLength: 1 })), (strings: string[]) => {
                 stringList.clear();
                 expect(stringList.isEmpty()).toBe(true);
                 stringList.add(...strings);
@@ -109,7 +108,7 @@ describe('SinglyLinkedList', () => {
 
     test('should get the size of the list', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (numbers) => {
+            fc.property(fc.array(fc.integer()), (numbers: number[]) => {
                 numberList.clear();
                 numberList.add(...numbers);
                 expect(numberList.size()).toBe(numbers.length);
@@ -117,7 +116,7 @@ describe('SinglyLinkedList', () => {
         );
 
         fc.assert(
-            fc.property(fc.array(fc.string({ minLength: 1 })), (strings) => {
+            fc.property(fc.array(fc.string({ minLength: 1 })), (strings: string[]) => {
                 stringList.clear();
                 stringList.add(...strings);
                 expect(stringList.size()).toBe(strings.length);
@@ -127,7 +126,7 @@ describe('SinglyLinkedList', () => {
 
     test('should clear the list', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (numbers) => {
+            fc.property(fc.array(fc.integer()), (numbers: number[]) => {
                 numberList.clear();
                 numberList.add(...numbers);
                 numberList.clear();
@@ -137,7 +136,7 @@ describe('SinglyLinkedList', () => {
         );
 
         fc.assert(
-            fc.property(fc.array(fc.string({ minLength: 1 })), (strings) => {
+            fc.property(fc.array(fc.string({ minLength: 1 })), (strings: string[]) => {
                 stringList.clear();
                 stringList.add(...strings);
                 stringList.clear();
@@ -149,7 +148,7 @@ describe('SinglyLinkedList', () => {
 
     test('should get the value at the specified index', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), fc.integer(), (numbers, index) => {
+            fc.property(fc.array(fc.integer()), fc.integer(), (numbers: number[], index: number) => {
                 numberList.clear();
                 numberList.add(...numbers);
                 if (index >= 0 && index < numbers.length) {
@@ -161,7 +160,7 @@ describe('SinglyLinkedList', () => {
         );
 
         fc.assert(
-            fc.property(fc.array(fc.string({ minLength: 1 })), fc.integer(), (strings, index) => {
+            fc.property(fc.array(fc.string({ minLength: 1 })), fc.integer(), (strings: string[], index: number) => {
                 stringList.clear();
                 stringList.add(...strings);
                 if (index >= 0 && index < strings.length) {
@@ -175,10 +174,10 @@ describe('SinglyLinkedList', () => {
 
     test('should set the value at the specified index', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), fc.integer(), fc.integer(), (numbers, index, newValue) => {
+            fc.property(fc.array(fc.integer()), fc.integer(), fc.integer(), (numbers: number[], index: number, newValue: number) => {
                 numberList.clear();
                 numberList.add(...numbers);
-                const result = numberList.set(index, newValue);
+                const result: boolean = numberList.set(index, newValue);
                 if (index >= 0 && index < numbers.length) {
                     expect(result).toBe(true);
                     expect(numberList.get(index)).toBe(newValue);
@@ -189,10 +188,10 @@ describe('SinglyLinkedList', () => {
         );
 
         fc.assert(
-            fc.property(fc.array(fc.string({ minLength: 1 })), fc.integer(), fc.string({ minLength: 1 }), (strings, index, newValue) => {
+            fc.property(fc.array(fc.string({ minLength: 1 })), fc.integer(), fc.string({ minLength: 1 }), (strings: string[], index: number, newValue: string) => {
                 stringList.clear();
                 stringList.add(...strings);
-                const result = stringList.set(index, newValue);
+                const result: boolean = stringList.set(index, newValue);
                 if (index >= 0 && index < strings.length) {
                     expect(result).toBe(true);
                     expect(stringList.get(index)).toBe(newValue);
@@ -205,7 +204,7 @@ describe('SinglyLinkedList', () => {
 
     test('should convert the list to an array', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (numbers) => {
+            fc.property(fc.array(fc.integer()), (numbers: number[]) => {
                 numberList.clear();
                 numberList.add(...numbers);
                 expect(numberList.toArray()).toEqual(numbers);
@@ -213,7 +212,7 @@ describe('SinglyLinkedList', () => {
         );
 
         fc.assert(
-            fc.property(fc.array(fc.string({ minLength: 1 })), (strings) => {
+            fc.property(fc.array(fc.string({ minLength: 1 })), (strings: string[]) => {
                 stringList.clear();
                 stringList.add(...strings);
                 expect(stringList.toArray()).toEqual(strings);
@@ -223,10 +222,10 @@ describe('SinglyLinkedList', () => {
 
     test('should be iterable', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (numbers) => {
+            fc.property(fc.array(fc.integer()), (numbers: number[]) => {
                 numberList.clear();
                 numberList.add(...numbers);
-                const numberItems = [];
+                const numberItems: number[] = [];
                 for (const item of numberList) {
                     numberItems.push(item);
                 }
@@ -235,10 +234,10 @@ describe('SinglyLinkedList', () => {
         );
 
         fc.assert(
-            fc.property(fc.array(fc.string({ minLength: 1 })), (strings) => {
+            fc.property(fc.array(fc.string({ minLength: 1 })), (strings: string[]) => {
                 stringList.clear();
                 stringList.add(...strings);
-                const stringItems = [];
+                const stringItems: string[] = [];
                 for (const item of stringList) {
                     stringItems.push(item);
                 }
@@ -251,10 +250,10 @@ describe('SinglyLinkedList', () => {
         fc.assert(
             fc.property(
                 fc.array(fc.oneof(fc.integer(), fc.string({ minLength: 1 }))),
-                (operations) => {
-                    const testNumberList = new SinglyLinkedList<number>((a, b) => a - b);
+                (operations: (number | string)[]) => {
+                    const testNumberList: SinglyLinkedList<number> = new SinglyLinkedList<number>((a: number, b: number) => a - b);
                     const referenceNumberList: number[] = [];
-                    const testStringList = new SinglyLinkedList<string>((a, b) => a.localeCompare(b));
+                    const testStringList: SinglyLinkedList<string> = new SinglyLinkedList<string>((a: string, b: string) => a.localeCompare(b));
                     const referenceStringList: string[] = [];
 
                     operations.forEach(op => {

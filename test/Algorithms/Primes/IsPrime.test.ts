@@ -10,7 +10,7 @@ describe('isPrime', () => {
         fc.assert(
             fc.property(fc.integer({ min: 2, max: 1000 }), (num) => {
                 if (isPrime(num)) {
-                    for (let i = 2; i < num; i++) {
+                    for (let i: number = 2; i < num; i++) {
                         expect(num % i).not.toBe(0);
                     }
                 }
@@ -22,8 +22,8 @@ describe('isPrime', () => {
         fc.assert(
             fc.property(fc.integer({ min: 2, max: 1000 }), (num) => {
                 if (!isPrime(num)) {
-                    let hasDivisor = false;
-                    for (let i = 2; i < num; i++) {
+                    let hasDivisor: boolean = false;
+                    for (let i: number = 2; i < num; i++) {
                         if (num % i === 0) {
                             hasDivisor = true;
                             break;

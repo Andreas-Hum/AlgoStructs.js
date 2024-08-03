@@ -399,7 +399,7 @@ export class BinarySearchTree<T> {
      * console.log(tree.isBalanced()); // Output: true
      */
     public isBalanced(): boolean {
-        const checkBalance = (node: Node<T> | null): [boolean, number] => {
+        const checkBalance: (node: Node<T> | null) => [boolean, number] = (node: Node<T> | null): [boolean, number] => {
             if (!node) return [true, 0];
             const [leftBalanced, leftHeight]: [boolean, number] = checkBalance(node.getLeftChild());
             const [rightBalanced, rightHeight]: [boolean, number] = checkBalance(node.getRightChild());
@@ -457,7 +457,7 @@ export class BinarySearchTree<T> {
      * console.log(tree.isFull()); // Output: false
      */
     public isFull(): boolean {
-        const checkFull = (node: Node<T> | null): boolean => {
+        const checkFull: (node: Node<T> | null) => boolean = (node: Node<T> | null): boolean => {
             if (!node) return true;
             if ((node.getLeftChild() && !node.getRightChild()) || (!node.getLeftChild() && node.getRightChild())) {
                 return false;

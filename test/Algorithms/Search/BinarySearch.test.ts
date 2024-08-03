@@ -36,7 +36,6 @@ describe("binarySearch", () => {
                 fc.array(fc.integer(), { minLength: 1, maxLength: 100 }).map(arr => arr.sort((a, b) => a - b)),
                 fc.integer(),
                 (numbers, targetNumber) => {
-                    // Ensure target is not in the array
                     numbers = numbers.filter(num => num !== targetNumber);
                     const options: SearchOptions<number> = {
                         array: numbers,

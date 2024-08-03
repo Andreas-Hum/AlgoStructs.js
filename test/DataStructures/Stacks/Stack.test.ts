@@ -19,9 +19,9 @@ describe('Stack', () => {
 
     test('should push elements onto the stack', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (arr) => {
+            fc.property(fc.array(fc.integer()), (arr: number[]) => {
                 stack = new Stack<number>(); // Ensure stack is reset
-                arr.forEach((num) => stack.push(num));
+                arr.forEach((num: number) => stack.push(num));
                 expect(stack.size()).toBe(arr.length);
                 if (arr.length > 0) {
                     expect(stack.peek()).toBe(arr[arr.length - 1]);
@@ -32,9 +32,9 @@ describe('Stack', () => {
 
     test('should pop elements from the stack', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (arr) => {
+            fc.property(fc.array(fc.integer()), (arr: number[]) => {
                 stack = new Stack<number>(); // Ensure stack is reset
-                arr.forEach((num) => stack.push(num));
+                arr.forEach((num: number) => stack.push(num));
                 while (arr.length > 0) {
                     expect(stack.pop()).toBe(arr.pop());
                 }
@@ -45,9 +45,9 @@ describe('Stack', () => {
 
     test('should peek the top element without removing it', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (arr) => {
+            fc.property(fc.array(fc.integer()), (arr: number[]) => {
                 stack = new Stack<number>(); // Ensure stack is reset
-                arr.forEach((num) => stack.push(num));
+                arr.forEach((num: number) => stack.push(num));
                 if (arr.length > 0) {
                     expect(stack.peek()).toBe(arr[arr.length - 1]);
                     expect(stack.size()).toBe(arr.length);
@@ -58,10 +58,10 @@ describe('Stack', () => {
 
     test('should check if the stack is empty', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (arr) => {
+            fc.property(fc.array(fc.integer()), (arr: number[]) => {
                 stack = new Stack<number>(); // Ensure stack is reset
                 expect(stack.isEmpty()).toBe(true);
-                arr.forEach((num) => stack.push(num));
+                arr.forEach((num: number) => stack.push(num));
                 expect(stack.isEmpty()).toBe(arr.length === 0);
             })
         );
@@ -69,9 +69,9 @@ describe('Stack', () => {
 
     test('should return the correct size of the stack', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (arr) => {
+            fc.property(fc.array(fc.integer()), (arr: number[]) => {
                 stack = new Stack<number>(); // Ensure stack is reset
-                arr.forEach((num) => stack.push(num));
+                arr.forEach((num: number) => stack.push(num));
                 expect(stack.size()).toBe(arr.length);
             })
         );
@@ -79,9 +79,9 @@ describe('Stack', () => {
 
     test('should clear the stack', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (arr) => {
+            fc.property(fc.array(fc.integer()), (arr: number[]) => {
                 stack = new Stack<number>(); // Ensure stack is reset
-                arr.forEach((num) => stack.push(num));
+                arr.forEach((num: number) => stack.push(num));
                 stack.clear();
                 expect(stack.isEmpty()).toBe(true);
                 expect(stack.size()).toBe(0);
@@ -91,10 +91,10 @@ describe('Stack', () => {
 
     test('should iterate over the stack in LIFO order', () => {
         fc.assert(
-            fc.property(fc.array(fc.integer()), (arr) => {
+            fc.property(fc.array(fc.integer()), (arr: number[]) => {
                 stack = new Stack<number>(); // Ensure stack is reset
-                arr.forEach((num) => stack.push(num));
-                const elements = [];
+                arr.forEach((num: number) => stack.push(num));
+                const elements: number[] = [];
                 for (const item of stack) {
                     elements.push(item);
                 }
