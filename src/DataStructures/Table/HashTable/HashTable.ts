@@ -1,14 +1,12 @@
-import Node from "../Nodes/HashTableNode";
-
 /**
  * Represents a hash table.
  * @template K - The type of the key.
  * @template V - The type of the value.
  */
-export  class HashTable<K, V> {
+export class HashTable<K, V> {
     private _toNumber: (key: K) => number;
     private _size: number;
-    private _table: Array<Node<K, V> | null>;
+    private _table: Array<Array<[K, V]>>;
     private _count: number;
     private _loadFactor: number;
 
@@ -28,12 +26,12 @@ export  class HashTable<K, V> {
      *     }
      *     return sum;
      * };
-     * const hashTable: HashTable<string, number> = new HashTable<string, number>(10, toNumber);
+     * const hashTable: HashTable<string, number> = new HashTable<string, number>({ size: 10, toNumber });
      */
     constructor(options: { size: number, toNumber: (key: K) => number }) {
         this._size = options.size;
         this._toNumber = options.toNumber;
-        this._table = new Array(options.size).fill(null);
+        this._table = new Array(options.size).fill(null).map(() => []);
         this._count = 0;
         this._loadFactor = 0.75;
     }
@@ -54,20 +52,18 @@ export  class HashTable<K, V> {
      * Rehashes the hash table to a new size.
      * @param {number} newSize - The new size of the hash table.
      * @complexity
-     * Time complexity: O(n) - Where n is the number of nodes in the hash table.
-     * Space complexity: O(n) - Where n is the number of nodes in the hash table.
+     * Time complexity: O(n) - Where n is the number of key-value pairs in the hash table.
+     * Space complexity: O(n) - Where n is the number of key-value pairs in the hash table.
      */
     private rehash(newSize: number): void {
-        const old_table = this._table;
+        const oldTable = this._table;
         this._size = newSize;
-        this._table = new Array(this._size).fill(null);
+        this._table = new Array(this._size).fill(null).map(() => []);
         this._count = 0;
 
-        for (let i = 0; i < old_table.length; i++) {
-            let node = old_table[i];
-            while (node) {
-                this.put(node.getKey(), node.getValue());
-                node = node.getNext();
+        for (const bucket of oldTable) {
+            for (const [key, value] of bucket) {
+                this.put(key, value);
             }
         }
     }
@@ -78,34 +74,25 @@ export  class HashTable<K, V> {
      * @param {V} value - The value to insert.
      * @complexity
      * Time complexity: O(1) - on average, O(n) in the worst case due to collisions.
-     * Space complexity: O(1) -  Constant space operation.
+     * Space complexity: O(1) - Constant space operation.
      */
     public put(key: K, value: V): void {
         if (this._count / this._size > this._loadFactor) {
             this.rehash(this._size * 2);
         }
 
-        const index: number = this.hash(key);
-        let node: Node<K, V> | null = this._table[index];
+        const index = this.hash(key);
+        const bucket = this._table[index];
 
-        if (!node) {
-            this._table[index] = new Node(key, value);
-            this._count++;
-            return;
-        }
-
-        while (node) {
-            if (this._toNumber(node.getKey()) === this._toNumber(key)) {
-                node.setValue(value);
+        for (let i = 0; i < bucket.length; i++) {
+            if (this._toNumber(bucket[i][0]) === this._toNumber(key)) {
+                bucket[i][1] = value;
                 return;
             }
-            if (!node.getNext()) {
-                node.setNext(new Node(key, value));
-                this._count++;
-                return;
-            }
-            node = node.getNext();
         }
+
+        bucket.push([key, value]);
+        this._count++;
     }
 
     /**
@@ -114,17 +101,16 @@ export  class HashTable<K, V> {
      * @returns {V | null} - The value associated with the key, or null if not found.
      * @complexity
      * Time complexity: O(1) - on average, O(n) in the worst case due to collisions.
-     * Space complexity: O(1) -  Constant space operation.
+     * Space complexity: O(1) - Constant space operation.
      */
     public get(key: K): V | null {
-        const index: number = this.hash(key);
-        let node: Node<K, V> | null = this._table[index];
+        const index = this.hash(key);
+        const bucket = this._table[index];
 
-        while (node) {
-            if (this._toNumber(node.getKey()) === this._toNumber(key)) {
-                return node.getValue();
+        for (const [k, v] of bucket) {
+            if (this._toNumber(k) === this._toNumber(key)) {
+                return v;
             }
-            node = node.getNext();
         }
 
         return null;
@@ -138,22 +124,15 @@ export  class HashTable<K, V> {
      * Space complexity: O(1) - Constant space operation.
      */
     public remove(key: K): void {
-        const index: number = this.hash(key);
-        let node: Node<K, V> | null = this._table[index];
-        let prev: Node<K, V> | null = null;
+        const index = this.hash(key);
+        const bucket = this._table[index];
 
-        while (node) {
-            if (this._toNumber(node.getKey()) === this._toNumber(key)) {
-                if (prev) {
-                    prev.setNext(node.getNext());
-                } else {
-                    this._table[index] = node.getNext();
-                }
+        for (let i = 0; i < bucket.length; i++) {
+            if (this._toNumber(bucket[i][0]) === this._toNumber(key)) {
+                bucket.splice(i, 1);
                 this._count--;
                 return;
             }
-            prev = node;
-            node = node.getNext();
         }
     }
 
@@ -173,38 +152,22 @@ export  class HashTable<K, V> {
      * Returns an array of all keys in the hash table.
      * @returns {K[]} - An array of all keys.
      * @complexity
-     * Time complexity: O(n) - where n is the number of nodes in the hash table.
-     * Space complexity: O(n) - where n is the number of nodes in the hash table.
+     * Time complexity: O(n) - where n is the number of key-value pairs in the hash table.
+     * Space complexity: O(n) - where n is the number of key-value pairs in the hash table.
      */
     public getKeys(): K[] {
-        const keys: K[] = [];
-        for (let i = 0; i < this._size; i++) {
-            let node: Node<K, V> | null = this._table[i];
-            while (node) {
-                keys.push(node.getKey());
-                node = node.getNext();
-            }
-        }
-        return keys;
+        return this._table.flatMap(bucket => bucket.map(([k, _]) => k));
     }
 
     /**
      * Returns an array of all values in the hash table.
      * @returns {V[]} - An array of all values.
      * @complexity
-     * Time complexity: O(n) - where n is the number of nodes in the hash table.
-     * Space complexity: O(n) - where n is the number of nodes in the hash table.
+     * Time complexity: O(n) - where n is the number of key-value pairs in the hash table.
+     * Space complexity: O(n) - where n is the number of key-value pairs in the hash table.
      */
     public getValues(): V[] {
-        const values: V[] = [];
-        for (let i = 0; i < this._size; i++) {
-            let node: Node<K, V> | null = this._table[i];
-            while (node) {
-                values.push(node.getValue());
-                node = node.getNext();
-            }
-        }
-        return values;
+        return this._table.flatMap(bucket => bucket.map(([_, v]) => v));
     }
 
     /**
@@ -214,7 +177,7 @@ export  class HashTable<K, V> {
      * Space complexity: O(1) - Constant space operation.
      */
     public clear(): void {
-        this._table.fill(null);
+        this._table = new Array(this._size).fill(null).map(() => []);
         this._count = 0;
     }
 
@@ -244,19 +207,15 @@ export  class HashTable<K, V> {
      * Provides a string representation of the hash table.
      * @returns {string} - The string representation.
      * @complexity
-     * Time complexity: O(n) - Where n is the number of nodes in the hash table.
-     * Space complexity: O(n) - Where n is the number of nodes in the hash table.
+     * Time complexity: O(n) - Where n is the number of key-value pairs in the hash table.
+     * Space complexity: O(n) - Where n is the number of key-value pairs in the hash table.
      */
     public toString(): string {
-        let result: string = '';
-        for (let i: number = 0; i < this._size; i++) {
-            let node: Node<K, V> | null = this._table[i];
+        let result = '';
+        for (let i = 0; i < this._size; i++) {
             result += `[${i}]: `;
-            while (node) {
-                result += `{${node.getKey()}: ${node.getValue()}} -> `;
-                node = node.getNext();
-            }
-            result += 'null\n';
+            result += this._table[i].map(([k, v]) => `{${k}: ${v}}`).join(' -> ');
+            result += ' -> null\n';
         }
         return result;
     }
@@ -265,15 +224,13 @@ export  class HashTable<K, V> {
      * Implements the iterable interface for the hash table.
      * @returns {IterableIterator<[K, V]>} - An iterator for the hash table.
      * @complexity
-     * Time complexity: O(n) - Where n is the number of nodes in the hash table.
+     * Time complexity: O(n) - Where n is the number of key-value pairs in the hash table.
      * Space complexity: O(1) - Constant space operation.
      */
     *[Symbol.iterator](): IterableIterator<[K, V]> {
-        for (let i: number = 0; i < this._size; i++) {
-            let node: Node<K, V> | null = this._table[i];
-            while (node) {
-                yield [node.getKey(), node.getValue()];
-                node = node.getNext();
+        for (const bucket of this._table) {
+            for (const [key, value] of bucket) {
+                yield [key, value];
             }
         }
     }

@@ -11,6 +11,10 @@ describe('SinglyLinkedList', () => {
         stringList = new SinglyLinkedList<string>((a, b) => a.localeCompare(b));
     });
 
+    afterEach(() => {
+        jest.clearAllTimers(); // Clear any timers after each test
+    });
+
     test('should add elements correctly', () => {
         fc.assert(
             fc.property(fc.array(fc.integer()), (numbers) => {
