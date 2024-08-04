@@ -60,6 +60,7 @@ This repository contains implementations of various data structures and algorith
       - [Quick Sort](#quick-sort)
       - [Heap Sort](#heap-sort)
       - [Block Sort](#block-sort)
+      - [Smooth Sort](#smooth-sort)
     - [O(n + k) Algorithms](#on--k-algorithms)
         - [Counting Sort](#counting-sort)
 - [Getting Started](#getting-started)
@@ -192,6 +193,9 @@ This repository contains implementations of various data structures and algorith
   - **[HeapSort](src/Algorithms/Sorting/HeapSort.ts)**: Implementation of the heap sort algorithm. This algorithm builds a max heap from the input data, then repeatedly extracts the maximum element from the heap and rebuilds the heap.
 - [Block Sort](https://en.wikipedia.org/wiki/Block_sort)
   - **[BlockSort](src/Algorithms/Sorting/BlockSort.ts)**: Implementation of the block sort algorithm. This algorithm uses quicksort as the default sorting method and divides the array into blocks, sorting each block individually and then merging them.
+- [Smooth Sort](https://en.wikipedia.org/wiki/Smoothsort)
+  - **[SmoothSort](src/Algorithms/Sorting/SmoothSort.ts)**: Implementation of the smooth sort algorithm. This algorithm is a variation of heapsort that sorts an array in O(n log n) time in the worst case and O(n) time in the best case.
+
 
 #### O(n + k) Algorithms
 

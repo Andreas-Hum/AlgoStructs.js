@@ -11,3 +11,4 @@ export * from './MergeSort';
 export * from './QuickSort';
 export * from './SelectionSort';
 export * from './ShellSort';
+export * from './SmoothSort';
