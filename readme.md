@@ -63,6 +63,7 @@ This repository contains implementations of various data structures and algorith
       - [Smooth Sort](#smooth-sort)
     - [O(n + k) Algorithms](#on--k-algorithms)
         - [Counting Sort](#counting-sort)
+        - [Radix Sort](#counting-sort)
 - [Getting Started](#getting-started)
 - [Contact](#contact)
 - [License](#license)
@@ -201,6 +202,8 @@ This repository contains implementations of various data structures and algorith
 
 - [Counting Sort](https://en.wikipedia.org/wiki/Counting_sort)
   - **[CountingSort](src/Algorithms/Sorting/CountingSort.ts)**: Implementation of the counting sort algorithm. This algorithm counts the number of occurrences of each unique element in the input array and uses this count to determine the position of each element in the sorted array.
+- [Radix Sort](https://en.wikipedia.org/wiki/Radix_sort)
+  - **[RadixSort](src/Algorithms/Sorting/RadixSort.ts)**: Implementation of the radix sort algorithm. This algorithm processes each digit of the numbers starting from the least significant digit to the most significant digit, using counting sort as a subroutine to sort the digits.
 
 ## Getting Started
 

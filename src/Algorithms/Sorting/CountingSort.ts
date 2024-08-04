@@ -1,10 +1,10 @@
-import { SortOptions } from "../../Options/AlgorithmOptions/SortOptions/SortOptions";
+import { NumericalOnlySortOptions } from "../../Options/AlgorithmOptions/SortOptions/SortOptions";
 
 /**
  * Performs a counting sort on an array.
  * 
  * @template T - The type of elements in the array.
- * @param {SortOptions<number>} options - The options for the counting sort.
+ * @param {NumericalOnlySortOptions<number>} options - The options for the counting sort.
  * @param {number[]} options.array - The array to be sorted.
  * @param {(a: number, b: number) => number} options.compare - The comparison function.
  * @returns {number[]} - The sorted array.
@@ -32,7 +32,7 @@ import { SortOptions } from "../../Options/AlgorithmOptions/SortOptions/SortOpti
  * const sortedNumbers: number[] = countingSort({ array: numbers, compare: (a, b) => a - b });
  * console.log(sortedNumbers); // Output: [2, 3, 4, 5, 8]
  */
-export function countingSort({ array }: SortOptions<number>): number[] {
+export function countingSort({ array }: NumericalOnlySortOptions<number>): number[] {
     const n: number = array.length;
     if (n <= 1) {
         return array;

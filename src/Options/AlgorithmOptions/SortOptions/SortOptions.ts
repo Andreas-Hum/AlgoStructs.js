@@ -8,3 +8,8 @@ export interface MergeSortOptions<T> {
     right: T[],
     compare: (a: T, b: T) => number;
 }
+
+
+export interface NumericalOnlySortOptions<T>{
+    array: T[];
+}
