@@ -1,4 +1,5 @@
 import { SearchOptions } from "../../Options/AlgorithmOptions";
+
 /**
  * Performs a meta binary search on a sorted array this is also known as one-sided binary search.
  * 
@@ -50,24 +51,30 @@ import { SearchOptions } from "../../Options/AlgorithmOptions";
  */
 export function metaBinarySearch<T>({ array, target, compare }: SearchOptions<T>): number {
     const n: number = array.length;
-    const max_steps: number = Math.floor(Math.log2(n - 1)) + 1;
+    if (n === 0) return -1; // Handle empty array case
 
-    let current_index: number = 0;
+    const maxSteps: number = Math.floor(Math.log2(n - 1)) + 1;
 
-    for (let step: number = max_steps - 1; step >= 0; step--) {
-        let new_index: number = current_index + (1 << step);
+    let currentIndex: number = 0;
 
-        if (new_index >= n) {
+    for (let step: number = maxSteps - 1; step >= 0; step--) {
+        const newIndex: number = currentIndex + (1 << step);
+
+        if (newIndex >= n) {
             continue;
         } else {
-            let comparison: number = compare(array[new_index], target);
+            const comparison: number = compare(array[newIndex], target);
 
             if (comparison === 0) {
-                return new_index;
+                return newIndex;
             } else if (comparison < 0) {
-                current_index = new_index;
+                currentIndex = newIndex;
             }
         }
+    }
+
+    if (compare(array[currentIndex], target) === 0) {
+        return currentIndex;
     }
 
     return -1;
