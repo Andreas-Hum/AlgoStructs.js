@@ -47,15 +47,17 @@ This repository contains implementations of various data structures and algorith
     - [A* Search](#a-star-search)
     - [Topological Sort](#topological-sort)
   - [Sorting Algorithms](#sorting-algorithms)
-    - [O(n^2) Algorithms](#on2-algorithms)
-        - [Selection Sort](#selection-sort)
-        - [Bubble Sort](#bubble-sort)
-        - [Insertion Sort](#insertion-sort)
-        - [Exchange Sort](#exchange-sort)
-    - [O(n log n) Algorithms](#on-log-n-algorithms)
-        - [Merge Sort](#merge-sort)
-        - [Quick Sort](#quick-sort)
-        - [Heap Sort](#heap-sort)
+  - [O(n^2) Algorithms](#on2-algorithms)
+      - [Selection Sort](#selection-sort)
+      - [Bubble Sort](#bubble-sort)
+      - [Insertion Sort](#insertion-sort)
+      - [Exchange Sort](#exchange-sort)
+      - [Comb Sort](#comb-sort)
+  - [O(n log n) Algorithms](#on-log-n-algorithms)
+      - [Merge Sort](#merge-sort)
+      - [Quick Sort](#quick-sort)
+      - [Heap Sort](#heap-sort)
+      - [Block Sort](#block-sort)
     - [O(n + k) Algorithms](#on--k-algorithms)
         - [Counting Sort](#counting-sort)
 - [Getting Started](#getting-started)
@@ -169,6 +171,8 @@ This repository contains implementations of various data structures and algorith
   - **[InsertionSort](src/Algorithms/Sorting/InsertionSort.ts)**: Implementation of the insertion sort algorithm. This algorithm builds the final sorted array one item at a time, with the assumption that the first item is already sorted.
 - [Exchange Sort](https://en.wikipedia.org/wiki/Sorting_algorithm#Exchange_sort)
   - **[ExchangeSort](src/Algorithms/Sorting/ExchangeSort.ts)**: Implementation of the exchange sort algorithm. This algorithm compares each pair of elements and swaps them if they are in the wrong order.
+- [Comb Sort](https://en.wikipedia.org/wiki/Comb_sort)
+  - **[CombSort](src/Algorithms/Sorting/CombSort.ts)**: Implementation of the comb sort algorithm. This algorithm improves on bubble sort by using a gap sequence to compare elements that are farther apart, reducing the gap in each iteration until it becomes 1.
 
 #### O(n log n) Algorithms
 
@@ -178,6 +182,9 @@ This repository contains implementations of various data structures and algorith
   - **[QuickSort](src/Algorithms/Sorting/QuickSort.ts)**: Implementation of the quick sort algorithm. This algorithm picks an element as a pivot, partitions the array around the pivot, and recursively sorts the partitions.
 - [Heap Sort](https://en.wikipedia.org/wiki/Heapsort)
   - **[HeapSort](src/Algorithms/Sorting/HeapSort.ts)**: Implementation of the heap sort algorithm. This algorithm builds a max heap from the input data, then repeatedly extracts the maximum element from the heap and rebuilds the heap.
+- [Block Sort](https://en.wikipedia.org/wiki/Block_sort)
+  - **[BlockSort](src/Algorithms/Sorting/BlockSort.ts)**: Implementation of the block sort algorithm. This algorithm uses quicksort as the default sorting method and divides the array into blocks, sorting each block individually and then merging them.
+
 
 #### O(n + k) Algorithms
 
