@@ -53,6 +53,7 @@ This repository contains implementations of various data structures and algorith
       - [Insertion Sort](#insertion-sort)
       - [Exchange Sort](#exchange-sort)
       - [Comb Sort](#comb-sort)
+      - [Shell Sort](#shell-sort)
   - [O(n log n) Algorithms](#on-log-n-algorithms)
       - [Merge Sort](#merge-sort)
       - [Quick Sort](#quick-sort)
@@ -173,6 +174,8 @@ This repository contains implementations of various data structures and algorith
   - **[ExchangeSort](src/Algorithms/Sorting/ExchangeSort.ts)**: Implementation of the exchange sort algorithm. This algorithm compares each pair of elements and swaps them if they are in the wrong order.
 - [Comb Sort](https://en.wikipedia.org/wiki/Comb_sort)
   - **[CombSort](src/Algorithms/Sorting/CombSort.ts)**: Implementation of the comb sort algorithm. This algorithm improves on bubble sort by using a gap sequence to compare elements that are farther apart, reducing the gap in each iteration until it becomes 1.
+- [Shell Sort](https://en.wikipedia.org/wiki/Shellsort)
+  - **[ShellSort](src/Algorithms/Sorting/ShellSort.ts)**: Implementation of the shell sort algorithm. This algorithm uses a gap sequence to compare and sort elements that are far apart, reducing the gap in each iteration until it becomes 1. With the best gap sequence, the worst-case time complexity is O(n log^2 n).
 
 #### O(n log n) Algorithms
 
@@ -184,7 +187,6 @@ This repository contains implementations of various data structures and algorith
   - **[HeapSort](src/Algorithms/Sorting/HeapSort.ts)**: Implementation of the heap sort algorithm. This algorithm builds a max heap from the input data, then repeatedly extracts the maximum element from the heap and rebuilds the heap.
 - [Block Sort](https://en.wikipedia.org/wiki/Block_sort)
   - **[BlockSort](src/Algorithms/Sorting/BlockSort.ts)**: Implementation of the block sort algorithm. This algorithm uses quicksort as the default sorting method and divides the array into blocks, sorting each block individually and then merging them.
-
 
 #### O(n + k) Algorithms
 

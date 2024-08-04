@@ -1,5 +1,8 @@
 {
     "exportall.config.relExclusion": [
         "/src/DataStructures/BinaryTrees/Nodes"
+    ],
+    "exportall.config.folderListener": [
+        "/src/Algorithms/Sorting"
     ]
 }
