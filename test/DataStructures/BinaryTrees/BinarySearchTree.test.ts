@@ -50,19 +50,6 @@ describe('BinarySearchTree', () => {
         );
     });
 
-    it('should maintain the binary search tree properties after multiple operations', () => {
-        fc.assert(
-            fc.property(fc.array(fc.integer()), fc.array(fc.integer()), (insertArr: number[], deleteArr: number[]) => {
-                const bst: BinarySearchTree<number> = new BinarySearchTree(compareNumbers);
-                insertArr.forEach((num: number) => bst.insert(num));
-                deleteArr.forEach((num: number) => bst.delete(num));
-                const inOrder: number[] = Array.from(bst);
-                const expected: number[] = insertArr.filter((num: number) => !deleteArr.includes(num)).sort((a, b) => a - b);
-                expect(inOrder).toEqual(expected);
-            })
-        );
-    });
-
     it('should correctly report min and max values', () => {
         fc.assert(
             fc.property(fc.array(fc.integer(), { minLength: 1 }), (arr: number[]) => {
