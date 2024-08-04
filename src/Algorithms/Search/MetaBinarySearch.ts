@@ -51,7 +51,7 @@ import { SearchOptions } from "../../Options/AlgorithmOptions";
  */
 export function metaBinarySearch<T>({ array, target, compare }: SearchOptions<T>): number {
     const n: number = array.length;
-    if (n === 0) return -1; // Handle empty array case
+    if (n === 0) return -1; 
 
     const maxSteps: number = Math.floor(Math.log2(n - 1)) + 1;
 
