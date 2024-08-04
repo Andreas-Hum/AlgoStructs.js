@@ -4,6 +4,7 @@ export * from './CocktailSort';
 export * from './CombSort';
 export * from './CountingSort';
 export * from './ExhangeSort';
+export * from './GnomeSort';
 export * from './HeapSort';
 export * from './InsertionSort';
 export * from './MergeSort';
