@@ -176,6 +176,8 @@ This repository contains implementations of various data structures and algorith
   - **[CombSort](src/Algorithms/Sorting/CombSort.ts)**: Implementation of the comb sort algorithm. This algorithm improves on bubble sort by using a gap sequence to compare elements that are farther apart, reducing the gap in each iteration until it becomes 1.
 - [Shell Sort](https://en.wikipedia.org/wiki/Shellsort)
   - **[ShellSort](src/Algorithms/Sorting/ShellSort.ts)**: Implementation of the shell sort algorithm. This algorithm uses a gap sequence to compare and sort elements that are far apart, reducing the gap in each iteration until it becomes 1. With the best gap sequence, the worst-case time complexity is O(n log^2 n).
+  - [Cocktail Sort](https://en.wikipedia.org/wiki/Cocktail_shaker_sort)
+    - **[CocktailSort](src/Algorithms/Sorting/CocktailSort.ts)**: Implementation of the cocktail sort algorithm. This algorithm is a variation of bubble sort that sorts in both directions on each pass through the list, improving the efficiency by allowing the array to be sorted from both ends.
 
 #### O(n log n) Algorithms
 

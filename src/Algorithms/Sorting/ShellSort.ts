@@ -16,7 +16,7 @@ import { SortOptions } from "../../Options/AlgorithmOptions";
  * - A positive number if the first argument is greater than the second.
  * 
  * @complexity
- * Time complexity: O(n log^2 n) - in the worst case because of the chosen gap sequence.
+ * Time complexity: O(n log^2 n) - In the worst case because of the chosen gap sequence.
  * Space complexity: O(1) - Shell sort is an in-place sorting algorithm.
  * 
  * @description
