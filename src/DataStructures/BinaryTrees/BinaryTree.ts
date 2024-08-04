@@ -174,50 +174,61 @@ export class BinaryTree<T> {
      * 
      * @private
      */
-    private _deleteRoot(): void {
-        if (this._root === null) {
-            return;
-        }
-
-        if (this._root.getLeftChild() === null && this._root.getRightChild() === null) {
-            this._root = null;
-        } else if (this._root.getLeftChild() === null) {
-            this._root = this._root.getRightChild();
-        } else if (this._root.getRightChild() === null) {
-            this._root = this._root.getLeftChild();
-        } else {
-            const queue: Node<T>[] = [this._root];
-            let deepest_rightmost: Node<T> = this._root;
-            let parent_of_deepest_rightmost: Node<T> | null = null;
-
-            while (queue.length > 0) {
-                const current: Node<T> = queue.shift() as Node<T>;
-                if (current.getLeftChild() !== null) {
-                    parent_of_deepest_rightmost = current;
-                    queue.push(current.getLeftChild() as Node<T>);
-                }
-                if (current.getRightChild() !== null) {
-                    parent_of_deepest_rightmost = current;
-                    queue.push(current.getRightChild() as Node<T>);
-                }
-                deepest_rightmost = current;
-            }
-
-            if (parent_of_deepest_rightmost !== null) {
-                if (parent_of_deepest_rightmost.getLeftChild() === deepest_rightmost) {
-                    parent_of_deepest_rightmost.setLeftChild(null);
-                } else {
-                    parent_of_deepest_rightmost.setRightChild(null);
-                }
-            }
-
-            deepest_rightmost.setLeftChild(this._root.getLeftChild());
-            deepest_rightmost.setRightChild(this._root.getRightChild());
-            this._root = deepest_rightmost;
-        }
-
-        this._size--;
+/**
+ * Deletes the root node of the binary tree.
+ * 
+ * @private
+ * 
+ * @remarks
+ * This method handles the deletion of the root node and updates the tree structure accordingly.
+ * It considers cases where the root has no children, one child, or two children.
+ * If duplicates of the root value exist, it ensures that all instances are handled correctly.
+ */
+private _deleteRoot(): void {
+    if (this._root === null) {
+        return;
     }
+
+    if (this._root.getLeftChild() === null && this._root.getRightChild() === null) {
+        this._root = null;
+    } 
+    else if (this._root.getLeftChild() === null) {
+        this._root = this._root.getRightChild();
+    } 
+    else if (this._root.getRightChild() === null) {
+        this._root = this._root.getLeftChild();
+    } 
+    else {
+        const queue: Node<T>[] = [this._root];
+        let deepest_rightmost: Node<T> = this._root;
+        let parent_of_deepest_rightmost: Node<T> | null = null;
+
+        while (queue.length > 0) {
+            const current: Node<T> = queue.shift() as Node<T>;
+            if (current.getLeftChild() !== null) {
+                parent_of_deepest_rightmost = current;
+                queue.push(current.getLeftChild() as Node<T>);
+            }
+            if (current.getRightChild() !== null) {
+                parent_of_deepest_rightmost = current;
+                queue.push(current.getRightChild() as Node<T>);
+            }
+            deepest_rightmost = current;
+        }
+
+        if (parent_of_deepest_rightmost !== null) {
+            if (parent_of_deepest_rightmost.getLeftChild() === deepest_rightmost) {
+                parent_of_deepest_rightmost.setLeftChild(null);
+            } else {
+                parent_of_deepest_rightmost.setRightChild(null);
+            }
+        }
+
+        deepest_rightmost.setLeftChild(this._root.getLeftChild());
+        deepest_rightmost.setRightChild(this._root.getRightChild());
+        this._root = deepest_rightmost;
+    }
+}
 
     /**
      * Deletes a specified node from the tree.
