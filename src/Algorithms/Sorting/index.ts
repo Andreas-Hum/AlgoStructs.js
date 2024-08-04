@@ -1,3 +1,4 @@
+export * from './BlockSort';
 export * from './BubbleSort';
 export * from './CountingSort';
 export * from './ExhangeSort';
