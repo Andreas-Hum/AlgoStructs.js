@@ -5,66 +5,66 @@ This repository contains implementations of various data structures and algorith
 ## Table of Contents
 
 - [Data Structures](#data-structures)
-  - [Binary Trees](#binary-trees)
-    - [BinaryTree](#binarytree)
-    - [BinarySearchTree](#binarysearchtree)
+  - [Binary Trees](#binary-trees)    
+    - BinaryTree
+    - BinarySearchTree
   - [Graphs](#graphs)
     <!-- - [Adjacency List](#adjacency-list)
     - [Adjacency Matrix](#adjacency-matrix) -->
-    - [Vertex Graph](#vertex-graph)
+    - Vertex Graph
   - [Lists](#lists)
-    - [Doubly Linked Lists](#doubly-linked-lists)
-    - [Singly Linked Lists](#singly-linked-lists)
+    - Doubly Linked Lists
+    - Singly Linked Lists
   - [Queues](#queues)
-    - [Queue](#queue)
+    - Queue
   - [Stacks](#stacks)
-    - [Stack](#stack)
+    - Stack
   - [Tables](#tables)
-    - [Hash Tables](#hash-tables)
+    - Hash Tables
 - [Algorithms](#algorithms)
   - [Divisor](#divisor)
-    - [Greatest Common Divisor](#greatest-common-divisor)
-    - [Least Common Multiple](#least-common-multiple)
+    - Greatest Common Divisor
+    - Least Common Multiple
   - [Fibonacci](#fibonacci)
-    - [FastFibonacci](#fastfibonacci)
-    - [Fibonacci](#fibonacci-1)
+    - FastFibonacci
+    - Fibonacci
   - [Primes](#primes)
-    - [Miller-Rabin Primality Test](#miller-rabin-primality-test)
-    - [Sieve of Atkin](#sieve-of-atkin)
-    - [Sieve of Eratosthenes](#sieve-of-eratosthenes)
+    - Miller-Rabin Primality Test
+    - Sieve of Atkin
+    - Sieve of Eratosthene
   - [Search](#search)
-    - [Binary Search](#binary-search)
-    - [Exponential Search](#exponential-search)
-    - [Interpolation Search](#interpolation-search)
-    - [Jump Search](#jump-search)
-    - [Linear Search](#linear-search)
-    - [Meta Binary Search](#meta-binary-search)
-    - [Ternary Search](#ternary-search)
+    - Binary Search
+    - Exponential Search
+    - Interpolation Search
+    - Jump Search
+    - Linear Search
+    - Meta Binary Search
+    - Ternary Search
   - [Graph Algorithms](#graph-algorithms)
-    - [Breadth-First Search](#breadth-first-search)
-    - [Depth-First Search](#depth-first-search)
-    - [Dijkstra's Algorithm](#dijkstras-algorithm)
-    - [A* Search](#a-star-search)
-    - [Topological Sort](#topological-sort)
+    - Breadth-First Search
+    - Depth-First Search
+    - Dijkstra's Algorithm
+    - A* Search
+    - Topological Sort
   - [Sorting Algorithms](#sorting-algorithms)
-  - [O(n^2) Algorithms](#on2-algorithms)
-      - [Selection Sort](#selection-sort)
-      - [Bubble Sort](#bubble-sort)
-      - [Insertion Sort](#insertion-sort)
-      - [Exchange Sort](#exchange-sort)
-      - [Comb Sort](#comb-sort)
-      - [Shell Sort](#shell-sort)
-      - [Gnome Sort](#gnome-sort)
-  - [O(n log n) Algorithms](#on-log-n-algorithms)
-      - [Merge Sort](#merge-sort)
-      - [Quick Sort](#quick-sort)
-      - [Heap Sort](#heap-sort)
-      - [Block Sort](#block-sort)
-      - [Smooth Sort](#smooth-sort)
+    - [O(n^2) Algorithms](#on2-algorithms)
+        - Selection Sort
+        - Bubble Sort
+        - Insertion Sort
+        - Exchange Sort
+        - Comb Sort
+        - Shell Sort
+        - Gnome Sort
+    - [O(n log n) Algorithms](#on-log-n-algorithms)
+        - Merge Sort
+        - Quick Sort
+        - Heap Sort
+        - Block Sort
+        - Smooth Sort
     - [O(n + k) Algorithms](#on--k-algorithms)
-        - [Counting Sort](#counting-sort)
-        - [Radix Sort](#radix-sort)
-        - [Bucket Sort](#bucket-sort)
+        - Counting Sort
+        - Radix Sort
+        - Bucket Sort
 - [Getting Started](#getting-started)
 - [Contact](#contact)
 - [License](#license)
